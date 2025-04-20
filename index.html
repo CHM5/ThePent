@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,21 +15,13 @@
 
     body, html {
       height: 100%;
-      font-family: Arial, sans-serif;
-    }
-
-    /* Fondo principal */
-    body {
-      background-image: url('forestbridge.jpg');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      color: #fff;
+      font-family: 'Arial', sans-serif;
+      background-color: #f8f9fa;
     }
 
     /* Navbar */
     nav {
-      background-color: #000;
+      background-color: #111;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -40,7 +32,8 @@
     }
 
     nav .logo {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
+      color: #fff;
       font-weight: bold;
     }
 
@@ -58,39 +51,65 @@
     }
 
     nav ul li a:hover {
-      color: #f0a500;
+      color: #0dc143;
     }
 
     /* Secciones */
     section {
       padding: 5rem 2rem;
       text-align: center;
-      background-color: rgba(0, 0, 0, 0.5);
-      margin: 2rem;
-      border-radius: 10px;
     }
 
     section h2 {
-      font-size: 2rem;
+      font-size: 2.2rem;
       margin-bottom: 1rem;
+      color: #111;
     }
 
     section p {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       max-width: 800px;
       margin: 0 auto;
       line-height: 1.6;
+      color: #333;
     }
 
     /* Footer */
     footer {
       text-align: center;
       padding: 2rem;
-      background-color: #000;
-      margin-top: 2rem;
+      background-color: #111;
+      color: #fff;
       font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+
+    /* Botón WhatsApp */
+    .whatsapp-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25d366;
+      color: white;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      z-index: 1001;
+    }
+
+    .whatsapp-button:hover {
+      background-color: #20c153;
     }
   </style>
+
+  <!-- Icono de WhatsApp (usamos un CDN de font-awesome) -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -100,34 +119,39 @@
   <nav>
     <div class="logo">The Pent</div>
     <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#quienes-somos">Quiénes Somos</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#contacto">Contacto</a></li>
     </ul>
   </nav>
 
-  <!-- Sección About -->
-  <section id="about">
-    <h2>About Us</h2>
-    <p>Welcome to The Pent. We specialize in providing unique experiences through nature, design, and innovation.</p>
+  <!-- Sección Quiénes Somos -->
+  <section id="quienes-somos">
+    <h2>Quiénes Somos</h2>
+    <p>En The Pent combinamos creatividad, innovación y pasión para ofrecer soluciones únicas a nuestros clientes.</p>
   </section>
 
-  <!-- Sección Services -->
-  <section id="services">
-    <h2>Our Services</h2>
-    <p>We offer customized adventures, creative projects, and personalized consultations tailored to your dreams.</p>
+  <!-- Sección Servicios -->
+  <section id="servicios">
+    <h2>Servicios</h2>
+    <p>Ofrecemos diseño web, cartas digitales QR, packaging personalizado, traducciones profesionales y decoración gráfica.</p>
   </section>
 
-  <!-- Sección Contact -->
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <p>Get in touch at contact@thepent.com or visit us at our headquarters nestled in the heart of the forest.</p>
+  <!-- Sección Contacto -->
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <p>¿Querés trabajar con nosotros? Escribinos a <strong>contacto@thepent.com.ar</strong> o hablá directo por WhatsApp.</p>
   </section>
 
   <!-- Footer -->
   <footer>
-    © 2025 The Pent. All rights reserved.
+    © 2025 The Pent. Todos los derechos reservados.
   </footer>
+
+  <!-- Botón de WhatsApp -->
+  <a class="whatsapp-button" href="https://wa.me/549XXXXXXXXXX" target="_blank" title="Contactanos por WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
 
 </body>
 </html>
