@@ -74,6 +74,25 @@
       color: #333;
     }
 
+    /* Botón general */
+    .button {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.8rem 1.5rem;
+      background-color: #0d6efd;
+      color: white;
+      text-decoration: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+      width: 100%;
+      max-width: 250px;
+    }
+
+    .button:hover {
+      background-color: #0b5ed7;
+    }
+
     /* Footer */
     footer {
       text-align: center;
@@ -106,9 +125,28 @@
     .whatsapp-button:hover {
       background-color: #20c153;
     }
+
+    /* Responsive Navbar (opcional, si querés más mobile-friendly en el futuro) */
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        background: #111;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 100%;
+        display: none;
+      }
+      nav ul.active {
+        display: flex;
+      }
+      nav {
+        flex-wrap: wrap;
+      }
+    }
   </style>
 
-  <!-- Icono de WhatsApp (usamos un CDN de font-awesome) -->
+  <!-- Icono de WhatsApp (Font Awesome) -->
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
 </head>
@@ -135,28 +173,16 @@
   <!-- Sección Servicios -->
   <section id="servicios">
     <h2>Servicios</h2>
-    <p>Ofrecemos soluciones para restaurantes: cartas web interactivas, diseño de cartas personalizadas fisicas, cartas digitales QR, cartas en inglés o portugués, individuales personalizados y todo lo que tu negocio necesite para potenciarlo.</p>
+    <p>Ofrecemos soluciones para restaurantes: cartas web interactivas, diseño de cartas personalizadas físicas, cartas digitales QR, cartas en inglés o portugués, individuales personalizados y todo lo que tu negocio necesite para potenciarlo.</p>
   </section>
 
-<section id="trabajos-realizados">
-  <h2>Trabajos Realizados</h2>
-  <p>Portugués, individuales personalizados y todo lo que tu negocio necesite para potenciarlo.</p>
-  
-  <a href="/barmodelo" style="
-    display: inline-block;
-    margin-top: 1rem;
-    padding: 0.75rem 1.5rem;
-    background-color: #0d6efd;
-    color: white;
-    text-decoration: none;
-    border-radius: 0.5rem;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-  ">
-    Ver Bar Modelo
-  </a>
-</section>
-  
+  <!-- Sección Trabajos Realizados -->
+  <section id="trabajos-realizados">
+    <h2>Trabajos Realizados</h2>
+    <p>Portugués, individuales personalizados y todo lo que tu negocio necesite para potenciarlo.</p>
+    <a href="/barmodelo" class="button">Ver Bar Modelo</a>
+  </section>
+
   <!-- Sección Contacto -->
   <section id="contacto">
     <h2>Contacto</h2>
