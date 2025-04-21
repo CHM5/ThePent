@@ -126,7 +126,7 @@
       const form = document.getElementById('pedido-form');
       form.innerHTML = '';
 
-      for (let i = 0; i < data.getNumberOfRows(); i++) {
+      for (let i = 1; i < data.getNumberOfRows(); i++) {
         const categoria = data.getValue(i, 0) || '';
         const plato = data.getValue(i, 1) || '';
         const descripcion = data.getValue(i, 2) || '';
