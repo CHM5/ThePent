@@ -1,60 +1,178 @@
-<form id="pedido-form">
-  <!-- Acá se cargarán dinámicamente los platos -->
-</form>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bar Modelo - The Pent</title>
 
-<button id="botonPedido" type="button" onclick="enviarPedido()" style="display:none;">Hacer Pedido</button>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<!-- Google Visualization API -->
-<script src="https://www.gstatic.com/charts/loader.js"></script>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f2f5;
+      padding: 2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-<script>
-  const numeroWhatsApp = '5491163057807'; // Tu número de WhatsApp
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #333;
+      text-align: center;
+    }
 
-  google.charts.load('current', {'packages':['corechart']});
-  google.charts.setOnLoadCallback(cargarPlatos);
+    form {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+    }
 
-  function cargarPlatos() {
-    const query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1bHOgSjbDydp69BeUS0Ln9JFke6Y2U0SGcwahUeAPAuc/gviz/tq?sheet=Hoja');
-    query.send(function(response) {
+    .plato {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #e0e0e0;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .plato input[type="checkbox"] {
+      margin-right: 0.75rem;
+      margin-top: 0.4rem;
+    }
+
+    .plato label {
+      font-size: 1rem;
+      color: #444;
+    }
+
+    .plato strong {
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 0.25rem;
+      color: #000;
+    }
+
+    .plato small {
+      display: block;
+      color: #666;
+      margin-top: 0.25rem;
+    }
+
+    button {
+      margin-top: 2rem;
+      width: 100%;
+      padding: 1rem;
+      background-color: #0d6efd;
+      color: #fff;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #0b5ed7;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
+      }
+      form {
+        padding: 1.5rem;
+      }
+      .plato label {
+        font-size: 0.95rem;
+      }
+      button {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Bar Modelo - Hacer Pedido</h1>
+
+  <form id="pedido-form"></form>
+
+  <button type="button" onclick="enviarPedido()">Hacer Pedido</button>
+
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script>
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(cargarDatos);
+
+    function cargarDatos() {
+      const query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1bHOgSjbDydp69BeUS0Ln9JFke6Y2U0SGcwahUeAPAuc/gviz/tq?sheet=Hoja');
+      query.send(respuesta);
+    }
+
+    function respuesta(response) {
       const data = response.getDataTable();
       const form = document.getElementById('pedido-form');
+      form.innerHTML = '';
 
       for (let i = 0; i < data.getNumberOfRows(); i++) {
         const categoria = data.getValue(i, 0) || '';
-        const nombre = data.getValue(i, 1) || '';
+        const plato = data.getValue(i, 1) || '';
         const descripcion = data.getValue(i, 2) || '';
         const precio = data.getValue(i, 3) || '';
 
-        const textoCompleto = `${nombre} - ${descripcion} ($${precio})`;
+        if (!plato) continue;
 
         const div = document.createElement('div');
         div.className = 'plato';
-        div.innerHTML = `
-          <input type="checkbox" id="plato${i}" value="Categoría: ${categoria}\nPlato: ${nombre}\nDescripción: ${descripcion}\nPrecio: $${precio}">
-          <label for="plato${i}"><strong>${nombre}</strong><br><small>${descripcion} - <strong>$${precio}</strong></small></label>
-        `;
+
+        const input = document.createElement('input');
+        input.type = 'checkbox';
+        input.id = `plato${i}`;
+        input.value = `Categoría: ${categoria} | Plato: ${plato} | ${descripcion} | Precio: ${precio}`;
+
+        const label = document.createElement('label');
+        label.setAttribute('for', `plato${i}`);
+        label.innerHTML = `<strong>${plato}</strong> ${descripcion ? `<small>${descripcion}</small>` : ''} <br><strong style="color:#0d6efd;">$${precio}</strong>`;
+
+        div.appendChild(input);
+        div.appendChild(label);
+
         form.appendChild(div);
       }
-      document.getElementById('botonPedido').style.display = 'block'; // Mostrar botón después de cargar platos
-    });
-  }
-
-  function enviarPedido() {
-    const platosSeleccionados = [];
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-
-    checkboxes.forEach(cb => {
-      platosSeleccionados.push(cb.value);
-    });
-
-    if (platosSeleccionados.length === 0) {
-      alert('Por favor, seleccioná al menos un plato.');
-      return;
     }
 
-    const mensaje = `Hola! Quisiera pedir:\n\n${platosSeleccionados.join('\n\n')}`;
-    const mensajeCodificado = encodeURIComponent(mensaje);
+    function enviarPedido() {
+      const platosSeleccionados = [];
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
 
-    window.open(`https://wa.me/${numeroWhatsApp}?text=${mensajeCodificado}`, '_blank');
-  }
-</script>
+      checkboxes.forEach(cb => {
+        platosSeleccionados.push(cb.value);
+      });
+
+      if (platosSeleccionados.length === 0) {
+        alert('Por favor, seleccioná al menos un plato.');
+        return;
+      }
+
+      const mensaje = `Hola! Quisiera pedir:\n- ${platosSeleccionados.join('\n- ')}`;
+      const mensajeCodificado = encodeURIComponent(mensaje);
+      const numeroWhatsApp = '5491163057807'; // Tu número de WhatsApp
+
+      window.open(`https://wa.me/${numeroWhatsApp}?text=${mensajeCodificado}`, '_blank');
+    }
+  </script>
+
+</body>
+</html>
