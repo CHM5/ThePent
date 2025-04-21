@@ -74,7 +74,7 @@
     google.charts.setOnLoadCallback(cargarPlatos);
 
     function cargarPlatos() {
-      const query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/ID_DE_TU_HOJA_DE_CALCULO/gviz/tq?sheet=NombreDeTuPestaña');
+      const query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1bHOgSjbDydp69BeUS0Ln9JFke6Y2U0SGcwahUeAPAuc/gviz/tq?sheet=Hoja');
       query.send(function(response) {
         const data = response.getDataTable();
         const form = document.getElementById('pedido-form');
