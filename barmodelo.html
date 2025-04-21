@@ -156,9 +156,17 @@
     function enviarPedido() {
       const platosSeleccionados = [];
       const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+      let total = 0; // Variable para calcular el total
 
       checkboxes.forEach(cb => {
         platosSeleccionados.push(cb.value);
+
+        // Obtener el precio del plato desde el texto del label
+        const label = document.querySelector(`label[for="${cb.id}"]`);
+        const precioTexto = label.innerHTML.match(/\$\d+(\.\d+)?/); // Extraer el precio con regex
+        if (precioTexto) {
+          total += parseFloat(precioTexto[0].replace('$', '')); // Sumar el precio al total
+        }
       });
 
       if (platosSeleccionados.length === 0) {
@@ -170,8 +178,16 @@
       const mensajeCodificado = encodeURIComponent(mensaje);
       const numeroWhatsApp = '5491163057807'; // Tu número de WhatsApp
 
-      window.open(`https://wa.me/${numeroWhatsApp}?text=${mensajeCodificado}`, '_blank');
-    }
+      // Link de pago de Mercado Pago
+      const linkPago = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=TU_PREFERENCE_ID`; // Reemplaza TU_PREFERENCE_ID con el ID dinámico
+  
+      // Agregar el link de pago al mensaje
+      const mensajeConPago = `${mensaje}\n\nTotal: $${total.toFixed(2)}\nLink de pago: ${linkPago}`;
+      const mensajeConPagoCodificado = encodeURIComponent(mensajeConPago);
+  
+      // Abrir WhatsApp con el mensaje
+      window.open(`https://wa.me/${numeroWhatsApp}?text=${mensajeConPagoCodificado}`, '_blank');
+      }
   </script>
 
 </body>
