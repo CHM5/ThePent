@@ -6,12 +6,8 @@
   <title>Bar Modelo - The Pent</title>
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    /* Tu mismo estilo anterior */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Arial', sans-serif;
       background-color: #f8f9fa;
@@ -22,14 +18,7 @@
       justify-content: center;
       align-items: center;
     }
-
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 2rem;
-      color: #111;
-      text-align: center;
-    }
-
+    h1 { font-size: 2rem; margin-bottom: 2rem; color: #111; text-align: center; }
     form {
       background-color: #fff;
       padding: 2rem;
@@ -38,19 +27,12 @@
       width: 100%;
       max-width: 500px;
     }
-
     .plato {
       margin-bottom: 1rem;
       display: flex;
       align-items: center;
     }
-
-    .plato label {
-      margin-left: 0.5rem;
-      font-size: 1rem;
-      color: #333;
-    }
-
+    .plato label { margin-left: 0.5rem; font-size: 1rem; color: #333; }
     button {
       margin-top: 2rem;
       width: 100%;
@@ -63,23 +45,11 @@
       cursor: pointer;
       transition: background-color 0.3s;
     }
-
-    button:hover {
-      background-color: #0b5ed7;
-    }
-
+    button:hover { background-color: #0b5ed7; }
     @media (max-width: 600px) {
-      body {
-        padding: 1rem;
-      }
-
-      form {
-        padding: 1.5rem;
-      }
-
-      button {
-        font-size: 1rem;
-      }
+      body { padding: 1rem; }
+      form { padding: 1.5rem; }
+      button { font-size: 1rem; }
     }
   </style>
 </head>
@@ -89,35 +59,40 @@
   <h1>Bar Modelo - Hacer Pedido</h1>
 
   <form id="pedido-form">
-    <div class="plato">
-      <input type="checkbox" id="plato1" value="Pizza Margherita">
-      <label for="plato1">Pizza Margherita</label>
-    </div>
-
-    <div class="plato">
-      <input type="checkbox" id="plato2" value="Hamburguesa Completa">
-      <label for="plato2">Hamburguesa Completa</label>
-    </div>
-
-    <div class="plato">
-      <input type="checkbox" id="plato3" value="Ensalada César">
-      <label for="plato3">Ensalada César</label>
-    </div>
-
-    <div class="plato">
-      <input type="checkbox" id="plato4" value="Empanadas de Carne">
-      <label for="plato4">Empanadas de Carne</label>
-    </div>
-
-    <div class="plato">
-      <input type="checkbox" id="plato5" value="Tarta de Verduras">
-      <label for="plato5">Tarta de Verduras</label>
-    </div>
-
-    <button type="button" onclick="enviarPedido()">Hacer Pedido</button>
+    <!-- Acá se cargarán dinámicamente los platos -->
   </form>
 
+  <button id="botonPedido" type="button" onclick="enviarPedido()" style="display:none;">Hacer Pedido</button>
+
+  <!-- Google Visualization API -->
+  <script src="https://www.gstatic.com/charts/loader.js"></script>
+
   <script>
+    const numeroWhatsApp = '5491163057807'; // Tu número de WhatsApp
+
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(cargarPlatos);
+
+    function cargarPlatos() {
+      const query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/ID_DE_TU_HOJA_DE_CALCULO/gviz/tq?sheet=NombreDeTuPestaña');
+      query.send(function(response) {
+        const data = response.getDataTable();
+        const form = document.getElementById('pedido-form');
+
+        for (let i = 0; i < data.getNumberOfRows(); i++) {
+          const plato = data.getValue(i, 0); // Asumimos que el nombre del plato está en la columna A
+          const div = document.createElement('div');
+          div.className = 'plato';
+          div.innerHTML = `
+            <input type="checkbox" id="plato${i}" value="${plato}">
+            <label for="plato${i}">${plato}</label>
+          `;
+          form.appendChild(div);
+        }
+        document.getElementById('botonPedido').style.display = 'block'; // Mostrar botón después de cargar platos
+      });
+    }
+
     function enviarPedido() {
       const platosSeleccionados = [];
       const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
@@ -133,7 +108,6 @@
 
       const mensaje = `Hola! Quisiera pedir:\n- ${platosSeleccionados.join('\n- ')}`;
       const mensajeCodificado = encodeURIComponent(mensaje);
-      const numeroWhatsApp = '5491163057807'; // Tu número de WhatsApp
 
       window.open(`https://wa.me/${numeroWhatsApp}?text=${mensajeCodificado}`, '_blank');
     }
