@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú del Restaurante</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Menú del Restaurante</h1>
+        <input type="text" id="search" placeholder="Buscar...">
+    </header>
+
+    <main id="menu"></main>
+
+    <script>
+        const API_KEY = 'AIzaSyDehY-9HbHf7Ngj0OZCHr21Txs_TEL-gHg';
+        const SHEET_ID = '1bHOgSjbDydp69BeUS0Ln9JFke6Y2U0SGcwahUeAPAuc';
+        const SHEET_NAME = 'Hoja 1';
+
+        const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(SHEET_NAME)}?key=${API_KEY}`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const entries = data.values;
+                const menuContainer = document.getElementById('menu');
+                const searchInput = document.getElementById('search');
+
+                let items = [];
+
+                // Convert sheet rows to objects
+                for (let i = 1; i < entries.length; i++) {
+                    const [categoria, nombre, descripcion, precio] = entries[i];
+                    items.push({ categoria, nombre, descripcion, precio });
+                }
+
+                function renderMenu(filter = '') {
+                    menuContainer.innerHTML = '';
+                    let categorias = {};
+
+                    items.filter(item =>
+                        item.nombre.toLowerCase().includes(filter) ||
+                        item.descripcion.toLowerCase().includes(filter)
+                    ).forEach(item => {
+                        if (!categorias[item.categoria]) {
+                            categorias[item.categoria] = [];
+                        }
+                        categorias[item.categoria].push(item);
+                    });
+
+                    for (let categoria in categorias) {
+                        const section = document.createElement('section');
+                        const title = document.createElement('h2');
+                        title.textContent = categoria;
+                        section.appendChild(title);
+
+                        categorias[categoria].forEach(item => {
+                            const card = document.createElement('div');
+                            card.className = 'card';
+                            card.innerHTML = `
+                                <h3>${item.nombre}</h3>
+                                <p>${item.descripcion}</p>
+                                <p class="price">${item.precio}</p>
+                            `;
+                            section.appendChild(card);
+                        });
+
+                        menuContainer.appendChild(section);
+                    }
+                }
+
+                searchInput.addEventListener('input', (e) => {
+                    renderMenu(e.target.value.toLowerCase());
+                });
+
+                renderMenu();
+            })
+            .catch(error => {
+                console.error('Error al cargar el menú:', error);
+            });
+    </script>
+
+    <footer>
+        <div class="contact-info">
+            <p><strong>📍 Dirección:</strong> Arcos 1440</p>
+            <p><strong>📞 Teléfono:</strong> 0230 438 5000</p>
+            <p><strong>📧 Email:</strong> Thepent@gmail.com</p>
+        </div>
+        <div class="social-icons">
+            <a href="#" target="_blank"><img src="instagram-logo.png" alt="Instagram"></a>
+            <a href="#" target="_blank"><img src="facebook-icon.png" alt="Facebook"></a>
+        </div>
+    </footer>
+
+    <!-- Botón flotante de WhatsApp -->
+    <a href="https://wa.me/5492304385000" class="whatsapp-button" target="_blank">
+        <img src="whatsapp-icon.png" alt="WhatsApp">
+    </a>
+
+</body>
+</html>
