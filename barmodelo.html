@@ -1,117 +1,60 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bar Modelo - The Pent</title>
+<form id="pedido-form">
+  <!-- Acá se cargarán dinámicamente los platos -->
+</form>
 
-  <style>
-    /* Tu mismo estilo anterior */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f8f9fa;
-      padding: 2rem;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    h1 { font-size: 2rem; margin-bottom: 2rem; color: #111; text-align: center; }
-    form {
-      background-color: #fff;
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 500px;
-    }
-    .plato {
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-    }
-    .plato label { margin-left: 0.5rem; font-size: 1rem; color: #333; }
-    button {
-      margin-top: 2rem;
-      width: 100%;
-      padding: 1rem;
-      background-color: #0d6efd;
-      color: #fff;
-      font-size: 1.2rem;
-      border: none;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    button:hover { background-color: #0b5ed7; }
-    @media (max-width: 600px) {
-      body { padding: 1rem; }
-      form { padding: 1.5rem; }
-      button { font-size: 1rem; }
-    }
-  </style>
-</head>
+<button id="botonPedido" type="button" onclick="enviarPedido()" style="display:none;">Hacer Pedido</button>
 
-<body>
+<!-- Google Visualization API -->
+<script src="https://www.gstatic.com/charts/loader.js"></script>
 
-  <h1>Bar Modelo - Hacer Pedido</h1>
+<script>
+  const numeroWhatsApp = '5491163057807'; // Tu número de WhatsApp
 
-  <form id="pedido-form">
-    <!-- Acá se cargarán dinámicamente los platos -->
-  </form>
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(cargarPlatos);
 
-  <button id="botonPedido" type="button" onclick="enviarPedido()" style="display:none;">Hacer Pedido</button>
+  function cargarPlatos() {
+    const query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/ID_DE_TU_HOJA_DE_CALCULO/gviz/tq?sheet=NombreDeTuPestaña');
+    query.send(function(response) {
+      const data = response.getDataTable();
+      const form = document.getElementById('pedido-form');
 
-  <!-- Google Visualization API -->
-  <script src="https://www.gstatic.com/charts/loader.js"></script>
+      for (let i = 0; i < data.getNumberOfRows(); i++) {
+        const categoria = data.getValue(i, 0) || '';
+        const nombre = data.getValue(i, 1) || '';
+        const descripcion = data.getValue(i, 2) || '';
+        const precio = data.getValue(i, 3) || '';
 
-  <script>
-    const numeroWhatsApp = '5491163057807'; // Tu número de WhatsApp
+        const textoCompleto = `${nombre} - ${descripcion} ($${precio})`;
 
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(cargarPlatos);
-
-    function cargarPlatos() {
-      const query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1bHOgSjbDydp69BeUS0Ln9JFke6Y2U0SGcwahUeAPAuc/gviz/tq?sheet=Hoja');
-      query.send(function(response) {
-        const data = response.getDataTable();
-        const form = document.getElementById('pedido-form');
-
-        for (let i = 0; i < data.getNumberOfRows(); i++) {
-          const plato = data.getValue(i, 0); // Asumimos que el nombre del plato está en la columna A
-          const div = document.createElement('div');
-          div.className = 'plato';
-          div.innerHTML = `
-            <input type="checkbox" id="plato${i}" value="${plato}">
-            <label for="plato${i}">${plato}</label>
-          `;
-          form.appendChild(div);
-        }
-        document.getElementById('botonPedido').style.display = 'block'; // Mostrar botón después de cargar platos
-      });
-    }
-
-    function enviarPedido() {
-      const platosSeleccionados = [];
-      const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-
-      checkboxes.forEach(cb => {
-        platosSeleccionados.push(cb.value);
-      });
-
-      if (platosSeleccionados.length === 0) {
-        alert('Por favor, seleccioná al menos un plato.');
-        return;
+        const div = document.createElement('div');
+        div.className = 'plato';
+        div.innerHTML = `
+          <input type="checkbox" id="plato${i}" value="Categoría: ${categoria}\nPlato: ${nombre}\nDescripción: ${descripcion}\nPrecio: $${precio}">
+          <label for="plato${i}"><strong>${nombre}</strong><br><small>${descripcion} - <strong>$${precio}</strong></small></label>
+        `;
+        form.appendChild(div);
       }
+      document.getElementById('botonPedido').style.display = 'block'; // Mostrar botón después de cargar platos
+    });
+  }
 
-      const mensaje = `Hola! Quisiera pedir:\n- ${platosSeleccionados.join('\n- ')}`;
-      const mensajeCodificado = encodeURIComponent(mensaje);
+  function enviarPedido() {
+    const platosSeleccionados = [];
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
 
-      window.open(`https://wa.me/${numeroWhatsApp}?text=${mensajeCodificado}`, '_blank');
+    checkboxes.forEach(cb => {
+      platosSeleccionados.push(cb.value);
+    });
+
+    if (platosSeleccionados.length === 0) {
+      alert('Por favor, seleccioná al menos un plato.');
+      return;
     }
-  </script>
 
-</body>
-</html>
+    const mensaje = `Hola! Quisiera pedir:\n\n${platosSeleccionados.join('\n\n')}`;
+    const mensajeCodificado = encodeURIComponent(mensaje);
+
+    window.open(`https://wa.me/${numeroWhatsApp}?text=${mensajeCodificado}`, '_blank');
+  }
+</script>
