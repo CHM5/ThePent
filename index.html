@@ -6,20 +6,19 @@
   <title>The Pent - Tu piso más alto</title>
   <link rel="stylesheet" href="styles.css">
 
-  <!-- Fuentes de Google Fonts -->
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Glacial+Indifference&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap" rel="stylesheet">
-  <!-- Nota: Usamos "Nothing You Could Do" como reemplazo visual temporal para Moontime si no la tenés -->
+
+  <!-- AOS Animate On Scroll -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
 </head>
 <body>
 
-  <header class="hero">
-    <h1>The Pent</h1>
-    <p>Tu piso más alto</p>
-  </header>
-
   <nav class="navbar">
     <ul>
+      <li><a href="#inicio">Inicio</a></li>
       <li><a href="#quienes-somos">Quiénes somos</a></li>
       <li><a href="#servicios">Servicios</a></li>
       <li><a href="#trabajos">Nuestros trabajos</a></li>
@@ -27,32 +26,56 @@
     </ul>
   </nav>
 
+  <section id="inicio" class="section hero">
+    <div data-aos="fade-up">
+      <h1>The Pent</h1>
+      <p>Tu piso más alto</p>
+    </div>
+  </section>
+
   <section id="quienes-somos" class="section">
-    <h2>Quiénes somos</h2>
-    <p>Descripción breve sobre The Pent.</p>
+    <div data-aos="fade-up">
+      <h2>Quiénes somos</h2>
+      <p>Somos The Pent, un concepto elevado en diseño y experiencia.</p>
+    </div>
   </section>
 
   <section id="servicios" class="section">
-    <h2>Servicios</h2>
-    <p>Lista de servicios destacados.</p>
-    <div class="video-container">
-      <iframe src="https://www.youtube.com/embed/ID_DEL_VIDEO" frameborder="0" allowfullscreen></iframe>
+    <div data-aos="fade-up">
+      <h2>Servicios</h2>
+      <p>Ofrecemos soluciones premium a medida de cada cliente.</p>
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/ID_DEL_VIDEO" frameborder="0" allowfullscreen></iframe>
+      </div>
     </div>
   </section>
 
   <section id="trabajos" class="section">
-    <h2>Nuestros trabajos</h2>
-    <p>Galería de proyectos destacados.</p>
+    <div data-aos="fade-up">
+      <h2>Nuestros trabajos</h2>
+      <p>Proyectos que hablan por nosotros.</p>
+    </div>
   </section>
 
   <section id="contacto" class="section">
-    <h2>Contacto</h2>
-    <p>Dejanos tu mensaje o encontranos en nuestras redes.</p>
+    <div data-aos="fade-up">
+      <h2>Contacto</h2>
+      <p>Escribinos y elevemos tus ideas juntos.</p>
+    </div>
   </section>
 
   <footer class="footer">
     <p>&copy; 2025 The Pent. Todos los derechos reservados.</p>
   </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+  </script>
 
 </body>
 </html>
