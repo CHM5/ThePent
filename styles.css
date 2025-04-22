@@ -1,0 +1,84 @@
+/* Paleta basada en tu diseño */
+:root {
+  --color-fondo: #f4a9b8; /* rosa similar al fondo */
+  --color-principal: #3c71a6; /* azul similar al texto */
+  --color-blanco: #ffffff;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--color-fondo);
+  color: var(--color-principal);
+}
+
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+  font-family: 'Moontime', cursive;
+}
+
+.hero h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-family: 'Glacial Indifference', sans-serif;
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.navbar {
+  background-color: var(--color-blanco);
+  padding: 10px 0;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: var(--color-principal);
+  font-weight: bold;
+}
+
+.section {
+  padding: 80px 20px;
+  text-align: center;
+  background-color: var(--color-blanco);
+  margin: 20px 0;
+  border-radius: 10px;
+}
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80%;
+  height: 80%;
+  border: 0;
+}
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.8em;
+  background-color: var(--color-principal);
+  color: var(--color-blanco);
+  margin-top: 40px;
+}
