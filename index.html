@@ -2,233 +2,53 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Pent</title>
-
-  <style>
-    /* Reset básico */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body, html {
-      height: 100%;
-      font-family: 'Arial', sans-serif;
-      background-color: #f8f9fa;
-    }
-
-    /* Navbar */
-    nav {
-      background-color: #111;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .logo {
-      font-size: 1.8rem;
-      color: #fff;
-      font-weight: bold;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    nav ul li a {
-      text-decoration: none;
-      color: #fff;
-      font-size: 1rem;
-      transition: color 0.3s;
-    }
-
-    nav ul li a:hover {
-      color: #0dc143;
-    }
-
-    /* Botón hamburguesa */
-    .menu-toggle {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-    }
-
-    .menu-toggle span {
-      height: 3px;
-      width: 25px;
-      background: #fff;
-      margin: 4px 0;
-      border-radius: 5px;
-    }
-
-    /* Secciones */
-    section {
-      padding: 5rem 2rem;
-      text-align: center;
-    }
-
-    section h2 {
-      font-size: 2.2rem;
-      margin-bottom: 1rem;
-      color: #111;
-    }
-
-    section p {
-      font-size: 1.2rem;
-      max-width: 800px;
-      margin: 0 auto;
-      line-height: 1.6;
-      color: #333;
-    }
-
-    .button {
-      display: inline-block;
-      margin-top: 1.5rem;
-      padding: 0.8rem 1.5rem;
-      background-color: #0d6efd;
-      color: white;
-      text-decoration: none;
-      border-radius: 0.5rem;
-      font-size: 1rem;
-      transition: background-color 0.3s ease;
-      width: 100%;
-      max-width: 250px;
-    }
-
-    .button:hover {
-      background-color: #0b5ed7;
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 2rem;
-      background-color: #111;
-      color: #fff;
-      font-size: 0.9rem;
-      margin-top: 2rem;
-    }
-
-    /* Botón WhatsApp */
-    .whatsapp-button {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #25d366;
-      color: white;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      font-size: 30px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      z-index: 1001;
-    }
-
-    .whatsapp-button:hover {
-      background-color: #20c153;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      nav ul {
-        position: absolute;
-        top: 70px;
-        right: 0;
-        background: #111;
-        width: 100%;
-        flex-direction: column;
-        align-items: center;
-        display: none;
-      }
-
-      nav ul.active {
-        display: flex;
-      }
-
-      .menu-toggle {
-        display: flex;
-      }
-    }
-  </style>
-
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Pent - Tu piso más alto</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
-  <!-- Navbar -->
-  <nav>
-    <div class="logo">The Pent</div>
-    <div class="menu-toggle" id="menu-toggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <ul id="menu">
-      <li><a href="#quienes-somos">Quiénes Somos</a></li>
+  <header class="hero">
+    <h1>The Pent</h1>
+    <p>Tu piso más alto</p>
+  </header>
+
+  <nav class="navbar">
+    <ul>
+      <li><a href="#quienes-somos">Quiénes somos</a></li>
       <li><a href="#servicios">Servicios</a></li>
-      <li><a href="#trabajos-realizados">Trabajos Realizados</a></li>
+      <li><a href="#trabajos">Nuestros trabajos</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
   </nav>
 
-  <!-- Sección Quiénes Somos -->
-  <section id="quienes-somos">
-    <h2>Quiénes Somos</h2>
-    <p>En The Pent combinamos creatividad, innovación y pasión para ofrecer soluciones únicas a nuestros clientes.</p>
+  <section id="quienes-somos" class="section">
+    <h2>Quiénes somos</h2>
+    <p>Descripción breve sobre The Pent.</p>
   </section>
 
-  <!-- Sección Servicios -->
-  <section id="servicios">
+  <section id="servicios" class="section">
     <h2>Servicios</h2>
-    <p>Ofrecemos soluciones para restaurantes: cartas web interactivas, diseño de cartas personalizadas físicas, cartas digitales QR, cartas en inglés o portugués, individuales personalizados y todo lo que tu negocio necesite para potenciarlo.</p>
+    <p>Lista de servicios destacados.</p>
+    <!-- Aquí iría el video de YouTube -->
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/ID_DEL_VIDEO" frameborder="0" allowfullscreen></iframe>
+    </div>
   </section>
 
-  <!-- Sección Trabajos Realizados -->
-  <section id="trabajos-realizados">
-    <h2>Trabajos Realizados</h2>
-    <p>Portugués, individuales personalizados y todo lo que tu negocio necesite para potenciarlo.</p>
-    <a href="/barmodelo" class="button">Ver Bar Modelo</a>
+  <section id="trabajos" class="section">
+    <h2>Nuestros trabajos</h2>
+    <p>Galería de proyectos.</p>
   </section>
 
-  <!-- Sección Contacto -->
-  <section id="contacto">
+  <section id="contacto" class="section">
     <h2>Contacto</h2>
-    <p>¿Querés trabajar con nosotros? Escribinos a <strong>contacto@thepent.com.ar</strong> o hablá directo por WhatsApp.</p>
+    <p>Mail, WhatsApp, Instagram...</p>
   </section>
 
-  <!-- Footer -->
-  <footer>
-    © 2025 The Pent. Todos los derechos reservados.
+  <footer class="footer">
+    <p>&copy; 2025 The Pent. Todos los derechos reservados.</p>
   </footer>
-
-  <!-- Botón de WhatsApp -->
-  <a class="whatsapp-button" href="https://wa.me/5491163057807" target="_blank" title="Contactanos por WhatsApp">
-    <i class="fab fa-whatsapp"></i>
-  </a>
-
-  <!-- Script para el menú hamburguesa -->
-  <script>
-    const menuToggle = document.getElementById('menu-toggle');
-    const menu = document.getElementById('menu');
-
-    menuToggle.addEventListener('click', () => {
-      menu.classList.toggle('active');
-    });
-  </script>
 
 </body>
 </html>
