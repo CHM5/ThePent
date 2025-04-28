@@ -30,22 +30,35 @@
       scroll-behavior: smooth;
     }
 
+    header {
+      position: sticky;
+      top: 0;
+      background: var(--background-color);
+      z-index: 1001;
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
     header img {
       max-width: 300px;
       margin: 20px 0;
     }
 
     .menu-categorias {
+      position: sticky;
+      top: 100px; /* Ajustá este número si el logo es más alto o más bajo */
       display: flex;
       overflow-x: auto;
       gap: 1rem;
-      margin-bottom: 2rem;
       padding: 0.5rem;
       background: #fff;
       border-radius: 1rem;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       width: 100%;
       max-width: 800px;
+      z-index: 1000;
     }
 
     .menu-categorias button {
