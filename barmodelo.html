@@ -4,8 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bar Modelo</title>
-
   <style>
+    :root {
+      --background-color: #f0f2f5;
+      --primary-color: #333;
+      --secondary-color: #777;
+      --accent-color: #0d6efd;
+      --font-family: 'Arial', sans-serif;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -13,8 +20,8 @@
     }
 
     body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f0f2f5;
+      font-family: var(--font-family);
+      background-color: var(--background-color);
       padding: 2rem;
       min-height: 100vh;
       display: flex;
@@ -25,23 +32,34 @@
     h1 {
       font-size: 2.5rem;
       margin-bottom: 2rem;
-      color: #333;
+      color: var(--primary-color);
       text-align: center;
     }
 
-    form {
-      background-color: #fff;
-      padding: 2rem;
+    #pedido-form {
+      width: 100%;
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .categoria {
+      background: #fff;
+      padding: 1.5rem;
       border-radius: 1rem;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 600px;
+    }
+
+    .categoria h2 {
+      margin-bottom: 1rem;
+      color: var(--accent-color);
+      border-bottom: 2px solid var(--accent-color);
+      padding-bottom: 0.5rem;
     }
 
     .plato {
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid #e0e0e0;
+      margin-bottom: 1rem;
       display: flex;
       align-items: flex-start;
     }
@@ -53,7 +71,7 @@
 
     .plato label {
       font-size: 1rem;
-      color: #444;
+      color: var(--primary-color);
     }
 
     .plato strong {
@@ -65,7 +83,7 @@
 
     .plato small {
       display: block;
-      color: #666;
+      color: var(--secondary-color);
       margin-top: 0.25rem;
     }
 
@@ -73,7 +91,7 @@
       margin-top: 2rem;
       width: 100%;
       padding: 1rem;
-      background-color: #0d6efd;
+      background-color: var(--accent-color);
       color: #fff;
       font-size: 1.2rem;
       border: none;
@@ -86,18 +104,43 @@
       background-color: #0b5ed7;
     }
 
+    .floating-buttons {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .floating-buttons a {
+      background-color: var(--accent-color);
+      color: white;
+      padding: 10px 12px;
+      border-radius: 50%;
+      text-decoration: none;
+      text-align: center;
+      font-size: 20px;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--secondary-color);
+      margin-top: 50px;
+      padding: 20px 0;
+      border-top: 1px solid var(--secondary-color);
+    }
+
     @media (max-width: 600px) {
       body {
         padding: 1rem;
       }
-      form {
-        padding: 1.5rem;
+      #pedido-form {
+        gap: 1rem;
       }
-      .plato label {
-        font-size: 0.95rem;
-      }
-      button {
-        font-size: 1rem;
+      .categoria {
+        padding: 1rem;
       }
     }
   </style>
@@ -111,10 +154,25 @@
 
   <button type="button" onclick="enviarPedido()">Hacer Pedido</button>
 
+  <button class="lang-switch" style="margin-top:20px;" onclick="switchLanguage()">Cambiar a Inglés</button>
+
+  <div class="floating-buttons">
+    <a href="https://wa.me/5491163057807" target="_blank">W</a>
+    <a href="https://instagram.com/barmodelo" target="_blank">I</a>
+  </div>
+
+  <footer>
+    Dirección: Av. Ejemplo 1234, Buenos Aires, Argentina<br>
+    Teléfono: +54 11 1234-5678<br>
+    Horarios: Lun a Dom 12:00 - 00:00 hs
+  </footer>
+
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script>
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(cargarDatos);
+
+    let categoriasMap = {};
 
     function cargarDatos() {
       const query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1bHOgSjbDydp69BeUS0Ln9JFke6Y2U0SGcwahUeAPAuc/gviz/tq?sheet=Hoja');
@@ -125,14 +183,24 @@
       const data = response.getDataTable();
       const form = document.getElementById('pedido-form');
       form.innerHTML = '';
+      categoriasMap = {}; // Reiniciar
 
       for (let i = 0; i < data.getNumberOfRows(); i++) {
-        const categoria = data.getValue(i, 0) || '';
+        const categoria = data.getValue(i, 0) || 'Otros';
         const plato = data.getValue(i, 1) || '';
         const descripcion = data.getValue(i, 2) || '';
         const precio = data.getValue(i, 3) || '';
 
         if (!plato) continue;
+
+        if (!categoriasMap[categoria]) {
+          const divCategoria = document.createElement('div');
+          divCategoria.className = 'categoria';
+          divCategoria.id = `cat-${categoria}`;
+          divCategoria.innerHTML = `<h2>${categoria}</h2>`;
+          form.appendChild(divCategoria);
+          categoriasMap[categoria] = divCategoria;
+        }
 
         const div = document.createElement('div');
         div.className = 'plato';
@@ -144,28 +212,27 @@
 
         const label = document.createElement('label');
         label.setAttribute('for', `plato${i}`);
-        label.innerHTML = `<small>${categoria}</small> <strong>${plato}</strong> ${descripcion ? `<small>${descripcion}</small>` : ''} <br><strong style="color:#0d6efd;">$${precio}</strong>`;
-        
+        label.innerHTML = `<strong>${plato}</strong> ${descripcion ? `<small>${descripcion}</small>` : ''} <br><strong style="color:var(--accent-color);">$${precio}</strong>`;
+
         div.appendChild(input);
         div.appendChild(label);
 
-        form.appendChild(div);
+        categoriasMap[categoria].appendChild(div);
       }
     }
 
     function enviarPedido() {
       const platosSeleccionados = [];
       const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-      let total = 0; // Variable para calcular el total
+      let total = 0;
 
       checkboxes.forEach(cb => {
         platosSeleccionados.push(cb.value);
 
-        // Obtener el precio del plato desde el texto del label
         const label = document.querySelector(`label[for="${cb.id}"]`);
-        const precioTexto = label.innerHTML.match(/\$\d+(\.\d+)?/); // Extraer el precio con regex
+        const precioTexto = label.innerHTML.match(/\$\d+(\.\d+)?/);
         if (precioTexto) {
-          total += parseFloat(precioTexto[0].replace('$', '')); // Sumar el precio al total
+          total += parseFloat(precioTexto[0].replace('$', ''));
         }
       });
 
@@ -175,19 +242,22 @@
       }
 
       const mensaje = `Hola! Quisiera pedir:\n- ${platosSeleccionados.join('\n- ')}`;
-      const mensajeCodificado = encodeURIComponent(mensaje);
-      const numeroWhatsApp = '5491163057807'; // Tu número de WhatsApp
+      const numeroWhatsApp = '5491163057807';
+      const linkPago = `link.mercadopago.com.ar/barmodelo`;
 
-      // Link de pago de Mercado Pago
-      const linkPago = `link.mercadopago.com.ar/barmodelo`; // Reemplaza TU_PREFERENCE_ID con el ID dinámico
-  
-      // Agregar el link de pago al mensaje
       const mensajeConPago = `${mensaje}\n\nTotal: $${total.toFixed(2)}\nLink de pago: ${linkPago}`;
       const mensajeConPagoCodificado = encodeURIComponent(mensajeConPago);
-  
-      // Abrir WhatsApp con el mensaje
+
       window.open(`https://wa.me/${numeroWhatsApp}?text=${mensajeConPagoCodificado}`, '_blank');
-      }
+    }
+
+    function switchLanguage() {
+      document.querySelectorAll('.categoria h2').forEach(h2 => {
+        if (h2.innerText.toLowerCase() === 'entradas') h2.innerText = 'Starters';
+        else if (h2.innerText.toLowerCase() === 'platos principales') h2.innerText = 'Main Courses';
+        else if (h2.innerText.toLowerCase() === 'postres') h2.innerText = 'Desserts';
+      });
+    }
   </script>
 
 </body>
