@@ -19,6 +19,17 @@
       box-sizing: border-box;
     }
 
+    .barra-fija {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--background-color);
+      padding-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     body {
       font-family: var(--font-family);
       background-color: var(--background-color);
@@ -31,10 +42,9 @@
     }
 
     header {
-      position: sticky;
-      top: 0;
-      background: var(--background-color);
-      z-index: 1001;
+      position: relative;
+      background: transparent;
+      z-index: auto;
       padding: 10px 0;
       display: flex;
       flex-direction: column;
@@ -47,8 +57,7 @@
     }
 
     .menu-categorias {
-      position: sticky;
-      top: 120px; /* Ajustado para dejar espacio debajo del logo */
+      position: relative; /* ya no sticky */
       display: flex;
       overflow-x: auto;
       gap: 1rem;
@@ -58,7 +67,6 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       width: 100%;
       max-width: 800px;
-      z-index: 1000;
     }
 
     .menu-categorias button {
@@ -169,11 +177,12 @@
       }
     }
   </style>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
 
+<div class="barra-fija">
   <header>
     <img src="barlaacademia.png" alt="Bar La Academia">
   </header>
@@ -181,6 +190,7 @@
   <div class="menu-categorias" id="menu-categorias">
     <!-- Botones de categorías -->
   </div>
+</div>
 
   <form id="pedido-form"></form>
 
