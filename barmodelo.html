@@ -255,10 +255,10 @@
           boton.innerText = categoria;
           boton.onclick = () => {
             const target = document.getElementById(`cat-${categoria}`);
-            const yOffset = -175; // Ajustá este valor según la altura real de tu barra fija
-            const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
-          
-            window.scrollTo({ top: y, behavior: 'smooth' });
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setTimeout(() => {
+              window.scrollBy(0, -180); // Ajustá -180 según el alto de tu barra
+            }, 300);
           };
           menuCategorias.appendChild(boton);
         }
