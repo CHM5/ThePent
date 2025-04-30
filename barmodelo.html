@@ -29,7 +29,23 @@
       flex-direction: column;
       align-items: center;
     }
-
+    
+    @media (max-width: 768px) {
+      .barra-fija {
+        flex-direction: row; /* Change to row for horizontal alignment */
+        justify-content: space-around; /* Space out the elements evenly */
+        padding: 0.5rem; /* Reduce padding for smaller screens */
+      }
+    }
+    
+    /* Responsive Design for Extra Small Screens */
+    @media (max-width: 480px) {
+      .barra-fija {
+        flex-direction: column; /* Stack elements again if needed */
+        padding: 0.25rem; /* Further reduce padding */
+      }
+    }
+    
     body {
       font-family: var(--font-family);
       background-color: var(--background-color);
