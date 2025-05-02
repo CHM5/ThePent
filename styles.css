@@ -1,106 +1,109 @@
-:root {
-  --color-fondo: #f4a9b8; /* Rosa pastel */
-  --color-principal: #3c71a6; /* Azul texto */
-  --color-blanco: #ffffff;
-}
-
+/* Reset básico */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  scroll-behavior: smooth;
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
-  background-color: var(--color-fondo);
-  color: var(--color-principal);
-}
-
-.navbar {
-  position: sticky;
-  top: 0;
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 15px 0;
-  z-index: 1000;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-.navbar ul {
-  display: flex;
-  justify-content: center;
-  list-style: none;
-  gap: 30px;
-}
-
-.navbar a {
-  text-decoration: none;
-  color: var(--color-principal);
-  font-weight: 700;
-  transition: color 0.3s;
-}
-
-.navbar a:hover {
-  color: #000;
-}
-
-.section {
-  height: 100vh;
-  padding: 40px 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background-color: var(--color-blanco);
-}
-
-.hero {
-  background-color: var(--color-fondo);
-  flex-direction: column;
-}
-
-.hero h1 {
-  font-family: 'Nothing You Could Do', cursive; /* Alternativa a Moontime */
-  font-size: 4em;
-  margin-bottom: 10px;
-}
-
-.hero p {
-  font-family: 'Glacial Indifference', sans-serif;
-  font-size: 1.5em;
-}
-
-h2 {
-  font-size: 2.5em;
-  margin-bottom: 20px;
-}
-
-p {
-  font-size: 1.2em;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.video-container {
-  margin-top: 30px;
-  position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
-}
-
-.video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 10%;
-  width: 80%;
-  height: 100%;
-  border: none;
-}
-
-.footer {
-  background-color: var(--color-principal);
-  color: var(--color-blanco);
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
   padding: 20px;
+}
+
+/* Encabezado */
+header {
   text-align: center;
-  font-size: 0.8em;
+  margin-bottom: 40px;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  color: #222;
+}
+
+header p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-top: 10px;
+}
+
+/* Tabla de planes */
+.tabla-planes table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 40px;
+}
+
+.tabla-planes th,
+.tabla-planes td {
+  border: 1px solid #ccc;
+  padding: 12px;
+  text-align: center;
+}
+
+.tabla-planes th {
+  background-color: #333;
+  color: #fff;
+}
+
+.tabla-planes tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.tabla-planes tr:hover {
+  background-color: #e9e9e9;
+}
+
+/* Sección de botones */
+.botones-planes {
+  text-align: center;
+}
+
+.botones-planes h2 {
+  margin-bottom: 20px;
+  font-size: 1.6rem;
+}
+
+.botonera {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #222;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background-color: #444;
+  transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tabla-planes table,
+  .tabla-planes th,
+  .tabla-planes td {
+    font-size: 0.85rem;
+  }
+
+  .botonera {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  button {
+    width: 80%;
+  }
 }
