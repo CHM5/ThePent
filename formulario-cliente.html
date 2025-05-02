@@ -1,73 +1,29 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Formulario - Plan Base</title>
+  <meta charset="UTF-8">
+  <title>Contratar plan Base</title>
   <style>
-    body { font-family: sans-serif; padding: 30px; max-width: 600px; margin: auto; }
-    h1 { text-align: center; }
-    label { display: block; margin-top: 15px; }
-    input { width: 100%; padding: 10px; margin-top: 5px; }
-    button {
-      margin-top: 20px;
-      padding: 12px 20px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
+    body{font-family:sans-serif;max-width:600px;margin:auto;padding:20px}
+    input,button{display:block;width:100%;margin-top:12px;padding:10px}
   </style>
 </head>
 <body>
-  <h1>Contratar Plan Base</h1>
-  <form id="clienteForm">
-    <label for="nombre">Nombre</label>
-    <input type="text" id="nombre" name="nombre" required />
+  <h1>Crear menú Base</h1>
 
-    <label for="apellido">Apellido</label>
-    <input type="text" id="apellido" name="apellido" required />
-
-    <label for="negocio">Nombre del Negocio</label>
-    <input type="text" id="negocio" name="negocio" required />
-
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" required />
-
-    <button type="submit">Crear Menú</button>
+  <!--  target="oculto" evita que se abra la respuesta "OK" en pantalla  -->
+  <form action="https://script.google.com/macros/s/AKfycbwwJ1R1lHcg5HGR8bo40sKy88x7Z8ALY4lAbeiGGqk6Xplv-DNYHQpXhUAYKBUXoOpb-/exec"
+        method="POST" target="oculto">
+    <input name="nombre"   placeholder="Nombre"            required>
+    <input name="apellido" placeholder="Apellido"          required>
+    <input name="negocio"  placeholder="Nombre del negocio" required>
+    <input name="email"    type="email" placeholder="Email" required>
+    <input type="hidden" name="plan" value="0">
+    <button>Crear menú</button>
+    <!-- iframe oculto -->
+    <iframe name="oculto" style="display:none"></iframe>
   </form>
 
-  <script>
-    const queryParams = new URLSearchParams(window.location.search);
-    const planSeleccionado = queryParams.get("plan");
-
-    document.getElementById("clienteForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-
-      const datos = {
-        nombre: document.getElementById("nombre").value,
-        apellido: document.getElementById("apellido").value,
-        negocio: document.getElementById("negocio").value,
-        email: document.getElementById("email").value,
-        plan: planSeleccionado
-      };
-
-      fetch("https://script.google.com/macros/s/AKfycbwJ1R1lHcg5HGR8bo40sKy88x7Z8ALY4lAbeiGGqk6Xplv-DNYHQpXhUAYKBUXoOpb-/exec", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(datos)
-      })
-
-      .then(res => res.ok ? alert("Formulario enviado con éxito") : alert("Error al enviar"))
-      .catch(err => {
-        console.error("Error:", err);
-        alert("Error al enviar los datos.");
-      });
-    });
-  </script>
+  <p>Al hacer clic en <em>Crear menú</em>, se guardará la información en nuestro Google Sheet.</p>
 </body>
 </html>
