@@ -131,3 +131,11 @@ with open(html_file, "w", encoding="utf-8") as f:
 
 print("✅ Menú generado:", html_file)
 print("📄 Planilla editable:", sheet_url)
+
+# NUEVO → exportar urls para el workflow
+with open("menu_url.txt", "w") as f:
+    # ruta pública en GitHub Pages
+    f.write(f"planes/menu-{fecha_id}/index.html")
+
+with open("sheet_url.txt", "w") as f:
+    f.write(sheet_url)
