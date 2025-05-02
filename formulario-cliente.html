@@ -61,6 +61,7 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(datos)
       })
+
       .then(res => res.ok ? alert("Formulario enviado con éxito") : alert("Error al enviar"))
       .catch(err => {
         console.error("Error:", err);
