@@ -31,6 +31,16 @@ copia = drive_service.files().copy(
 
 sheet_id = copia["id"]  # 👈 ESTA LÍNEA ES CLAVE
 sheet_url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/edit"
+csv_url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv"
+print("🔗 CSV para menú en vivo:", csv_url)
+
+drive_service.permissions().create(
+    fileId=sheet_id,
+    body={
+        "type": "anyone",
+        "role": "reader"
+    }
+).execute()
 
 # Compartir automáticamente la copia con tu cuenta personal
 drive_service.permissions().create(
@@ -60,7 +70,7 @@ html_file = output_dir / "index.html"
 html = f"""<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Menú Base</title>
   <style>
     body {{ font-family: sans-serif; padding: 20px; }}
@@ -72,17 +82,46 @@ html = f"""<!DOCTYPE html>
 </head>
 <body>
   <h1>Menú Base</h1>
-  <p>Este menú fue generado automáticamente. Podés editarlo desde <a href="{sheet_url}" target="_blank">esta planilla</a>.</p>
-  <table>
-    <tr>{"".join(f"<th>{col}</th>" for col in SHEET_FIELDS)}</tr>
-"""
+  <p>Este menú está conectado a <a href="{sheet_url}" target="_blank">esta planilla</a> y se actualiza automáticamente.</p>
 
-for row in rows:
-    cells = [row[i] if i < len(row) else "" for i in range(4)]
-    html += "    <tr>" + "".join(f"<td>{cell}</td>" for cell in cells) + "</tr>\n"
-
-html += """
+  <table id="menuTable">
+    <thead>
+      <tr>
+        <th>Categoría</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
   </table>
+
+  <script>
+    const CSV_URL = "{csv_url}";
+
+    fetch(CSV_URL)
+      .then(response => response.text())
+      .then(data => {{
+        const rows = data.split("\\n").slice(0, 25);
+        const tbody = document.querySelector("#menuTable tbody");
+
+        rows.forEach(row => {{
+          const cols = row.split(",").map(col => col.replace(/\"/g, ""));
+          if (cols.length >= 4) {{
+            const tr = document.createElement("tr");
+            cols.slice(0, 4).forEach(cell => {{
+              const td = document.createElement("td");
+              td.textContent = cell;
+              tr.appendChild(td);
+            }});
+            tbody.appendChild(tr);
+          }}
+        }});
+      }})
+      .catch(err => {{
+        console.error("Error al cargar el CSV:", err);
+      }});
+  </script>
 </body>
 </html>
 """
