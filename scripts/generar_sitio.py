@@ -4,6 +4,7 @@ from pathlib import Path
 from datetime import datetime
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
 
 # === CONFIG ===
 TEMPLATE_SHEET_ID = "1bHOgSjbDydp69BeUS0Ln9JFke6Y2U0SGcwahUeAPAuc"
@@ -34,13 +35,34 @@ sheet_url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/edit"
 csv_url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv"
 print("🔗 CSV para menú en vivo:", csv_url)
 
-drive_service.permissions().create(
-    fileId=sheet_id,
-    body={
-        "type": "anyone",
-        "role": "reader"
-    }
-).execute()
+# === LEER EL CORREO DEL CLIENTE ===
+cliente_email = os.environ["CLIENT_EMAIL"]  # Asegúrate de que este email se pase como un parámetro
+
+# === DAR PERMISOS DE EDICIÓN AL CLIENTE ===
+def share_sheet_with_client(sheet_id, client_email):
+    try:
+        # Crear el servicio de Drive
+        service = build('drive', 'v3', credentials=creds)
+
+        # Llamada para otorgar permisos de edición al cliente
+        permission = {
+            'type': 'user',
+            'role': 'writer',  # 'writer' para permisos de edición
+            'emailAddress': client_email
+        }
+
+        # Crear el permiso
+        service.permissions().create(
+            fileId=sheet_id,
+            body=permission
+        ).execute()
+
+        print(f"Se ha dado acceso de escritura a: {client_email}")
+
+    except HttpError as error:
+        print(f'Ha ocurrido un error al compartir el archivo: {error}')
+# Llamada a la función para compartir el sheet con el cliente
+share_sheet_with_client(sheet_id, cliente_email)
 
 # Compartir automáticamente la copia con tu cuenta personal
 drive_service.permissions().create(
