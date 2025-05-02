@@ -25,5 +25,22 @@
   </form>
 
   <p>Al hacer clic en <em>Crear menú</em>, se guardará la información en nuestro Google Sheet.</p>
+  <script>
+    // Cuando el iframe termina de cargar, leemos la respuesta del Web App
+    document.getElementById("oculto").addEventListener("load", function () {
+      try {
+        // El contenido devuelto por Apps Script suele ser "OK" o "ERROR: ..."
+        const respuesta = this.contentDocument.body.innerText.trim();
+        if (respuesta === "OK") {
+          alert("✅ Se ha enviado la información necesaria para comenzar a disfrutar su carta web interactiva. ¡Éxitos!");
+        } else {
+          alert("❌ Ocurrió un problema al procesar la solicitud.\n" + respuesta);
+        }
+      } catch (err) {
+        alert("❌ No se pudo verificar la respuesta. Intenta nuevamente.");
+        console.error(err);
+      }
+    });
+  </script> 
 </body>
 </html>
