@@ -42,6 +42,9 @@
   </form>
 
   <script>
+    const queryParams = new URLSearchParams(window.location.search);
+    const planSeleccionado = queryParams.get("plan");
+
     document.getElementById("clienteForm").addEventListener("submit", function(e) {
       e.preventDefault();
 
@@ -49,25 +52,18 @@
         nombre: document.getElementById("nombre").value,
         apellido: document.getElementById("apellido").value,
         negocio: document.getElementById("negocio").value,
-        email: document.getElementById("email").value
+        email: document.getElementById("email").value,
+        plan: planSeleccionado
       };
 
-      fetch("https://TU-ENDPOINT", {
+      fetch("https://TU_WEB_APP_URL", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(datos)
       })
-      .then(response => {
-        if (response.ok) {
-          alert("Formulario enviado correctamente. Vas a recibir un mail con tu menú.");
-        } else {
-          alert("Ocurrió un error al enviar el formulario.");
-        }
-      })
-      .catch(error => {
-        console.error("Error:", error);
+      .then(res => res.ok ? alert("Formulario enviado con éxito") : alert("Error al enviar"))
+      .catch(err => {
+        console.error("Error:", err);
         alert("Error al enviar los datos.");
       });
     });
