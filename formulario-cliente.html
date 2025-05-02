@@ -11,9 +11,9 @@
 <body>
   <h1>Crear menú Base</h1>
 
-  <!-- target="oculto" evita que el usuario vea la página "OK" -->
   <form action="https://script.google.com/macros/s/AKfycbzxrjlRDwP_GxVO7IrzVpLvEEJV93xUTtq6lKUp3-XLjX5ViLMnMwGc3dPMDYdltx57/exec"
-        method="POST" target="oculto">
+        method="POST" target="oculto"
+        onsubmit="alert('✅ Se ha enviado la información necesaria para comenzar a disfrutar su carta web interactiva. ¡Éxitos!');">
     <input name="nombre"   placeholder="Nombre"             required>
     <input name="apellido" placeholder="Apellido"           required>
     <input name="negocio"  placeholder="Nombre del negocio" required>
@@ -21,18 +21,10 @@
     <input type="hidden" name="plan" value="0">
     <button type="submit">Crear menú</button>
 
-    <!-- iframe oculto donde se carga la respuesta -->
-    <iframe name="oculto" id="oculto" style="display:none"></iframe>
+    <!-- iframe oculto para que la respuesta OK no redirija -->
+    <iframe name="oculto" style="display:none"></iframe>
   </form>
 
   <p>Al hacer clic en <em>Crear menú</em>, se guardará la información en nuestro Google Sheet.</p>
-
-  <script>
-    // Cuando el iframe termina de cargar (es decir, el Web App ya respondió),
-    // mostramos el mensaje de éxito.
-    document.getElementById("oculto").addEventListener("load", function () {
-      alert("✅ Se ha enviado la información necesaria para comenzar a disfrutar su carta web interactiva. ¡Éxitos!");
-    });
-  </script>
 </body>
 </html>
