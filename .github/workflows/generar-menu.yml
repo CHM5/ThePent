@@ -1,0 +1,21 @@
+name: Generar menú
+
+on:
+  workflow_dispatch:  # Esto permite correrlo manualmente desde la pestaña "Actions"
+
+jobs:
+  generar-sitio:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v3
+
+      - name: Instalar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Ejecutar script para generar sitio
+        run: |
+          python scripts/crear_sitio.py
