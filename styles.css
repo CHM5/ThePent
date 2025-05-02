@@ -1,109 +1,114 @@
-/* Reset básico */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+:root {
+  --base: #cccccc;
+  --emprendedor: #007bff;
+  --profesional: #28a745;
+  --corporativo: #c59d00;
 }
 
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #f9f9f9;
+  background: #f6f6f6;
   color: #333;
-  line-height: 1.6;
-  padding: 20px;
+  padding: 40px 20px;
 }
 
-/* Encabezado */
 header {
   text-align: center;
   margin-bottom: 40px;
 }
 
 header h1 {
-  font-size: 2.5rem;
-  color: #222;
+  font-size: 2.8rem;
+  margin-bottom: 10px;
 }
 
 header p {
   font-size: 1.2rem;
   color: #555;
-  margin-top: 10px;
 }
 
 /* Tabla de planes */
-.tabla-planes table {
+table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 40px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px #ccc;
 }
 
-.tabla-planes th,
-.tabla-planes td {
-  border: 1px solid #ccc;
-  padding: 12px;
+th, td {
+  padding: 16px;
   text-align: center;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
 }
 
-.tabla-planes th {
-  background-color: #333;
-  color: #fff;
+th {
+  background: #333;
+  color: white;
 }
 
-.tabla-planes tr:nth-child(even) {
-  background-color: #f2f2f2;
+td:first-child {
+  text-align: left;
+  font-weight: 600;
+  color: #222;
 }
 
-.tabla-planes tr:hover {
-  background-color: #e9e9e9;
+/* Colores por columna */
+th:nth-child(2), td:nth-child(2) { background-color: var(--base); color: #000; }
+th:nth-child(3), td:nth-child(3) { background-color: var(--emprendedor); color: #fff; }
+th:nth-child(4), td:nth-child(4) { background-color: var(--profesional); color: #fff; }
+th:nth-child(5), td:nth-child(5) { background-color: var(--corporativo); color: #fff; }
+
+tr:nth-child(odd) td {
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
-/* Sección de botones */
+tr:hover td {
+  background-color: #f0f0f0;
+}
+
+/* Botones */
 .botones-planes {
   text-align: center;
-}
-
-.botones-planes h2 {
-  margin-bottom: 20px;
-  font-size: 1.6rem;
+  margin-top: 40px;
 }
 
 .botonera {
   display: flex;
   flex-wrap: wrap;
+  gap: 15px;
   justify-content: center;
-  gap: 20px;
 }
 
 button {
-  padding: 12px 24px;
-  font-size: 1rem;
-  background-color: #222;
-  color: #fff;
+  padding: 14px 28px;
   border: none;
   border-radius: 8px;
+  font-size: 1rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  font-weight: 600;
+  transition: transform 0.2s ease;
 }
 
 button:hover {
-  background-color: #444;
   transform: scale(1.05);
 }
 
+button:nth-child(1) { background-color: var(--base); color: #000; }
+button:nth-child(2) { background-color: var(--emprendedor); color: #fff; }
+button:nth-child(3) { background-color: var(--profesional); color: #fff; }
+button:nth-child(4) { background-color: var(--corporativo); color: #fff; }
+
 /* Responsive */
 @media (max-width: 768px) {
-  .tabla-planes table,
-  .tabla-planes th,
-  .tabla-planes td {
+  th, td {
     font-size: 0.85rem;
-  }
-
-  .botonera {
-    flex-direction: column;
-    gap: 15px;
+    padding: 12px;
   }
 
   button {
-    width: 80%;
+    width: 90%;
   }
 }
