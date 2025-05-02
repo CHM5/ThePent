@@ -36,7 +36,10 @@ csv_url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:cs
 print("🔗 CSV para menú en vivo:", csv_url)
 
 # === LEER EL CORREO DEL CLIENTE ===
-cliente_email = os.environ["CLIENT_EMAIL"]  # Asegúrate de que este email se pase como un parámetro
+cliente_email = os.environ.get("CLIENT_EMAIL", "default_email@example.com")  # Usando una variable de entorno o pasando por el flujo de GitHub
+
+# Si el correo no es pasado por el entorno, puedes también tomarlo directamente de la variable del flujo
+cliente_email = cliente_email or "default_email@example.com"  # Aquí usas el email pasado por el flujo si está disponible
 
 # === DAR PERMISOS DE EDICIÓN AL CLIENTE ===
 def share_sheet_with_client(sheet_id, client_email):
