@@ -1,81 +1,63 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Pent - Tu piso más alto</title>
-  <link rel="stylesheet" href="styles.css">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Glacial+Indifference&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap" rel="stylesheet">
-
-  <!-- AOS Animate On Scroll -->
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Pent – El menú de tu negocio</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <header>
+    <h1>The Pent</h1>
+    <p>Elegí el plan ideal para tu restaurante y generá tu menú online al instante.</p>
+  </header>
 
-  <nav class="navbar">
-    <ul>
-      <li><a href="#inicio">Inicio</a></li>
-      <li><a href="#quienes-somos">Quiénes somos</a></li>
-      <li><a href="#servicios">Servicios</a></li>
-      <li><a href="#trabajos">Nuestros trabajos</a></li>
-      <li><a href="#contacto">Contacto</a></li>
-    </ul>
-  </nav>
+  <section class="tabla-planes">
+    <table>
+      <thead>
+        <tr>
+          <th>Característica</th>
+          <th>Base</th>
+          <th>Emprendedor</th>
+          <th>Profesional</th>
+          <th>Corporativo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Productos</td><td>25 max</td><td>Ilimitados</td><td>Ilimitados</td><td>Ilimitados</td></tr>
+        <tr><td>Actualizaciones</td><td>5/mes</td><td>Ilimitadas</td><td>Ilimitadas</td><td>Ilimitadas</td></tr>
+        <tr><td>Datos negocio</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+        <tr><td>Hosting web</td><td>Limitado</td><td>24/7</td><td>24/7</td><td>24/7</td></tr>
+        <tr><td>Botón redes</td><td>❌</td><td>✅</td><td>✅</td><td>✅</td></tr>
+        <tr><td>Sin publicidad</td><td>❌</td><td>✅</td><td>✅</td><td>✅</td></tr>
+        <tr><td>Botón WhatsApp</td><td>❌</td><td>❌</td><td>✅</td><td>✅</td></tr>
+        <tr><td>Diseño Carta Física</td><td>❌</td><td>10% off</td><td>20% off</td><td>30% off</td></tr>
+        <tr><td>Atención</td><td>❌</td><td>Virtual</td><td>Personalizada</td><td>Prioritaria</td></tr>
+        <tr><td>Dominio propio</td><td>❌</td><td>❌</td><td>✅</td><td>✅</td></tr>
+        <tr><td>Seguridad Sitio Seguro</td><td>❌</td><td>❌</td><td>✅</td><td>✅</td></tr>
+        <tr><td>Fotos platos</td><td>❌</td><td>❌</td><td>✅</td><td>✅</td></tr>
+        <tr><td>Promos x temporada</td><td>❌</td><td>❌</td><td>❌</td><td>✅</td></tr>
+        <tr><td>Informe mensual</td><td>❌</td><td>❌</td><td>❌</td><td>✅</td></tr>
+        <tr><td><strong>Precio</strong></td><td><strong>GRATIS</strong></td><td><strong>$15.000</strong></td><td><strong>$25.000</strong></td><td><strong>$50.000</strong></td></tr>
+      </tbody>
+    </table>
+  </section>
 
-  <section id="inicio" class="section hero">
-    <div data-aos="fade-up">
-      <h1>The Pent</h1>
-      <p>Tu piso más alto</p>
+  <section class="botones-planes">
+    <h2>Elegí tu plan</h2>
+    <div class="botonera">
+      <button onclick="seleccionarPlan('base')">Plan Base</button>
+      <button onclick="seleccionarPlan('emprendedor')">Plan Emprendedor</button>
+      <button onclick="seleccionarPlan('profesional')">Plan Profesional</button>
+      <button onclick="seleccionarPlan('corporativo')">Plan Corporativo</button>
     </div>
   </section>
 
-  <section id="quienes-somos" class="section">
-    <div data-aos="fade-up">
-      <h2>Quiénes somos</h2>
-      <p>Somos The Pent, un concepto elevado en diseño y experiencia.</p>
-    </div>
-  </section>
-
-  <section id="servicios" class="section">
-    <div data-aos="fade-up">
-      <h2>Servicios</h2>
-      <p>Ofrecemos soluciones premium a medida de cada cliente.</p>
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/ID_DEL_VIDEO" frameborder="0" allowfullscreen></iframe>
-      </div>
-    </div>
-  </section>
-
-  <section id="trabajos" class="section">
-    <div data-aos="fade-up">
-      <h2>Nuestros trabajos</h2>
-      <p>Proyectos que hablan por nosotros.</p>
-    </div>
-  </section>
-
-  <section id="contacto" class="section">
-    <div data-aos="fade-up">
-      <h2>Contacto</h2>
-      <p>Escribinos y elevemos tus ideas juntos.</p>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <p>&copy; 2025 The Pent. Todos los derechos reservados.</p>
-  </footer>
-
-  <!-- Scripts -->
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
-    AOS.init({
-      duration: 1000,
-      once: true
-    });
+    function seleccionarPlan(plan) {
+      alert(`¡Seleccionaste el plan ${plan.toUpperCase()}! Acá se puede disparar el flujo correspondiente.`);
+      // Más adelante podemos hacer: fetch() para activar el GitHub Action
+    }
   </script>
-
 </body>
 </html>
