@@ -24,6 +24,14 @@ sheets_service = build("sheets", "v4", credentials=creds)
 fecha_id = datetime.now().strftime("%Y%m%d-%H%M")
 nombre_copia = f"Menu Base {fecha_id}"
 
+copia = drive_service.files().copy(
+    fileId=TEMPLATE_SHEET_ID,
+    body={"name": nombre_copia}
+).execute()
+
+sheet_id = copia["id"]  # 👈 ESTA LÍNEA ES CLAVE
+sheet_url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/edit"
+
 # Compartir automáticamente la copia con tu cuenta personal
 drive_service.permissions().create(
     fileId=sheet_id,
