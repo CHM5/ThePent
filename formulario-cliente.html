@@ -107,7 +107,7 @@
       <input name="web" placeholder="Página web">
       <input name="facebook" placeholder="Facebook">
       <input name="instagram" placeholder="Instagram">
-      <button type="submit">Crear MENÚ INTERACTIVO WEB</button>
+      <button type="button" id="btn-crear-menu">Crear menú INTERACTIVO WEB</button>
 
       <iframe name="oculto" style="display:none"></iframe>
     </form>
@@ -189,7 +189,7 @@
       `;
       document.title = "Contratar " + info.nombre;
       document.querySelector("h1").textContent = "Crear menú " + info.nombre;
-      document.querySelector("button[type='submit']").textContent = "Crear menú " + info.nombre;
+      document.getElementById("btn-crear-menu").textContent = "Crear menú " + info.nombre;
     } else {
       contenedor.innerHTML = `
         <h2>Plan no válido</h2>
@@ -207,6 +207,45 @@
         </div>
       `;
     }
+      document.getElementById('btn-crear-menu').addEventListener('click', function () {
+        const plan = parseInt(new URLSearchParams(window.location.search).get("plan")) || 0;
+
+        if (plan === 0) {
+          document.querySelector('form').submit(); // envío directo
+        } else {
+          // Guardar en localStorage que el form ya fue completado (por si querés recuperarlo)
+          localStorage.setItem('formularioPendiente', '1');
+          // Redirigir a suscripción (ajustá el link según el plan)
+          let links = {
+            1: "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c938084966c84bc01969976d53f14d2",
+            2: "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c938084966c84bc01969976d53f14d2",
+            3: "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c938084966c84bc01969976d53f14d2"
+          };
+          const formData = Object.fromEntries(new FormData(document.querySelector("form")));
+          localStorage.setItem("datosForm", JSON.stringify(formData));
+          window.location.href = links[plan] + "&back_url=" + encodeURIComponent(window.location.href + "&pago=ok");
+        }
+      });
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const pagoOk = params.get('pago') === 'ok';
+      const plan = parseInt(params.get("plan")) || 0;
+
+      if (pagoOk && plan > 0) {
+        const datos = JSON.parse(localStorage.getItem("datosForm") || "{}");
+        for (const [key, value] of Object.entries(datos)) {
+          const campo = document.querySelector(`[name="${key}"]`);
+          if (campo) campo.value = value;
+        }
+        document.querySelector('form').submit();
+        localStorage.removeItem("datosForm");
+
+        // ✅ limpiar el ?pago=ok de la URL para evitar reenvíos
+        const cleanUrl = window.location.href.replace(/([&?])pago=ok(&|$)/, '$1').replace(/\?$/, '');
+        history.replaceState({}, document.title, cleanUrl);
+        document.getElementById('btn-crear-menu').disabled = true;
+      }
+    });
   </script>
   
 </body>
