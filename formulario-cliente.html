@@ -1,8 +1,14 @@
+<!--
+  Este es un formulario HTML para contratar un plan de menú digital.
+  Incluye campos para datos personales y detalles del negocio.
+  Al enviar el formulario, se envían los datos a un Google Sheet.
+  Dependiendo del plan seleccionado, se redirige a una página de pago.
+  -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Contratar plan Base</title>
+  <title>Contratar plan Base</title>
   <style>
     body {
       font-family: sans-serif;
@@ -28,12 +34,10 @@
       text-align: center;
       color: #333;
     }
-
     ul {
       margin-top: 0;
       padding-left: 20px;
     }
-
     button {
       background-color: #0066cc;
       color: white;
@@ -41,219 +45,169 @@
       font-weight: bold;
       cursor: pointer;
     }
-
     button:hover {
       background-color: #004999;
-    }
-
-    form p {
-      font-style: italic;
-      margin-top: 20px;
-      color: #555;
     }
   </style>
 </head>
 <body>
-  <div id="info-plan" style="border: 1px solid #ccc; padding: 16px; background-color: #f9f9f9; margin-bottom: 20px;">
-    <!-- El contenido se insertará dinámicamente -->
-  </div>
-  
-  <div id="contenido">
-    <h1>Crear menú Base</h1>
-    
-    <form 
-      action="https://script.google.com/macros/s/AKfycbzjWtQ89b3-pHPMRN5yPLbcLyujTKB8IUkpWIs0AqkVf6a9toM-vP8JKHTuTizPXQbC/exec"
-      method="POST" 
-      target="oculto"
-      onsubmit="mostrarMensaje(); return true;"
-    >
-      <input name="nombre"   placeholder="* Nombre" required>
-      <input name="apellido" placeholder="* Apellido" required>
-      <input name="telefono" placeholder="* Telefono de contacto" required>
-      <input name="email" type="email" placeholder="* Email" required>
 
-      <p>Los datos opcionales pedidos a continuación se utilizarán para la realización del MENÚ INTERACTIVO WEB</p>
-      <input name="negocio" placeholder="Nombre del negocio">
-      <input name="whatsapp" placeholder="Whatsapp del negocio">
-      <input name="direccion" placeholder="Dirección del negocio">
-      <input name="ciudad" placeholder="Ciudad">
-      <input name="provincia" placeholder="Provincia">
-      <input name="codigo" placeholder="Código postal">
-      <label for="pais">País</label>
-      <select name="pais" id="pais">
-        <option value="">Seleccionar país</option>
-        <option value="Argentina">Argentina</option>
-        <option value="Bolivia">Bolivia</option>
-        <option value="Chile">Chile</option>
-        <option value="Colombia">Colombia</option>
-        <option value="Costa Rica">Costa Rica</option>
-        <option value="Cuba">Cuba</option>
-        <option value="Ecuador">Ecuador</option>
-        <option value="El Salvador">El Salvador</option>
-        <option value="España">España</option>
-        <option value="Guatemala">Guatemala</option>
-        <option value="Honduras">Honduras</option>
-        <option value="México">México</option>
-        <option value="Nicaragua">Nicaragua</option>
-        <option value="Panamá">Panamá</option>
-        <option value="Paraguay">Paraguay</option>
-        <option value="Perú">Perú</option>
-        <option value="República Dominicana">República Dominicana</option>
-        <option value="Uruguay">Uruguay</option>
-        <option value="Venezuela">Venezuela</option>
-        <option value="Estados Unidos">Estados Unidos</option>
-        <option value="Canadá">Canadá</option>
-      </select>
-      <input name="web" placeholder="Página web">
-      <input name="facebook" placeholder="Facebook">
-      <input name="instagram" placeholder="Instagram">
-      <button type="button" id="btn-crear-menu">Crear menú INTERACTIVO WEB</button>
+<div id="info-plan" style="border: 1px solid #ccc; padding: 16px; background-color: #f9f9f9; margin-bottom: 20px;"></div>
 
-      <iframe name="oculto" style="display:none"></iframe>
-    </form>
+<div id="contenido">
+  <h1>Crear menú Base</h1>
 
-    <p>Al hacer clic en <em>Crear menú</em>, se guardará la información en nuestro Google Sheet.</p>
-  </div>
+  <form id="formulario">
+    <input name="nombre" placeholder="* Nombre" required>
+    <input name="apellido" placeholder="* Apellido" required>
+    <input name="telefono" placeholder="* Teléfono de contacto" required>
+    <input name="email" type="email" placeholder="* Email" required>
 
-  <div id="mensajeFinal">
-    ✅ ¡¡¡Felicitaciones!!!<br><br>Se ha enviado toda la información a tu email para comenzar a disfrutar tu Carta Web Interactiva.<br><br>The Pent - diseños de altura
-    <div style="margin-top: 20px;">
-      <a href="https://thepent.com.ar" style="
-        background-color: #0066cc;
-        color: white;
-        padding: 10px 20px;
-        text-decoration: none;
-        font-weight: bold;
-        border-radius: 6px;
-        display: inline-block;
-      ">Volver al sitio</a>
-    </div>
-  </div>
-  
+    <p>Datos opcionales para la creación del menú web</p>
+    <input name="negocio" placeholder="Nombre del negocio">
+    <input name="whatsapp" placeholder="Whatsapp del negocio">
+    <input name="direccion" placeholder="Dirección del negocio">
+    <input name="ciudad" placeholder="Ciudad">
+    <input name="provincia" placeholder="Provincia">
+    <input name="codigo" placeholder="Código postal">
+    <select name="pais">
+      <option value="">Seleccionar país</option>
+      <option value="Argentina">Argentina</option>
+      <option value="Uruguay">Uruguay</option>
+      <option value="Chile">Chile</option>
+      <option value="Bolivia">Bolivia</option>
+      <option value="Colombia">Colombia</option>
+      <option value="Costa Rica">Costa Rica</option>
+      <option value="Cuba">Cuba</option>
+      <option value="Ecuador">Ecuador</option>
+      <option value="El Salvador">El Salvador</option>
+      <option value="España">España</option>
+      <option value="Guatemala">Guatemala</option>
+      <option value="Honduras">Honduras</option>
+      <option value="México">México</option>
+      <option value="Nicaragua">Nicaragua</option>
+      <option value="Panamá">Panamá</option>
+      <option value="Paraguay">Paraguay</option>
+      <option value="Perú">Perú</option>
+      <option value="República Dominicana">República Dominicana</option>
+      <option value="Venezuela">Venezuela</option>
+      <option value="Estados Unidos">Estados Unidos</option>
+      <option value="Canadá">Canadá</option>
+    </select>
+    <input name="web" placeholder="Página web">
+    <input name="facebook" placeholder="Facebook">
+    <input name="instagram" placeholder="Instagram">
 
-  <script>
-    function mostrarMensaje() {
-      document.getElementById('contenido').style.display = 'none';
-      document.getElementById('mensajeFinal').style.display = 'block';
+    <button type="button" id="btn-crear-menu">Crear menú INTERACTIVO WEB</button>
+  </form>
+
+  <p>Al hacer clic se guardará tu información en nuestro Google Sheet.</p>
+</div>
+
+<div id="mensajeFinal">
+  ✅ ¡¡¡Felicitaciones!!!<br><br>
+  Se ha enviado toda la información a tu email para comenzar a disfrutar tu Carta Web Interactiva.<br><br>The Pent - diseños de altura
+  <a href="https://thepent.com.ar" style="
+    background-color: #0066cc;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 6px;
+    display: inline-block;
+  ">Volver al sitio</a>
+</div>
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const plan = parseInt(urlParams.get("plan")) || 0;
+
+  const planInfo = {
+    0: { nombre: "Plan Base", detalles: ["Menú digital responsive", "Formulario de contacto", "Soporte por email"] },
+    1: { nombre: "Plan Emprendedor", detalles: ["Todo lo del Base", "Botón WhatsApp", "Colores y logo"] },
+    2: { nombre: "Plan Profesional", detalles: ["Todo lo anterior", "Estadísticas", "Edición web"] },
+    3: { nombre: "Plan Corporativo", detalles: ["Todo completo", "Atención personalizada", "Múltiples usuarios"] }
+  };
+
+  const info = planInfo[plan];
+  const contenedor = document.getElementById("info-plan");
+
+  if (info) {
+    document.title = "Contratar " + info.nombre;
+    document.querySelector("h1").textContent = "Crear menú " + info.nombre;
+    document.getElementById("btn-crear-menu").textContent = "Crear menú " + info.nombre;
+    contenedor.innerHTML = `
+      <h2>${info.nombre}</h2>
+      <p>Este plan incluye:</p>
+      <ul>${info.detalles.map(d => `<li>${d}</li>`).join("")}</ul>
+    `;
+  }
+
+  document.getElementById('btn-crear-menu').addEventListener('click', async () => {
+    const form = document.getElementById('formulario');
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
     }
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const plan = parseInt(urlParams.get("plan")) || 0;  // Asegura que sea número
-    const planInfo = {
-      0: {
-        nombre: "Plan Base",
-        detalles: [
-          "Menú digital responsive",
-          "Formulario de contacto",
-          "Soporte inicial por email"
-        ],
-        extra: "¿Necesitás más funcionalidades? El Plan Emprendedor te permite personalización avanzada."
-      },
-      1: {
-        nombre: "Plan Emprendedor",
-        detalles: [
-          "Todo lo del Plan Base",
-          "Botón de WhatsApp",
-          "Personalización de colores y logo"
-        ],
-        extra: "¿Buscás aún más control? Mirá el Plan Profesional."
-      },
-      2: {
-        nombre: "Plan Profesional",
-        detalles: [
-          "Todo lo anterior",
-          "Acceso a estadísticas",
-          "Edición de platos vía web"
-        ],
-        extra: "¿Querés asistencia personalizada? El Plan Corporativo es para vos."
-      },
-      3: {
-        nombre: "Plan Corporativo",
-        detalles: [
-          "Todas las funciones disponibles",
-          "Atención personalizada",
-          "Múltiples menús y usuarios"
-        ],
-        extra: "Este es nuestro plan más completo. Si necesitás algo a medida, <strong>contactanos</strong>."
-      }
-    };
+    const formData = new FormData(form);
+    formData.append('plan', plan);
 
-    const contenedor = document.getElementById("info-plan");
-    const info = planInfo[plan];
-      if (info) {
-      contenedor.innerHTML = `
-        <h2>${info.nombre}</h2>
-        <p>Este plan incluye:</p>
-        <ul>${info.detalles.map(d => `<li>${d}</li>`).join("")}</ul>
-        <p><em>${info.extra}</em></p>
-      `;
-      document.title = "Contratar " + info.nombre;
-      document.querySelector("h1").textContent = "Crear menú " + info.nombre;
-      document.getElementById("btn-crear-menu").textContent = "Crear menú " + info.nombre;
-    } else {
-      contenedor.innerHTML = `
-        <h2>Plan no válido</h2>
-        <p>Por favor volvé a intentar desde el link correcto.</p>
-        <div style="text-align: center; margin-top: 20px;">
-          <a href="https://thepent.com.ar" style="
-            background-color: #0066cc;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 6px;
-            display: inline-block;
-          ">Volver al inicio</a>
-        </div>
-      `;
-    }
-      document.getElementById('btn-crear-menu').addEventListener('click', function () {
-        const plan = parseInt(new URLSearchParams(window.location.search).get("plan")) || 0;
-        const form = document.querySelector('form');
-        
-        // Validación de campos obligatorios
-        if (!form.checkValidity()) {
-          form.reportValidity();  // muestra los mensajes de error nativos del navegador
-          return;
-        }
-        if (plan === 0) {
-          form.submit(); // envío directo
+    if (plan === 0) {
+      try {
+        const response = await fetch("https://script.google.com/macros/s/AKfycbzxrjlRDwP_GxVO7IrzVpLvEEJV93xUTtq6lKUp3-XLjX5ViLMnMwGc3dPMDYdltx57/exec", {
+          method: "POST",
+          body: formData
+        });
+
+        const text = await response.text();
+        if (text.includes("OK")) {
+          document.getElementById("contenido").style.display = "none";
+          document.getElementById("mensajeFinal").style.display = "block";
         } else {
-          // Guardar en localStorage que el form ya fue completado (por si querés recuperarlo)
-          localStorage.setItem('formularioPendiente', '1');
-          // Redirigir a suscripción (ajustá el link según el plan)
-          let links = {
-            1: "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c938084968c9eaa01969982254c05d0",
-            2: "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c938084968c9eaa01969982254c05d0",
-            3: "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c938084968c9eaa01969982254c05d0"
-          };
-          const formData = Object.fromEntries(new FormData(document.querySelector("form")));
-          localStorage.setItem("datosForm", JSON.stringify(formData));
-          window.location.href = links[plan] + "&back_url=" + encodeURIComponent(window.location.href + "&pago=ok");
+          alert("Hubo un error al enviar el formulario.");
         }
-      });
-    window.addEventListener('DOMContentLoaded', () => {
-      const params = new URLSearchParams(window.location.search);
-      const pagoOk = params.get('pago') === 'ok';
-      const plan = parseInt(params.get("plan")) || 0;
+      } catch (error) {
+        console.error(error);
+        alert("No se pudo conectar con el servidor.");
+      }
+    } else {
+      const links = {
+        1: "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c938084968c9eaa01969982254c05d0",
+        2: "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c938084968c9eaa01969982254c05d0",
+        3: "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c938084968c9eaa01969982254c05d0"
+      };
+      localStorage.setItem("datosForm", JSON.stringify(Object.fromEntries(formData)));
+      window.location.href = links[plan] + "&back_url=" + encodeURIComponent(window.location.href + "&pago=ok");
+    }
+  });
 
-      if (pagoOk && plan > 0) {
-        const datos = JSON.parse(localStorage.getItem("datosForm") || "{}");
-        for (const [key, value] of Object.entries(datos)) {
-          const campo = document.querySelector(`[name="${key}"]`);
-          if (campo) campo.value = value;
-        }
-        document.querySelector('form').submit();
+  window.addEventListener("DOMContentLoaded", () => {
+    const pagoOk = urlParams.get("pago") === "ok";
+    if (pagoOk && plan > 0) {
+      const datos = JSON.parse(localStorage.getItem("datosForm") || "{}");
+      for (const [key, value] of Object.entries(datos)) {
+        const campo = document.querySelector(`[name="${key}"]`);
+        if (campo) campo.value = value;
+      }
+
+      const formData = new FormData(document.getElementById("formulario"));
+      formData.append("plan", plan);
+
+      fetch("https://script.google.com/macros/s/AKfycbzxrjlRDwP_GxVO7IrzVpLvEEJV93xUTtq6lKUp3-XLjX5ViLMnMwGc3dPMDYdltx57/exec", {
+        method: "POST",
+        body: formData
+      }).then(() => {
+        document.getElementById("contenido").style.display = "none";
+        document.getElementById("mensajeFinal").style.display = "block";
         localStorage.removeItem("datosForm");
-
-        // ✅ limpiar el ?pago=ok de la URL para evitar reenvíos
         const cleanUrl = window.location.href.replace(/([&?])pago=ok(&|$)/, '$1').replace(/\?$/, '');
         history.replaceState({}, document.title, cleanUrl);
-        document.getElementById('btn-crear-menu').disabled = true;
-      }
-    });
-  </script>
-  
+      });
+    }
+  });
+</script>
+
 </body>
 </html>
-<!-- Fin del formulario -->
