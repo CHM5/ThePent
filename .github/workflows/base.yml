@@ -21,6 +21,7 @@ jobs:
           echo "apellido=${{ github.event.client_payload.apellido }}" >> $GITHUB_OUTPUT
           echo "telefono=${{ github.event.client_payload.telefono }}" >> $GITHUB_OUTPUT
           echo "email=${{ github.event.client_payload.email }}" >> $GITHUB_OUTPUT
+          echo "tipo=${{ github.event.client_payload.tipo }}" >> $GITHUB_OUTPUT
           echo "negocio=${{ github.event.client_payload.negocio }}" >> $GITHUB_OUTPUT
           echo "whatsapp=${{ github.event.client_payload.whatsapp }}" >> $GITHUB_OUTPUT
           echo "direccion=${{ github.event.client_payload.direccion }}" >> $GITHUB_OUTPUT
@@ -83,11 +84,11 @@ jobs:
           to: ${{ steps.vars.outputs.email }}
           from: "The Pent <${{ secrets.SMTP_USER }}>"
           content_type: text/html
-          body: |
-            ¡Hola ${{ steps.vars.outputs.nombre }}!<br><br>
-            Aquí tenés tu menú online:<br>
-            <a href="https://chm5.github.io/ThePent/${{ steps.paths.outputs.menu_url }}">Ver menú</a><br><br>
-            Podés editar los platos desde esta planilla:<br>
-            <a href="${{ steps.paths.outputs.sheet_url }}">Abrir Google Sheet</a><br><br>
-            ¡Gracias por elegirnos!<br>
-            — Equipo The Pent
+          body: >
+            <p>¡Hola ${{ steps.vars.outputs.nombre }}!</p>
+            <p>Aquí tenés tu menú online:<br>
+            <a href="https:ThePent.com.ar/${{ steps.paths.outputs.menu_url }}">Ver menú</a></p>
+            <p>Podés editar los platos desde esta planilla:<br>
+            <a href="${{ steps.paths.outputs.sheet_url }}">Abrir Google Sheet</a></p>
+            <p>¡Gracias por elegirnos!<br>
+            — Equipo The Pent</p>
