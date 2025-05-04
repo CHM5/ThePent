@@ -87,8 +87,9 @@ jobs:
           body: >
             <p>¡Hola ${{ steps.vars.outputs.nombre }}!</p>
             <p>Aquí tenés tu menú online:<br>
-            <a href="https:ThePent.com.ar/${{ steps.paths.outputs.menu_url }}">Ver menú</a></p>
+            <a href="https://ThePent.com.ar/${{ steps.paths.outputs.menu_url }}">Ver menú</a></p>
             <p>Podés editar los platos desde esta planilla:<br>
             <a href="${{ steps.paths.outputs.sheet_url }}">Abrir Google Sheet</a></p>
             <p>¡Gracias por elegirnos!<br>
             — Equipo The Pent</p>
+            <p>PD: Si no podés ver el menú, no dudes en contactarnos.</p>
