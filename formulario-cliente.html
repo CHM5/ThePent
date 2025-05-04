@@ -209,9 +209,15 @@
     }
       document.getElementById('btn-crear-menu').addEventListener('click', function () {
         const plan = parseInt(new URLSearchParams(window.location.search).get("plan")) || 0;
-
+        const form = document.querySelector('form');
+        
+        // Validación de campos obligatorios
+        if (!form.checkValidity()) {
+          form.reportValidity();  // muestra los mensajes de error nativos del navegador
+          return;
+        }
         if (plan === 0) {
-          document.querySelector('form').submit(); // envío directo
+          form.submit(); // envío directo
         } else {
           // Guardar en localStorage que el form ya fue completado (por si querés recuperarlo)
           localStorage.setItem('formularioPendiente', '1');
