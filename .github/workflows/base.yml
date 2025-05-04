@@ -19,10 +19,19 @@ jobs:
         run: |
           echo "nombre=${{ github.event.client_payload.nombre }}" >> $GITHUB_OUTPUT
           echo "apellido=${{ github.event.client_payload.apellido }}" >> $GITHUB_OUTPUT
-          echo "negocio=${{ github.event.client_payload.negocio }}" >> $GITHUB_OUTPUT
+          echo "telefono=${{ github.event.client_payload.telefono }}" >> $GITHUB_OUTPUT
           echo "email=${{ github.event.client_payload.email }}" >> $GITHUB_OUTPUT
+          echo "negocio=${{ github.event.client_payload.negocio }}" >> $GITHUB_OUTPUT
+          echo "whatsapp=${{ github.event.client_payload.whatsapp }}" >> $GITHUB_OUTPUT
+          echo "direccion=${{ github.event.client_payload.direccion }}" >> $GITHUB_OUTPUT
+          echo "ciudad=${{ github.event.client_payload.ciudad }}" >> $GITHUB_OUTPUT
+          echo "provincia=${{ github.event.client_payload.provincia }}" >> $GITHUB_OUTPUT
+          echo "codigo=${{ github.event.client_payload.codigo }}" >> $GITHUB_OUTPUT
+          echo "pais=${{ github.event.client_payload.pais }}" >> $GITHUB_OUTPUT
+          echo "web=${{ github.event.client_payload.web }}" >> $GITHUB_OUTPUT
+          echo "facebook=${{ github.event.client_payload.facebook }}" >> $GITHUB_OUTPUT
+          echo "instagram=${{ github.event.client_payload.instagram }}" >> $GITHUB_OUTPUT
           echo "plan=${{ github.event.client_payload.plan }}" >> $GITHUB_OUTPUT
-
       # 2) Python + deps
       - uses: actions/setup-python@v4
         with: 
