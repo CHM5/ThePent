@@ -193,7 +193,7 @@
       const links = {
         1: "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c938084968c9eaa01969982254c05d0",
         2: "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c938084968c9eaa01969982254c05d0",
-        3: "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c938084968c9eaa01969982254c05d0"
+        3: "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c938084968c9eaa01969bd7f0f4062c"
       };
       localStorage.setItem("datosForm", JSON.stringify(Object.fromEntries(formData)));
       window.location.href = links[plan] + "&back_url=" + encodeURIComponent(window.location.href + "&pago=ok");
@@ -211,7 +211,7 @@
 
       const formData = new FormData(document.getElementById("formulario"));
       formData.append("plan", plan);
-
+/*
       fetch("https://script.google.com/macros/s/AKfycbzjWtQ89b3-pHPMRN5yPLbcLyujTKB8IUkpWIs0AqkVf6a9toM-vP8JKHTuTizPXQbC/exec", {
         method: "POST",
         body: formData
@@ -222,6 +222,7 @@
         const cleanUrl = window.location.href.replace(/([&?])pago=ok(&|$)/, '$1').replace(/\?$/, '');
         history.replaceState({}, document.title, cleanUrl);
       });
+      */
     }
   });
 </script>
