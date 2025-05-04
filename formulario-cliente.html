@@ -107,7 +107,6 @@
       <input name="web" placeholder="Página web">
       <input name="facebook" placeholder="Facebook">
       <input name="instagram" placeholder="Instagram">
-      <input type="hidden" name="plan" value="0">
       <button type="submit">Crear MENÚ INTERACTIVO WEB</button>
 
       <iframe name="oculto" style="display:none"></iframe>
@@ -117,8 +116,20 @@
   </div>
 
   <div id="mensajeFinal">
-    ✅ Se ha enviado la información necesaria para comenzar a disfrutar su carta web interactiva. ¡Éxitos!
+    ✅ ¡¡¡Felicitaciones!!!<br><br>Se ha enviado toda la información a tu email para comenzar a disfrutar tu Carta Web Interactiva.<br><br>The Pent - diseños de altura
+    <div style="margin-top: 20px;">
+      <a href="https://thepent.com.ar" style="
+        background-color: #0066cc;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 6px;
+        display: inline-block;
+      ">Volver al sitio</a>
+    </div>
   </div>
+  
 
   <script>
     function mostrarMensaje() {
@@ -126,61 +137,76 @@
       document.getElementById('mensajeFinal').style.display = 'block';
     }
 
-  const planInfo = {
-    0: {
-      nombre: "Plan Base",
-      detalles: [
-        "Menú digital responsive",
-        "Formulario de contacto",
-        "Soporte inicial por email"
-      ],
-      extra: "¿Necesitás más funcionalidades? El Plan Emprendedor te permite personalización avanzada."
-    },
-    1: {
-      nombre: "Plan Emprendedor",
-      detalles: [
-        "Todo lo del Plan Base",
-        "Botón de WhatsApp",
-        "Personalización de colores y logo"
-      ],
-      extra: "¿Buscás aún más control? Mirá el Plan Profesional."
-    },
-    2: {
-      nombre: "Plan Profesional",
-      detalles: [
-        "Todo lo anterior",
-        "Acceso a estadísticas",
-        "Edición de platos vía web"
-      ],
-      extra: "¿Querés asistencia personalizada? El Plan Corporativo es para vos."
-    },
-    3: {
-      nombre: "Plan Corporativo",
-      detalles: [
-        "Todas las funciones disponibles",
-        "Atención personalizada",
-        "Múltiples menús y usuarios"
-      ],
-      extra: "Este es nuestro plan más completo. Si necesitás algo a medida, <strong>contactanos</strong>."
+    const urlParams = new URLSearchParams(window.location.search);
+    const plan = parseInt(urlParams.get("plan")) || 0;  // Asegura que sea número
+    const planInfo = {
+      0: {
+        nombre: "Plan Base",
+        detalles: [
+          "Menú digital responsive",
+          "Formulario de contacto",
+          "Soporte inicial por email"
+        ],
+        extra: "¿Necesitás más funcionalidades? El Plan Emprendedor te permite personalización avanzada."
+      },
+      1: {
+        nombre: "Plan Emprendedor",
+        detalles: [
+          "Todo lo del Plan Base",
+          "Botón de WhatsApp",
+          "Personalización de colores y logo"
+        ],
+        extra: "¿Buscás aún más control? Mirá el Plan Profesional."
+      },
+      2: {
+        nombre: "Plan Profesional",
+        detalles: [
+          "Todo lo anterior",
+          "Acceso a estadísticas",
+          "Edición de platos vía web"
+        ],
+        extra: "¿Querés asistencia personalizada? El Plan Corporativo es para vos."
+      },
+      3: {
+        nombre: "Plan Corporativo",
+        detalles: [
+          "Todas las funciones disponibles",
+          "Atención personalizada",
+          "Múltiples menús y usuarios"
+        ],
+        extra: "Este es nuestro plan más completo. Si necesitás algo a medida, <strong>contactanos</strong>."
+      }
+    };
+
+    const contenedor = document.getElementById("info-plan");
+    const info = planInfo[plan];
+      if (info) {
+      contenedor.innerHTML = `
+        <h2>${info.nombre}</h2>
+        <p>Este plan incluye:</p>
+        <ul>${info.detalles.map(d => `<li>${d}</li>`).join("")}</ul>
+        <p><em>${info.extra}</em></p>
+      `;
+      document.title = "Contratar " + info.nombre;
+      document.querySelector("h1").textContent = "Crear menú " + info.nombre;
+      document.querySelector("button[type='submit']").textContent = "Crear menú " + info.nombre;
+    } else {
+      contenedor.innerHTML = `
+        <h2>Plan no válido</h2>
+        <p>Por favor volvé a intentar desde el link correcto.</p>
+        <div style="text-align: center; margin-top: 20px;">
+          <a href="https://thepent.com.ar" style="
+            background-color: #0066cc;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 6px;
+            display: inline-block;
+          ">Volver al inicio</a>
+        </div>
+      `;
     }
-  };
-
-  const plan = document.querySelector('input[name="plan"]').value;
-  const contenedor = document.getElementById("info-plan");
-  const info = planInfo[plan];
-
-  if (info) {
-    contenedor.innerHTML = `
-      <h2>${info.nombre}</h2>
-      <p>Este plan incluye:</p>
-      <ul>${info.detalles.map(d => `<li>${d}</li>`).join("")}</ul>
-      <p><em>${info.extra}</em></p>
-    `;
-  }
-  document.title = "Contratar " + info.nombre;
-  document.querySelector("h1").textContent = "Crear menú " + info.nombre;
-  document.querySelector("button[type='submit']").textContent = "Crear menú " + info.nombre;
-
   </script>
   
 </body>
