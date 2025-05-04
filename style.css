@@ -1,114 +1,107 @@
-:root {
-  --base: #cccccc;
-  --emprendedor: #007bff;
-  --profesional: #28a745;
-  --corporativo: #c59d00;
-}
-
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background: #f6f6f6;
-  color: #333;
-  padding: 40px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  color: #0e1318;
 }
 
-header {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-header h1 {
-  font-size: 2.8rem;
-  margin-bottom: 10px;
-}
-
-header p {
-  font-size: 1.2rem;
-  color: #555;
-}
-
-/* Tabla de planes */
-table {
+.style-6 {
+  background-color: #fff;
+  border-bottom: 0.8px solid rgba(0, 0, 0, 0.07);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 48px;
+  position: sticky;
+  top: 0;
   width: 100%;
+  z-index: 1;
+}
+
+.style-7 {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 15px;
+}
+
+.style-8 {
+  padding: 12px 16px;
+  font-weight: 700;
+}
+
+.style-9 {
+  color: #304254;
+  text-decoration: none;
+}
+
+.style-10 {
+  font-family: inherit;
+}
+
+.tabla-planes {
+  overflow-x: auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+}
+
+.tabla-planes table {
   border-collapse: collapse;
-  background: white;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 0 10px #ccc;
+  width: 100%;
+  max-width: 960px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-th, td {
-  padding: 16px;
+.tabla-planes th,
+.tabla-planes td {
+  border: 1px solid #ddd;
+  padding: 12px 16px;
   text-align: center;
-  border-bottom: 1px solid #eee;
-  font-size: 0.95rem;
 }
 
-th {
-  background: #333;
-  color: white;
-}
-
-td:first-child {
-  text-align: left;
+.tabla-planes th {
+  background-color: #f3f4f6;
   font-weight: 600;
-  color: #222;
 }
 
-/* Colores por columna */
-th:nth-child(2), td:nth-child(2) { background-color: var(--base); color: #000; }
-th:nth-child(3), td:nth-child(3) { background-color: var(--emprendedor); color: #fff; }
-th:nth-child(4), td:nth-child(4) { background-color: var(--profesional); color: #fff; }
-th:nth-child(5), td:nth-child(5) { background-color: var(--corporativo); color: #fff; }
-
-tr:nth-child(odd) td {
-  background-color: rgba(255, 255, 255, 0.3);
+.tabla-planes tr:nth-child(even) {
+  background-color: #fafafa;
 }
 
-tr:hover td {
-  background-color: #f0f0f0;
-}
-
-/* Botones */
 .botones-planes {
   text-align: center;
-  margin-top: 40px;
+  padding: 2rem;
+}
+
+.botones-planes h2 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
 }
 
 .botonera {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 1rem;
   justify-content: center;
 }
 
-button {
-  padding: 14px 28px;
+.botonera button {
+  background-color: #7d2ae8;
+  color: white;
   border: none;
+  padding: 0.75rem 1.5rem;
   border-radius: 8px;
+  font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
-  font-weight: 600;
-  transition: transform 0.2s ease;
+  transition: background-color 0.2s ease-in-out;
 }
 
-button:hover {
-  transform: scale(1.05);
-}
-
-button:nth-child(1) { background-color: var(--base); color: #000; }
-button:nth-child(2) { background-color: var(--emprendedor); color: #fff; }
-button:nth-child(3) { background-color: var(--profesional); color: #fff; }
-button:nth-child(4) { background-color: var(--corporativo); color: #fff; }
-
-/* Responsive */
-@media (max-width: 768px) {
-  th, td {
-    font-size: 0.85rem;
-    padding: 12px;
-  }
-
-  button {
-    width: 90%;
-  }
+.botonera button:hover {
+  background-color: #5f1eb3;
 }
