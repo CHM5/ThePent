@@ -149,17 +149,12 @@ body {
   background-color: #6923c5;
 }
 
-/* Tooltip */
 .tooltip {
   position: relative;
   display: inline-block;
-  cursor: help;
-  color: #6c757d;
-  font-size: 0.85rem;
-  vertical-align: middle;
 }
 
-.tooltip .tooltip-icon {
+.tooltip-icon {
   display: inline-block;
   background-color: #e4e7eb;
   color: #0e1318;
@@ -169,10 +164,12 @@ body {
   text-align: center;
   font-size: 0.75rem;
   line-height: 1rem;
-  margin-left: 0.3rem;
+  margin-left: 6px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.tooltip .tooltip-text {
+.tooltip-text {
   visibility: hidden;
   width: 240px;
   background-color: #333;
@@ -181,12 +178,13 @@ body {
   border-radius: 6px;
   padding: 0.5rem;
   position: absolute;
-  z-index: 1;
+  z-index: 100;
   bottom: 125%;
   left: 50%;
-  margin-left: -120px;
+  transform: translateX(-50%);
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
 .tooltip:hover .tooltip-text {
