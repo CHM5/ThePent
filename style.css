@@ -149,12 +149,17 @@ body {
   background-color: #6923c5;
 }
 
+/* Tooltip */
 .tooltip {
   position: relative;
   display: inline-block;
+  cursor: help;
+  color: #6c757d;
+  font-size: 0.85rem;
+  vertical-align: middle;
 }
 
-.tooltip-icon {
+.tooltip .tooltip-icon {
   display: inline-block;
   background-color: #e4e7eb;
   color: #0e1318;
@@ -164,12 +169,11 @@ body {
   text-align: center;
   font-size: 0.75rem;
   line-height: 1rem;
-  margin-left: 6px;
+  margin-left: 0.3rem;
   font-weight: bold;
-  cursor: pointer;
 }
 
-.tooltip-text {
+.tooltip .tooltip-text {
   visibility: hidden;
   width: 240px;
   background-color: #333;
@@ -178,13 +182,12 @@ body {
   border-radius: 6px;
   padding: 0.5rem;
   position: absolute;
-  z-index: 100;
+  z-index: 1;
   bottom: 125%;
   left: 50%;
-  transform: translateX(-50%);
+  margin-left: -120px;
   opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
+  transition: opacity 0.3s;
 }
 
 .tooltip:hover .tooltip-text {
@@ -199,6 +202,7 @@ body {
   margin-right: 0.25rem;
   font-weight: 600;
   display: inline-block;
+  font-size: 1rem;
 }
 
 .precio-final {
