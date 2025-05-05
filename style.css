@@ -148,3 +148,35 @@ body {
 .contacto-final .botonera button:hover {
   background-color: #6923c5;
 }
+
+/* Tooltip */
+.tooltip {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: bold;
+  margin-left: 0.3rem;
+  color: #7d2ae8;
+}
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  width: 260px;
+  background-color: #555;
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 0.5rem;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -130px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
