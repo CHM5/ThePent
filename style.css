@@ -198,10 +198,12 @@ body {
   color: #a0a0a0;
   margin-right: 0.25rem;
   font-weight: 600;
+  display: inline-block;
 }
 
 .precio-final {
   font-weight: 700;
   color: #0e1318;
   font-size: 1rem;
+  display: inline-block;
 }
