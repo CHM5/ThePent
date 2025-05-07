@@ -260,72 +260,176 @@
     right: 20%;
   }
   
-  /* Responsive */
-  @media (max-width: 768px) {
+/* Estilos móvil - Agrupado por planes */
+@media (max-width: 768px) {
+    .tabla-planes {
+      padding: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
     .tabla-planes table {
-      display: block;
+      display: none; /* Oculta la tabla tradicional */
     }
     
-    .tabla-planes thead {
-      display: none;
+    /* Contenedor de planes móviles */
+    .planes-mobile {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
     }
     
-    .tabla-planes tbody tr {
-      display: block;
-      margin-bottom: 1rem;
-      border: 1px solid #e5e7eb;
-      border-radius: 8px;
+    /* Estilo para cada plan (tarjeta) */
+    .plan-card {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-top: 4px solid;
     }
     
-    .tabla-planes tbody td {
+    /* Colores para cada plan */
+    .plan-card.base {
+      border-color: #6b7280;
+    }
+    
+    .plan-card.emprendedor {
+      border-color: #3b82f6;
+    }
+    
+    .plan-card.pro {
+      border-color: #8b5cf6;
+    }
+    
+    .plan-card.corp {
+      border-color: #ec4899;
+    }
+    
+    /* Encabezado del plan */
+    .plan-header {
+      padding: 1.2rem;
+      text-align: center;
+      color: white;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    
+    .plan-header.base {
+      background: linear-gradient(135deg, #6b7280, #9ca3af);
+    }
+    
+    .plan-header.emprendedor {
+      background: linear-gradient(135deg, #3b82f6, #60a5fa);
+    }
+    
+    .plan-header.pro {
+      background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+    }
+    
+    .plan-header.corp {
+      background: linear-gradient(135deg, #ec4899, #f472b6);
+    }
+    
+    /* Cuerpo del plan */
+    .plan-body {
+      background: white;
+      padding: 0;
+    }
+    
+    .plan-feature {
+      padding: 1rem;
+      border-bottom: 1px solid #f3f4f6;
       display: flex;
       justify-content: space-between;
+    }
+    
+    .plan-feature-name {
+      font-weight: 500;
+      color: #374151;
+      display: flex;
       align-items: center;
-      text-align: right;
-      padding: 0.8rem 1rem;
-      border-bottom: 1px solid #e5e7eb;
     }
     
-    .tabla-planes tbody td:first-child {
-      background: #f3f4f6;
+    .plan-feature-value {
       font-weight: 600;
+      color: #1f2937;
     }
     
-    .tabla-planes tbody td::before {
-      content: attr(data-label);
-      font-weight: 600;
-      margin-right: 1rem;
-      color: #6b7280;
+    /* Precio */
+    .plan-price {
+      padding: 1.2rem;
+      text-align: center;
+      background: #f9fafb;
     }
     
-    .tabla-planes .fila-botones td {
-      justify-content: center;
-    }
-    
-    .tabla-planes .botonera button {
-      max-width: none;
-    }
-  }
-  @media (max-width: 400px) {
-    .tabla-planes tbody td {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.3rem;
-      padding: 0.8rem 0.5rem;
-    }
-    
-    .tabla-planes tbody td::before {
-      margin-right: 0;
-      margin-bottom: 0.2rem;
+    .precio-original {
+      color: #9ca3af;
       font-size: 0.9rem;
+      text-decoration: line-through;
     }
     
-    .tabla-planes .tooltip-icon {
-      margin-left: 0;
-      margin-top: 0.2rem;
+    .precio-final {
+      color: #1f2937;
+      font-size: 1.5rem;
+      font-weight: 700;
+      display: block;
+      margin-top: 0.3rem;
     }
     
-    .tabla-planes .precio-final {
-      font-size: 1.2rem;
+    /* Botón */
+    .plan-button {
+      padding: 1rem;
+      text-align: center;
+    }
+    
+    .plan-button button {
+      width: 100%;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    /* Colores de botones por plan */
+    .plan-button.base button {
+      background: #6b7280;
+      color: white;
+    }
+    
+    .plan-button.emprendedor button {
+      background: #3b82f6;
+      color: white;
+    }
+    
+    .plan-button.pro button {
+      background: #8b5cf6;
+      color: white;
+    }
+    
+    .plan-button.corp button {
+      background: #ec4899;
+      color: white;
+    }
+    
+    /* Tooltip móvil */
+    .tooltip-mobile {
+      display: inline-block;
+      margin-left: 0.3rem;
+    }
+    
+    .tooltip-icon {
+      width: 18px;
+      height: 18px;
+      background: #e5e7eb;
+      color: #6b7280;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
     }
   }

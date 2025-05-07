@@ -6,6 +6,26 @@
   <title>The Pent – Planes</title>
   <link rel="stylesheet" href="style_prices.css">
 </head>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  function toggleView() {
+    const table = document.querySelector('.tabla-planes table');
+    const mobilePlans = document.querySelector('.planes-mobile');
+    
+    if (window.innerWidth <= 768) {
+      table.style.display = 'none';
+      mobilePlans.style.display = 'flex';
+    } else {
+      table.style.display = 'table';
+      mobilePlans.style.display = 'none';
+    }
+  }
+  
+  // Ejecutar al cargar y al redimensionar
+  toggleView();
+  window.addEventListener('resize', toggleView);
+});
+</script>
 <body class="style-0">
   <div class="style-1">
     <div class="style-2">
@@ -240,11 +260,49 @@
                                       </div>
                                     </td>
                                   </tr>                                  
-                                </tbody>
-                                
+                                </tbody>                                
                               </table>
                             </div>
-                            
+                            <div class="planes-mobile">
+                              <!-- Plan Base -->
+                              <div class="plan-card base">
+                                <div class="plan-header base">Base</div>
+                                <div class="plan-body">
+                                  <div class="plan-feature">
+                                    <span class="plan-feature-name">Actualizaciones <span class="tooltip-mobile"><span class="tooltip-icon">i</span></span></span>
+                                    <span class="plan-feature-value">✅</span>
+                                  </div>
+                                  <div class="plan-feature">
+                                    <span class="plan-feature-name">Datos negocio <span class="tooltip-mobile"><span class="tooltip-icon">i</span></span></span>
+                                    <span class="plan-feature-value">✅</span>
+                                  </div>
+                                  <!-- Repite para todas las características -->
+                                  <div class="plan-price">
+                                    <strong>GRATIS</strong>
+                                  </div>
+                                  <div class="plan-button base">
+                                    <button>Seleccionar</button>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              <!-- Plan Emprendedor -->
+                              <div class="plan-card emprendedor">
+                                <div class="plan-header emprendedor">Emprendedor</div>
+                                <div class="plan-body">
+                                  <!-- Características aquí -->
+                                  <div class="plan-price">
+                                    <span class="precio-original"><del>$20.000</del></span>
+                                    <span class="precio-final">$18.000</span>
+                                  </div>
+                                  <div class="plan-button emprendedor">
+                                    <button>Seleccionar</button>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              <!-- Repite para Plan Pro y Corporativo -->
+                            </div>
                             <div class="contacto-final">
                               <h2>¿Necesitás ayuda para elegir el plan adecuado?</h2>
                               <p>Nuestro equipo está listo para ayudarte a encontrar la solución perfecta para tu negocio.</p>
