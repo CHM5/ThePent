@@ -4300,3 +4300,91 @@
 .home-text219 {
   display: inline-block;
 }
+
+.nosotros-section {
+  text-align: center;
+  max-width: 900px;
+  margin: 80px auto;
+  padding: 0 20px;
+}
+
+.nosotros-section h2 {
+  font-size: 2.8rem; /* más grande */
+  margin-bottom: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.nosotros-section p {
+  font-size: 1.5rem; /* agrandado */
+  line-height: 2.2rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.nosotros-section strong,
+.nosotros-section .resaltado {
+  color: #d94e9b;
+  font-weight: 600;
+}
+
+.faq-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+.faq-section h2 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 32px;
+}
+
+.faq-section details {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  transition: box-shadow 0.3s ease;
+}
+
+.faq-section details:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.faq-section summary {
+  font-weight: 600;
+  font-size: 18px;
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+  padding-right: 24px;
+}
+
+.faq-section summary::-webkit-details-marker {
+  display: none;
+}
+
+/* flechita */
+.faq-section summary::after {
+  content: "▼";
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 14px;
+  color: #888;
+  pointer-events: none; /* ← esto permite que el clic pase al summary */
+}
+
+.faq-section details[open] summary::after {
+  content: "▲";
+}
+
+.faq-section p {
+  margin-top: 12px;
+  color: #555;
+  font-size: 16px;
+  line-height: 1.5;
+}
