@@ -216,3 +216,20 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.head.appendChild(style);
 });
+
+  const productCheckboxes = document.querySelectorAll('.product-checkbox');
+  const totalAmountDisplay = document.getElementById('totalAmount');
+
+  function updateTotalAmount() {
+    let total = 0;
+    productCheckboxes.forEach(cb => {
+      if (cb.checked) {
+        total += parseFloat(cb.getAttribute('data-price'));
+      }
+    });
+    totalAmountDisplay.innerHTML = `<strong>Total: $${total}</strong>`;
+  }
+
+  productCheckboxes.forEach(cb => {
+    cb.addEventListener('change', updateTotalAmount);
+  });

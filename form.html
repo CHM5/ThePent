@@ -16,20 +16,44 @@
                     </div>
                     <div class="progress-steps">
                         <div class="step active" data-step="1">    
-                          <div class="step-label">Datos personales</div></div>
-                        <div class="step" data-step="2">
-                              <div class="step-label">Datos Negocio</div></div>
+                          <div class="step-label">Selección</div></div>                        
+                        <div class="step active" data-step="2">    
+                          <div class="step-label">Datos Personales</div></div>
                         <div class="step" data-step="3">
-                              <div class="step-label">Datos Adicionales</div></div>
+                              <div class="step-label">Datos Negocio</div></div>
                         <div class="step" data-step="4">
-                              <div class="step-label">Pago</div></div>
+                              <div class="step-label">Adicionales</div></div>
                         <div class="step" data-step="5">
+                              <div class="step-label">Pago</div></div>
+                        <div class="step" data-step="6">
                               <div class="step-label">Felicitaciones</div></div>
                     </div>
                   </div>
                 
-                <!-- Step 1: Personal Information -->
+                <!-- Step 1: Selección de Productos -->
                 <div class="form-step active" data-step="1">
+                  <h2>Seleccioná tus Productos</h2>
+                  <div class="checkbox-group">
+                    <label><input type="checkbox" class="product-checkbox" data-price="150000"> MicroSite ($150.000)</label>
+                    <label><input type="checkbox" class="product-checkbox" data-price="300000"> ProSite ($300.000)</label>
+                    <label><input type="checkbox" class="product-checkbox" data-price="100000"> Carta Simple Faz ($100.000)</label>
+                    <label><input type="checkbox" class="product-checkbox" data-price="180000"> Carta Doble Faz ($180.000)</label>
+                    <label><input type="checkbox" class="product-checkbox" data-price="200000"> Carta Tríptico A3 ($200.000)</label>
+                    <label><input type="checkbox" class="product-checkbox" data-price="300000"> Carta Anillada ($300.000)</label>
+                    <label><input type="checkbox" class="product-checkbox" data-price="150000"> Individual de Mesa ($150.000)</label>
+                    <label><input type="checkbox" class="product-checkbox" data-price="50000"> Diseño de Portavasos ($50.000)</label>
+                    <label><input type="checkbox" class="product-checkbox" data-price="50000"> Diseño de Tarjeta de Descuento ($50.000)</label>
+                    <label><input type="checkbox" class="product-checkbox" data-price="336000"> <b>Combo Base:</b> MicroSite, carta doble faz e individual ($336.000)</label>
+                    <label><input type="checkbox" class="product-checkbox" data-price="600000"> <b>Combo Pro:</b> ProSite, carta Anillada, portavasos y tarjeta de descuento ($600.000)</label>
+                  </div>
+                  <div id="totalAmount" class="form-group"><strong>Total: $0</strong></div>
+                  <div class="form-buttons">
+                    <button type="button" class="btn next-btn">Continuar</button>
+                  </div>
+                </div>
+
+                <!-- Step 2: Personal Information -->
+                <div class="form-step active" data-step="2">
                     <h2>Información Personal</h2>
                     <div class="form-group">
                         <label for="firstName">Nombre</label>
@@ -53,7 +77,7 @@
                 </div>
                 
                 <!-- Step 2: Sponsorship Details -->
-                <div class="form-step" data-step="2">
+                <div class="form-step" data-step="3">
                     <h2>Información de tu Negocio</h2>
                     <div class="form-group">
                         <label for="companyName">Nombre de tu Negocio</label>
@@ -84,7 +108,7 @@
                 </div>
                 
                 <!-- Step 3: Contratación -->
-                <div class="form-step" data-step="3">
+                <div class="form-step" data-step="4">
                     <h2>Información Adicional</h2>
                     <div class="form-group">
                         <label for="hearAbout">¿Cómo nos conociste?</label>

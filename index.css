@@ -156,8 +156,8 @@
   width: 100%;
   display: flex;
   align-items: center;
-  margin-bottom: var(--dl-layout-space-threeunits);
   justify-content: space-between;
+  margin-bottom: var(--dl-layout-space-threeunits);
 }
  
 .navbar8-logo {
@@ -168,6 +168,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.navbar8-mobile-menu.active {
+  display: flex;
 }
  
 .navbar8-icon16 {
@@ -2575,7 +2579,7 @@
   top: var(--dl-layout-space-unit);
   right: var(--dl-layout-space-unit);
   position: absolute;
-  font-size: 40px;
+  font-size: 30px;
   font-style: normal;
   font-weight: 700;
 }
@@ -2596,7 +2600,7 @@
   top: var(--dl-layout-space-unit);
   right: var(--dl-layout-space-unit);
   position: absolute;
-  font-size: 40px;
+  font-size: 30px;
   font-style: normal;
   font-weight: 700;
 }
@@ -2617,7 +2621,7 @@
   top: var(--dl-layout-space-unit);
   right: var(--dl-layout-space-unit);
   position: absolute;
-  font-size: 40px;
+  font-size: 30px;
   font-style: normal;
   font-weight: 700;
 }
@@ -2637,7 +2641,7 @@
   top: var(--dl-layout-space-unit);
   right: var(--dl-layout-space-unit);
   position: absolute;
-  font-size: 40px;
+  font-size: 30px;
   font-style: normal;
   font-weight: 700;
 }

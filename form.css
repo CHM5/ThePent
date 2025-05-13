@@ -191,7 +191,10 @@ input:focus, select:focus, textarea:focus {
 /* Checkbox Style */
 .checkbox-group {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start; /* Alinea todo a la izquierda */
+    padding-left: 0; /* Asegura que no haya margen extra */
 }
 
 .checkbox-group input {
@@ -327,4 +330,10 @@ input:focus, select:focus, textarea:focus {
   .progress-bar {
     display: none; /* opcional: ocultar la línea en mobile */
   }
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
