@@ -5019,3 +5019,18 @@ button::before, button::after,
   background-color: #007bff;
   color: white;
 }
+
+.hero17-row-container1 img {
+  pointer-events: none;
+}
+
+.thq-animated-group-horizontal {
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero17-row-container1 *,
+.hero17-row-container1 {
+  pointer-events: none !important;
+  user-select: none;
+}
