@@ -1,6 +1,7 @@
       <head>
           <link rel="stylesheet" href="form.css">
           <script src="form.js" defer></script>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
       </head>
       <div class="container">
         <div class="form-container">
@@ -16,22 +17,28 @@
                     </div>
                     <div class="progress-steps">
                         <div class="step active" data-step="1">    
-                          <div class="step-label">Selección</div></div>                        
-                        <div class="step active" data-step="2">    
-                          <div class="step-label">Datos Personales</div></div>
+                            <div class="step-label">Selección</div>
+                        </div>                        
+                        <div class="step" data-step="2">    
+                            <div class="step-label">Datos Personales</div>
+                        </div>
                         <div class="step" data-step="3">
-                              <div class="step-label">Datos Negocio</div></div>
+                            <div class="step-label">Datos Negocio</div>
+                        </div>
                         <div class="step" data-step="4">
-                              <div class="step-label">Adicionales</div></div>
+                            <div class="step-label">Adicionales</div>
+                        </div>
                         <div class="step" data-step="5">
-                              <div class="step-label">Pago</div></div>
+                            <div class="step-label">Pago</div>
+                        </div>
                         <div class="step" data-step="6">
-                              <div class="step-label">Felicitaciones</div></div>
+                            <div class="step-label">Felicitaciones</div>
+                        </div>
                     </div>
                   </div>
                 
                 <!-- Step 1: Selección de Productos -->
-                <div class="form-step active" data-step="1">
+                <div class="form-step active" data-step="1" id="step1">
                   <h2>Seleccioná tus Productos</h2>
                   <div class="checkbox-group">
                     <label><input type="checkbox" class="product-checkbox" data-price="150000"> MicroSite ($150.000)</label>
@@ -47,13 +54,14 @@
                     <label><input type="checkbox" class="product-checkbox" data-price="600000"> <b>Combo Pro:</b> ProSite, carta Anillada, portavasos y tarjeta de descuento ($600.000)</label>
                   </div>
                   <div id="totalAmount" class="form-group"><strong>Total: $0</strong></div>
+                  <div id="formError" class="form-error" style="display:none;"></div>
                   <div class="form-buttons">
                     <button type="button" class="btn next-btn">Continuar</button>
                   </div>
                 </div>
 
                 <!-- Step 2: Personal Information -->
-                <div class="form-step active" data-step="2">
+                <div class="form-step" data-step="2">
                     <h2>Información Personal</h2>
                     <div class="form-group">
                         <label for="firstName">Nombre</label>
@@ -72,11 +80,12 @@
                         <input type="tel" id="phone" name="phone" required .>
                     </div>
                     <div class="form-buttons">
+                        <button type="button" class="btn prev-btn">Atrás</button>
                         <button type="button" class="btn next-btn">Continuar</button>
                     </div>
                 </div>
                 
-                <!-- Step 2: Sponsorship Details -->
+                <!-- Step 3: Sponsorship Details -->
                 <div class="form-step" data-step="3">
                     <h2>Información de tu Negocio</h2>
                     <div class="form-group">
@@ -107,7 +116,7 @@
                     </div>
                 </div>
                 
-                <!-- Step 3: Contratación -->
+                <!-- Step 4: Contratación -->
                 <div class="form-step" data-step="4">
                     <h2>Información Adicional</h2>
                     <div class="form-group">
@@ -135,15 +144,35 @@
                         <button type="submit" class="btn submit-btn">Realizar Pago</button>
                     </div>
                 </div>
+
+                <!-- Step 5: Payment -->
+                <div class="form-step" data-step="5">
+                    <div class="success-message">
+                        <div class="success-icon">✓</div>
+                        <h2>redireccionar!</h2>
+                        <p>redireccionar.</p>
+                        <div class="form-buttons">
+                        </div>
+                    </div>
+                    <div class="form-buttons">
+                        <button type="button" class="btn prev-btn">Atrás</button>
+                        <button type="submit" class="btn submit-btn">Continuar</button>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Step 6: Success -->
+                <div class="form-step" data-step="6">
+                    <div class="success-message">
+                        <div class="success-icon">✓</div>
+                        <h2>¡Felicitaciones!</h2>
+                        <p>Tu compra fue procesada exitosamente. En breve recibirás un mail con los accesos y tu sitio editable.</p>
+                        <br>¿Dudas? Escribinos con el codigo de tu compra a al whatsapp o mail de contacto.</br>
+                        <div class="form-buttons">
+                            <button type="button" class="btn" id="resetForm">Realizar otra compra</button>
+                        </div>
+                    </div>
+                </div>
             </form>
-            
-            <div id="formSuccess" class="success-message" style="display: none;">
-                <div class="success-icon">✓</div>
-                <h2>Felicitaciones!</h2>
-                <p>Se ha generado tu archivo editable junto con el sitio web para que comiences a disfrutar de tu Carta Web Editable.
-                  <br>En instantes recibirás en tu casilla de mail toda la información necesaria.</br>
-                </p>
-                <button type="button" class="btn" id="resetForm">Realizar una nueva compra</button>
-            </div>
   </div>
 </div>

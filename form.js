@@ -70,8 +70,8 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Sponsorship Form Submission:', formDataObj);
             
             // Show success message
-            sponsorshipForm.style.display = 'none';
-            formSuccess.style.display = 'block';
+            currentStep++;
+            updateFormProgress(currentStep);
             
             // Add animation to success icon
             document.querySelector('.success-icon').classList.add('animated');
@@ -80,19 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Handle form reset
     resetFormButton.addEventListener('click', function() {
-        // Reset form fields
-        sponsorshipForm.reset();
-        
-        // Reset to first step
-        currentStep = 1;
-        updateFormProgress(currentStep);
-        
-        // Hide success message and show form
-        formSuccess.style.display = 'none';
-        sponsorshipForm.style.display = 'block';
-        
-        // Reset custom amount container
-        customAmountContainer.style.display = 'none';
+        window.location.href = 'index.html';
     });
     
     // Function to update form progress
@@ -120,102 +108,56 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Function to validate each step
     function validateStep(step) {
+        document.getElementById('formError').style.display = 'none';
         const currentStepEl = document.querySelector(`.form-step[data-step="${step}"]`);
         const requiredFields = currentStepEl.querySelectorAll('[required]');
         let isValid = true;
-        
-        // Check each required field
+
+        // ✅ Validación personalizada del paso 1: al menos un producto seleccionado
+        if (step === 1) {
+            const checkboxes = document.querySelectorAll('.product-checkbox');
+            const algunoSeleccionado = Array.from(checkboxes).some(cb => cb.checked);
+            if (!algunoSeleccionado) {
+                const errorBox = document.getElementById('formError');
+                errorBox.textContent = 'Debés seleccionar al menos un producto para continuar.';
+                errorBox.style.display = 'block';
+                return false;
+            }
+        }
+
+        // Validar campos requeridos
         requiredFields.forEach(field => {
-            // Clear previous error styling
             field.style.borderColor = '';
-            
-            // Check if field is empty or invalid
+
             if (!field.checkValidity() || field.value.trim() === '') {
                 field.style.borderColor = 'var(--danger-color)';
                 isValid = false;
-                
-                // Add shake animation
+
+                // Shake animation
                 field.classList.add('shake');
                 setTimeout(() => {
                     field.classList.remove('shake');
                 }, 500);
             }
         });
-        
-        // Custom validation for specific fields
+
+        // Validación personalizada para USA (platinum)
         if (step === 2 && sponsorshipLevel.value === 'platinum') {
             const customAmount = document.getElementById('customAmount');
             if (!customAmount.value || parseInt(customAmount.value) < 10000) {
                 customAmount.style.borderColor = 'var(--danger-color)';
                 isValid = false;
-                
-                // Add shake animation
+
                 customAmount.classList.add('shake');
                 setTimeout(() => {
                     customAmount.classList.remove('shake');
                 }, 500);
             }
         }
-        
+
         return isValid;
     }
-    
-    // Add keypress event for enter key
-    document.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter' && document.activeElement.type !== 'textarea') {
-            e.preventDefault();
-            // Trigger click on the appropriate button based on current step
-            if (currentStep < formSteps.length) {
-                document.querySelector(`.form-step[data-step="${currentStep}"] .next-btn`).click();
-            } else {
-                submitButton.click();
-            }
-        }
-    });
-    
-    // Add animations for input fields
-    const inputFields = document.querySelectorAll('input, select, textarea');
-    
-    inputFields.forEach(field => {
-        // Focus effect
-        field.addEventListener('focus', function() {
-            this.parentElement.classList.add('focused');
-        });
-        
-        field.addEventListener('blur', function() {
-            this.parentElement.classList.remove('focused');
-        });
-    });
-    
-    // Add CSS for shake animation
-    const style = document.createElement('style');
-    style.innerHTML = `
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-            20%, 40%, 60%, 80% { transform: translateX(5px); }
-        }
-        
-        .shake {
-            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
-        }
-        
-        .focused {
-            transition: all 0.3s ease;
-        }
-        
-        @keyframes successFade {
-            0% { transform: scale(0.7); opacity: 0; }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        
-        .success-icon.animated {
-            animation: successFade 0.5s ease forwards;
-        }
-    `;
-    document.head.appendChild(style);
-});
+
 
   const productCheckboxes = document.querySelectorAll('.product-checkbox');
   const totalAmountDisplay = document.getElementById('totalAmount');
@@ -233,3 +175,4 @@ document.addEventListener('DOMContentLoaded', function() {
   productCheckboxes.forEach(cb => {
     cb.addEventListener('change', updateTotalAmount);
   });
+});
