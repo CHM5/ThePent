@@ -26,7 +26,8 @@
 }
  
 .navbar8-image1 {
-  height: 3rem;
+  height: 1px; /* o el tamaño que quieras */
+  width: auto;
 }
  
 .navbar8-desktop-menu {
@@ -133,17 +134,18 @@
 }
  
 .navbar8-mobile-menu {
+  display: none;
   top: 0px;
   left: 0px;
   width: 100%;
   height: 100vh;
-  display: none;
   padding: var(--dl-layout-space-twounits);
   z-index: 100;
   position: absolute;
   flex-direction: column;
   justify-content: space-between;
   background-color: var(--dl-color-theme-neutral-light);
+  overflow-y: auto;
 }
  
 .navbar8-nav {
@@ -161,7 +163,10 @@
 }
  
 .navbar8-logo {
-  height: 3rem;
+  height: 40px !important; /* antes tenía 4px */
+  width: auto !important;
+  display: block;
+  margin-bottom: var(--dl-layout-space-unit);
 }
  
 .navbar8-close-menu {
@@ -4475,7 +4480,7 @@ body {
 .pricing-section {
   padding: 4rem 1rem;
   font-family: 'Inter', sans-serif;
-  background-color: #fdfcfb;
+  background-color: var(--dl-color-theme-neutral-light);
 }
 
 .pricing-toggle {
@@ -4582,6 +4587,10 @@ body {
   .pricing-cards {
     flex-direction: column;
     align-items: center;
+  }
+
+  .navbar8-burger-menu {
+    display: flex !important;
   }
 }
 
@@ -4884,7 +4893,7 @@ button::before, button::after,
               .pricing-section {
                 padding: 4rem 1rem;
                 font-family: 'Inter', sans-serif;
-                background-color: #fdfcfb;
+                background-color: var(--dl-color-theme-neutral-light);
               }
               .pricing-toggle {
                 display: flex;
