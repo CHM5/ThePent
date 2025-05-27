@@ -175,4 +175,21 @@ document.addEventListener('DOMContentLoaded', function() {
   productCheckboxes.forEach(cb => {
     cb.addEventListener('change', updateTotalAmount);
   });
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const radios = document.querySelectorAll('.plan');
+  const totalDisplay = document.getElementById('totalAmount');
+
+  radios.forEach(radio => {
+    radio.addEventListener('change', () => {
+      const selected = document.querySelector('.plan:checked');
+      const price = selected ? parseInt(selected.dataset.price || 0, 10) : 0;
+      totalDisplay.innerHTML = `<strong>Total: $${price.toLocaleString()}</strong>`;
+    });
+  });
+});
+
 });

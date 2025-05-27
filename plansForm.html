@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
       <head>
-        <title>Productos | The Pent</title>
+        <title>Planes | The Pent</title>
         <meta property="og:title" content="The Pent" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta charset="utf-8" />
         <meta property="twitter:card" content="summary_large_image" />
+        <!-- Copia los mismos estilos y fuentes que en index.html -->
         <link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.css" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" data-tag="font" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:wght@400;700&display=swap" data-tag="font" />
@@ -14,17 +15,20 @@
         <link rel="stylesheet" href="./style.css" />
         <link rel="stylesheet" href="./index.css" />
         <link rel="stylesheet" href="form.css" />
-        <script src="form.js" defer></script>
+        <script src="plansForm.js" defer></script>
+        <style>
+        /* Puedes copiar aquí los estilos globales de index.html si no están en style.css */
+        </style>
       </head>
-
-    <body>
+        
+      <body>
         <div class="container">
             <div class="form-container">
                 <div class="form-header">
                     <h1>Aplicación de Plan</h1>
-                    <p>Completá los pasos para activar tu sitio y acceder a los beneficios de tu compra</p>
+                    <p>Completá los pasos para activar tu sitio en tiempo real.</p>
                 </div>
-                
+            
                 <form id="sponsorshipForm">
                     <div class="form-progress">
                         <div class="progress-bar">
@@ -41,38 +45,75 @@
                                 <div class="step-label">Datos Negocio</div>
                             </div>
                             <div class="step" data-step="4">
-                                <div class="step-label">Adicionales</div>
-                            </div>
-                            <div class="step" data-step="5">
                                 <div class="step-label">Pago</div>
                             </div>
-                            <div class="step" data-step="6">
+                            <div class="step" data-step="5">
                                 <div class="step-label">Felicitaciones</div>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Step 1: Selección de Productos -->
+                    <!-- Step 1: Selección de Servicio -->
                     <div class="form-step active" data-step="1" id="step1">
-                    <h2>Seleccioná tus Productos</h2>
-                    <div class="checkbox-group">
-                        <label><input type="checkbox" class="product-checkbox" data-price="150000"> MicroSite ($150.000)</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="300000"> ProSite ($300.000)</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="100000"> Carta Simple Faz ($100.000)</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="180000"> Carta Doble Faz ($180.000)</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="200000"> Carta Tríptico A3 ($200.000)</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="300000"> Carta Anillada ($300.000)</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="150000"> Individual de Mesa ($150.000)</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="50000"> Diseño de Portavasos ($50.000)</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="50000"> Diseño de Tarjeta de Descuento ($50.000)</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="336000"> <b>Combo Base:</b> MicroSite, carta doble faz e individual ($336.000)</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="600000"> <b>Combo Pro:</b> ProSite, carta Anillada, portavasos y tarjeta de descuento ($600.000)</label>
-                    </div>
-                    <div id="totalAmount" class="form-group"><strong>Total: $0</strong></div>
-                    <div id="formError" class="form-error" style="display:none;"></div>
-                    <div class="form-buttons">
-                        <button type="button" class="btn next-btn">Continuar</button>
-                    </div>
+                        <h2>Seleccioná el Plan que mejor se adapta a tu negocio</h2>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" class="plan" name="plan" data-price="0" checked>
+                                <div class="plan-text">
+                                    <strong>Base</strong><br>
+                                    <span>(Gratis)</span>
+                                </div>
+                            </label>
+                            <label>
+                                <input type="radio" class="plan" name="plan" data-price="18000">
+                                <div class="plan-text">
+                                    <strong>Emprendedor Mensual</strong><br>
+                                    <span>($18.000)</span>
+                                </div>
+                            </label>
+                            <label>
+                                <input type="radio" class="plan" name="plan" data-price="36000">
+                                <div class="plan-text">
+                                    <strong>Profesional Mensual</strong><br>
+                                    <span>($36.000)</span>
+                                </div>
+                            </label>
+                            <label>
+                                <input type="radio" class="plan" name="plan" data-price="72000">
+                                <div class="plan-text">
+                                    <strong>Corporativo Mensual</strong><br>
+                                    <span>($72.000)</span>
+                                </div>
+                            </label>
+                            <label>
+                                <input type="radio" class="plan" name="plan" data-price="180000">
+                                <div class="plan-text">
+                                    <strong>Emprendedor Anual</strong><br>
+                                    <span>($180.000 - 2 meses de regalo por año)</span>
+                                </div>
+                            </label>
+                            <label>
+                                <input type="radio" class="plan" name="plan" data-price="360000">
+                                <div class="plan-text">
+                                    <strong>Profesional Anual</strong><br>
+                                    <span>($360.000 - 2 meses de regalo por año)</span>
+                                </div>
+                            </label>
+                            <label>
+                                <input type="radio" class="plan" name="plan" data-price="720000">
+                                <div class="plan-text">
+                                    <strong>Corporativo Anual</strong><br>
+                                    <span>($720.000 - 2 meses de regalo por año)</span>
+                                </div>
+                            </label>
+                        </div>
+                        <div id="totalAmount">
+                            <strong>Total: $<span class="priceValue">0</span></strong>
+                        </div>
+                        <div id="formError" class="form-error" style="display:none;"></div>
+                        <div class="form-buttons">
+                            <button type="button" class="btn next-btn">Continuar</button>
+                        </div>
                     </div>
 
                     <!-- Step 2: Personal Information -->
@@ -125,14 +166,6 @@
                             <label for="customAmount">Custom Amount ($)</label>
                             <input type="number" id="customAmount" name="customAmount" min="10000">
                         </div>
-                        <div class="form-buttons">
-                            <button type="button" class="btn prev-btn">Atrás</button>
-                            <button type="button" class="btn next-btn">Continuar</button>
-                        </div>
-                    </div>
-                    
-                    <!-- Step 4: Contratación -->
-                    <div class="form-step" data-step="4">
                         <h2>Información Adicional</h2>
                         <div class="form-group">
                             <label for="hearAbout">¿Cómo nos conociste?</label>
@@ -150,33 +183,39 @@
                             <label for="comments">Comentarios Adicionales</label>
                             <textarea id="comments" name="comments" rows="4"></textarea>
                         </div>
-                        <div class="form-group checkbox-group">
+                        <div class="form-group checkbox-group horizontal">
                             <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
                             <label for="agreeTerms">Acepto los términos y condiciones</label>
                         </div>
+                        <div id="termsError" class="form-error" style="display:none; color: #d32f2f; margin-top: 8px;">
+                            Debes aceptar los términos y condiciones.
+                        </div>
                         <div class="form-buttons">
                             <button type="button" class="btn prev-btn">Atrás</button>
-                            <button type="submit" class="btn submit-btn">Realizar Pago</button>
+                            <button type="button" class="btn next-btn">Continuar</button>
                         </div>
                     </div>
-
-                    <!-- Step 5: Payment -->
-                    <div class="form-step" data-step="5">
+                    
+                    <!-- Step 4: Total -->
+                    <div class="form-step" data-step="4">
+                        <div id="planInfo"></div>
+                        <strong>Total a pagar: $<span class="priceValue">0</span></strong>
                         <div class="success-message">
-                            <div class="success-icon">✓</div>
-                            <h2>redireccionar!</h2>
-                            <p>redireccionar.</p>
-                            <div class="form-buttons">
-                            </div>
+                            <h2>Pago</h2>
+                            <p>Hacé clic en el siguiente botón para completar tu suscripción:</p>
+                            <a href="https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c938084968c9eaa01969982254c05d0"
+                            name="MP-payButton"
+                            class="blue-button"
+                            target="_blank"
+                            rel="noopener noreferrer">Suscribirme</a>
                         </div>
                         <div class="form-buttons">
                             <button type="button" class="btn prev-btn">Atrás</button>
-                            <button type="submit" class="btn submit-btn">Continuar</button>
                         </div>
                     </div>
 
-                    <!-- Step 6: Success -->
-                    <div class="form-step" data-step="6">
+                    <!-- Step 5: Success -->
+                    <div class="form-step" data-step="5">
                         <div class="success-message">
                             <div class="success-icon">✓</div>
                             <h2>¡Felicitaciones!</h2>
@@ -188,8 +227,6 @@
                         </div>
                     </div>
                 </form>
-
-
             </div>
         </div>
 
@@ -210,5 +247,6 @@
                 </div>
             </footer>
         </footer4-wrapper>
+                        
     </body>
 </html>
