@@ -4547,7 +4547,7 @@ body {
 .info-icon {
   display: inline-block;
   margin-left: 6px;
-  background: #ddd;
+  background: #eee;
   color: #333;
   border-radius: 50%;
   width: 16px;
@@ -4555,23 +4555,33 @@ body {
   font-size: 12px;
   text-align: center;
   line-height: 16px;
-  cursor: help;
+  cursor: pointer;
   position: relative;
+  user-select: none;
+  font-weight: bold;
 }
 
 .info-icon:hover::after {
   content: attr(data-tooltip);
   position: absolute;
-  bottom: 125%;
+  bottom: 120%;
   left: 50%;
   transform: translateX(-50%);
   background: #333;
   color: white;
-  padding: 6px 8px;
+  padding: 6px 10px;
   border-radius: 4px;
   white-space: nowrap;
-  z-index: 10;
   font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out;
+  z-index: 100;
+}
+
+.info-icon:hover::after,
+.info-icon:focus::after {
+  opacity: 1;
 }
 
 .select-btn {
@@ -5031,6 +5041,28 @@ button::before, button::after,
 
 .hero17-row-container1 *,
 .hero17-row-container1 {
-  pointer-events: none !important;
-  user-select: none;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  width: max-content;
+  animation-play-state: running !important;
+  animation: scroll-x 20s linear infinite;
+  pointer-events: none; /* opcional, evita interferencias del mouse */
+}
+
+.carousel-track img {
+  flex-shrink: 0;
+  width: 400px; /* Ajustalo a tu diseño */
+}
+
+@keyframes scroll-x {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
