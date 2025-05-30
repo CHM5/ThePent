@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
   <html lang="es">
     <head
       ><title>The Pent</title
@@ -358,46 +358,54 @@
               {
                 name: 'Plan Base',
                 prices: { monthly: 'GRATIS', yearly: 'GRATIS' }, ids: { monthly: 0, yearly: 0 },
-                features: [
-                  { label: 'Actualizaciones', info: 'Actualizaciones automáticas del sistema', modes: ['monthly'] },
-                  { label: 'Datos negocio', info: 'Carga y edición de información básica del local' },
-                  { label: 'Seguridad Sitio Seguro', info: 'Certificado SSL incluido' },
-                  { label: 'Máx. 25 productos', info: 'Podés cargar hasta 25 ítems en tu carta' },
-                  { label: 'Hosting limitado', info: 'Conexión restringida al plan gratuito' }
+                  intro:'de por vida',
+                  features: [
+                  { label: '🔄 Actualizaciones', info: 'Actualizá tu carta en tiempo real' },
+                  { label: '📱Diseño Responsivo', info: 'Compatible con móviles y tablets' },
+                  { label: '🏪 Data Negocio', info: 'Cargá toda la data para que tus clientes te encuentren facilmente' },
+                  { label: '🔐 Seguridad Sitio Seguro', info: 'Certificado SSL incluido' },
+                  { label: '🍝 Hasta 25 Ítems', info: 'Podés cargar hasta 25 ítems en tu carta' }
                 ]
               },
               {
                 name: 'Plan Emprendedor',
                 prices: { monthly: '$18.000', yearly: '$180.000' }, ids: { monthly: 1, yearly: 4 },
+                intro:'todo del <b>Plan Base</b>, más:',
                 features: [
-                  { label: 'Actualizaciones', info: 'Actualizaciones automáticas del sistema' },
-                  { label: 'Datos negocio', info: 'Carga y edición de información básica del local' },
-                  { label: 'Productos ilimitados', info: 'Sin límite de carga de productos' },
-                  { label: 'Botón redes', info: 'Enlaces a redes sociales desde tu carta' },
-                  { label: 'Sin publicidad', info: 'Carta sin banners ni anuncios externos' },
-                  { label: 'Hosting 24/7', info: 'Acceso permanente a la carta online' }
+                  { label: '🍝 Ítems Ilimitados', info: 'Sin límite de carga de ítems' },
+                  { label: '📞 Atención Virtual', info: 'Incluye todas las características previas' },
+                  { label: '📺 Botón Redes', info: 'Enlaces a redes sociales desde tu carta' },
+                  { label: '🤳 QR Personalizado', info: 'Código QR único para tu carta' },
+                  { label: '🪧 Sin Publicidad', info: 'Carta sin banners ni anuncios externos' },
+                  { label: '🛏️ Hosting 24/7', info: 'Acceso permanente a la carta online' },
+                  { label: '✅5% OFF en productos', info: 'Descuento exclusivo en impresiones físicas', modes: ['monthly']},
+                  { label: '✅<b>20% OFF</b> en productos', info: 'Descuento exclusivo en impresiones físicas', modes: ['yearly']}
                 ]
               },
               {
                 name: 'Plan Profesional',
                 prices: { monthly: '$36.000', yearly: '$360.000' }, ids: { monthly: 2, yearly: 5 },
+                intro:'Todo del <b>Plan Emprendedor</b>, más:',
                 features: [
-                  { label: 'Todo lo anterior', info: 'Incluye todas las características previas' },
-                  { label: 'Botón WhatsApp', info: 'Contacto directo vía WhatsApp desde la carta' },
-                  { label: 'Dominio propio', info: 'URL personalizada con el nombre de tu local' },
-                  { label: 'Fotos platos', info: 'Galería fotográfica para mostrar tus productos' },
-                  { label: 'Diseño carta física 10% OFF', info: 'Descuento exclusivo en impresiones físicas' }
+                  { label: '📞 Atención Personalizada', info: 'Incluye todas las características previas' },
+                  { label: '✅ Botón WhatsApp', info: 'Contacto directo vía WhatsApp desde la carta' },
+                  { label: '🌐 Dominio Propio', info: 'URL personalizada con el nombre de tu local' },
+                  { label: '📷 Fotos Platos', info: 'Galería fotográfica para mostrar tus productos' },
+                  { extra: true },
+                  { label: '✅10% OFF en productos', info: 'Descuento exclusivo en impresiones físicas', modes: ['monthly']},
+                  { label: '✅<b>25% OFF</b> en productos', info: 'Descuento exclusivo en impresiones físicas', modes: ['yearly']}
                 ]
               },
               {
                 name: 'Plan Corporativo',
                 prices: { monthly: '$72.000', yearly: '$720.000' }, ids: { monthly: 3, yearly: 6 },
+                intro:'todo del <b>Plan Profesional</b>, más:',
                 features: [
-                  { label: 'Todo lo anterior', info: 'Incluye todas las características previas' },
-                  { label: 'Promos x temporada', info: 'Asistencia para crear promociones estacionales' },
-                  { label: 'Reporte mensual', info: 'Reporte con métricas de uso y visitas' },
-                  { label: 'Atención prioritaria', info: 'Soporte técnico rápido y personalizado' },
-                  { label: 'Diseño carta física 20% OFF', info: 'Descuento exclusivo en impresiones físicas' }
+                  { label: '🛍️ Promos x temporada', info: 'Asistencia para crear promociones estacionales' },
+                  { label: '📈 Reporte mensual', info: 'Reporte con métricas de uso y visitas' },
+                  { label: '📞 Atención prioritaria', info: 'Soporte técnico rápido y personalizado' },
+                  { label: '✅15% OFF en productos', info: 'Descuento exclusivo en impresiones físicas', modes: ['monthly']},
+                  { label: '✅<b>30% OFF</b> en productos', info: 'Descuento exclusivo en impresiones físicas', modes: ['yearly']}
                 ]
               }
             ];
@@ -426,13 +434,16 @@
                 card.innerHTML = `
                   <h3>${plan.name}</h3>
                   <div class="price">${plan.prices[mode]}</div>
+                  ${plan.intro ? `<div class="plan-intro">${plan.intro}</div>` : ''}
                   <ul class="feature-list">
-                    ${plan.features.map(f => `
-                      <li>
-                        ✓ ${f.label}
-                        <span class="info-icon" title="${f.info}">i</span>
-                      </li>
-                    `).join('')}
+                    ${plan.features
+                      .filter(f => !f.modes || f.modes.includes(mode))
+                      .map(f => `
+                        <li>
+                          ${f.label}
+                          <span class="info-icon" title="${f.info || ''}">i</span>
+                        </li>
+                      `).join('')}
                   </ul>
                   <button class="select-btn" data-plan="${planId}">Seleccionar</button>
                 `;
