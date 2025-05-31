@@ -29,6 +29,20 @@
 
           fill: var(--dl-color-theme-neutral-dark);
         }
+
+        @font-face {
+          font-family: 'Moontime';
+          src: url('fonts/MoonTime.woff2') format('woff2');
+          font-weight: normal;
+          font-style: normal;
+          font-display: swap;
+        }
+        .logo-moontime {
+          font-family: 'Moontime', cursive;
+          font-size: 2.1rem;
+          letter-spacing: 1px;
+          display: inline-block;
+        }
       </style>
       
       <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
@@ -314,19 +328,16 @@
         <section id="adn" class="nosotros-section">
   <div class="container" style="max-width: 800px; margin: 0 auto; border-radius: 18px; box-shadow: 0 4px 24px rgba(79,140,255,0.07); background: #fff; padding: 36px 28px;">
     <h2 style="font-size: 2.2rem; font-weight: 800; color: #1976d2; text-align: center; margin-bottom: 18px; letter-spacing: 1px;">
-      <span style="font-size: 2.3rem; vertical-align: middle;">✨</span>
-      ADN
-      <span style="display: inline-block; margin-left: 12px;">
-        <span style="font-family: 'Dancing Script', cursive; color: #ff5ebc; font-size: 2.1rem; font-weight: 700;">The</span>
-        <span style="font-family: 'Pacifico', cursive; color: #1976d2; font-size: 2.1rem; margin-left: 2px;">Pent</span>
-      </span>
+      Nuestro ADN
     </h2>
     <p style="font-size: 1.18rem; color: #333; margin-bottom: 18px; text-align: center;">
-      En <strong>The Pent</strong> ayudamos a <strong>negocios gastronómicos</strong> a <strong>modernizar su carta</strong> sin complicaciones.
+      En     <span class="logo-moontime" style="color: #ff5ebc;">The</span>
+    <span class="logo-moontime" style="color: #1976d2; margin-left: 2px;">Pent</span>
+ ayudamos a <strong>negocios gastronómicos</strong> a <strong>modernizar su carta</strong> sin complicaciones.
       <br>
       <span style="color:#4f8cff;">Diseñamos <strong>cartas digitales</strong> que se actualizan <strong>en tiempo real</strong></span>,
       con opción de incluir <span style="color:#1976d2;">botones de redes sociales</span>, <span style="color:#1976d2;">QR personalizado</span> para que tus clientes accedan desde su celular,
-      <span style="color:#1976d2;">fotos de platos</span> y hasta <span style="color:#1976d2;">promos por temporada</span>.
+      <span style="color:#1976d2;">fotos de platos</span> y <span style="color:#1976d2;">promos por temporada</span>.
     </p>
     <ul style="list-style: none; padding: 0; margin: 0 0 18px 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 18px;">
       <li style="background: #e3f2fd; border-radius: 8px; padding: 10px 18px; font-size: 1rem; color: #1976d2; display: flex; align-items: center; gap: 8px;">
@@ -383,7 +394,7 @@
                   { label: '🔄 Actualizaciones', info: 'Actualizá tu carta en tiempo real' },
                   { label: '📱Diseño Responsivo', info: 'Compatible con móviles y tablets' },
                   { label: '🏪 Data Negocio', info: 'Cargá toda la data para que tus clientes te encuentren facilmente' },
-                  { label: '🔐 Seguridad Sitio Seguro', info: 'Certificado SSL incluido' },
+                  { label: '🔐 Sitio Seguro SSL', info: 'Certificado SSL incluido' },
                   { label: '🍝 Hasta 25 Ítems', info: 'Podés cargar hasta 25 ítems en tu carta' }
                 ]
               },
@@ -398,8 +409,9 @@
                   { label: '🤳 QR Personalizado', info: 'Código QR único para tu carta' },
                   { label: '🪧 Sin Publicidad', info: 'Carta sin banners ni anuncios externos' },
                   { label: '🛏️ Hosting 24/7', info: 'Acceso permanente a la carta online' },
-                  { label: '✅5% OFF en productos', info: 'Descuento exclusivo en impresiones físicas', modes: ['monthly']},
-                  { label: '✅<b>20% OFF</b> en productos', info: 'Descuento exclusivo en impresiones físicas', modes: ['yearly']}
+                  { label: '<br></br>EXTRA:'},
+                  { label: '✅5%OFF en <a href="#productos" style="color:#1976d2;text-decoration:underline;cursor:pointer;">productos</a>', info: 'Descuento exclusivo en impresiones físicas', modes: ['monthly']},
+                  { label: '✅<b>20%OFF</b> en <a href="#productos" style="color:#1976d2;text-decoration:underline;cursor:pointer;">productos</a>', info: 'Descuento exclusivo en impresiones físicas', modes: ['yearly']}
                 ]
               },
               {
@@ -411,10 +423,9 @@
                   { label: '✅ Botón WhatsApp', info: 'Contacto directo vía WhatsApp desde la carta' },
                   { label: '🌐 Dominio Propio', info: 'URL personalizada con el nombre de tu local' },
                   { label: '📷 Fotos Platos', info: 'Galería fotográfica para mostrar tus productos' },
-                  { extra: true },
-                  { label: '✅10% OFF en productos', info: 'Descuento exclusivo en impresiones físicas', modes: ['monthly']},
-                  { label: '✅<b>25% OFF</b> en productos', info: 'Descuento exclusivo en impresiones físicas', modes: ['yearly']}
-                ]
+                  { label: '<br></br>EXTRA:'},
+                  { label: '✅10%OFF en <a href="#productos" style="color:#1976d2;text-decoration:underline;cursor:pointer;">productos</a>', info: 'Descuento exclusivo en impresiones físicas', modes: ['monthly']},
+                  { label: '✅<b>25%OFF</b> en <a href="#productos" style="color:#1976d2;text-decoration:underline;cursor:pointer;">productos</a>', info: 'Descuento exclusivo en impresiones físicas', modes: ['yearly']}                ]
               },
               {
                 name: 'Plan Corporativo',
@@ -424,8 +435,9 @@
                   { label: '🛍️ Promos x temporada', info: 'Asistencia para crear promociones estacionales' },
                   { label: '📈 Reporte mensual', info: 'Reporte con métricas de uso y visitas' },
                   { label: '📞 Atención prioritaria', info: 'Soporte técnico rápido y personalizado' },
-                  { label: '✅15% OFF en productos', info: 'Descuento exclusivo en impresiones físicas', modes: ['monthly']},
-                  { label: '✅<b>30% OFF</b> en productos', info: 'Descuento exclusivo en impresiones físicas', modes: ['yearly']}
+                  { label: '<br></br>EXTRA:'},
+                  { label: '✅15%OFF en <a href="#productos" style="color:#1976d2;text-decoration:underline;cursor:pointer;">productos</a>', info: 'Descuento exclusivo en impresiones físicas', modes: ['monthly']},
+                  { label: '✅<b>30%OFF</b> en <a href="#productos" style="color:#1976d2;text-decoration:underline;cursor:pointer;">productos</a>', info: 'Descuento exclusivo en impresiones físicas', modes: ['yearly']}
                 ]
               }
             ];
@@ -461,7 +473,7 @@
                       .map(f => `
                         <li>
                           ${f.label}
-                          <span class="info-icon" title="${f.info || ''}">i</span>
+                          ${(!f.label.includes('EXTRA') && f.info) ? `<span class="info-icon" title="${f.info || ''}">i</span>` : ''}
                         </li>
                       `).join('')}
                   </ul>
@@ -1429,11 +1441,11 @@
                         </p>
                       </div>
                       <div>
-                        <a href="https://wa.me/5491130625858" class="thq-button-outline cta26-button" target="_blank" rel="noopener noreferrer">
-                          Escribinos por WhatsApp
+                        <a href="https://wa.me/5491130625858?text=Hola%20quisiera%20consultar%20acerca%20de..." class="thq-button-outline cta26-button" target="_blank" rel="noopener noreferrer">
+                          WhatsApp
                         </a>
                         <a href="mailto:comercial@thepent.com.ar" class="thq-button-filled cta26-button">
-                          <span><span class="home-text126">Mails a comercial@thepent.com.ar</span></span>
+                          <span><span class="home-text126">comercial@thepent.com.ar</span></span>
                         </a>
                       </div>
                     </div>
@@ -1453,7 +1465,12 @@
                 ><div class="thq-divider-horizontal"></div
                 ><div class="footer4-row"
                   ><div class="footer4-container"
-                    ><span class="thq-body-small">© 2025 The Pent</span></div
+                    ><span class="thq-body-small">© 2025   
+                      <span style="display: inline-block; margin-left: 12px;">
+                      <span class="logo-moontime" style="color: #ff5ebc;">The</span>
+                      <span class="logo-moontime" style="color: #1976d2; margin-left: 2px;">Pent</span>
+                    </span>
+                  </span></div
                   >
                 </div
                 ></div
