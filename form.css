@@ -163,8 +163,6 @@ body {
 /* Form Steps */
 .form-step {
     display: none;
-    padding: 20px 30px 30px;
-    text-align: left; /* Alinea el contenido del formulario a la izquierda */
 }
 
 .form-step.active {

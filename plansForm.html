@@ -35,89 +35,23 @@
                             <div class="progress-fill"></div>
                         </div>
                         <div class="progress-steps">
-                            <div class="step active" data-step="1">    
-                                <div class="step-label">Selección</div>
-                            </div>                        
-                            <div class="step" data-step="2">    
+                            <div class="step" data-step="1">
                                 <div class="step-label">Datos Personales</div>
                             </div>
-                            <div class="step" data-step="3">
+                            <div class="step" data-step="2">
                                 <div class="step-label">Datos Negocio</div>
                             </div>
-                            <div class="step" data-step="4">
+                            <div class="step" data-step="3">
                                 <div class="step-label">Pago</div>
                             </div>
-                            <div class="step" data-step="5">
+                            <div class="step" data-step="4">
                                 <div class="step-label">Felicitaciones</div>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Step 1: Selección de Servicio -->
-                    <div class="form-step active" data-step="1" id="step1">
-                        <h2>Seleccioná el Plan que mejor se adapta a tu negocio</h2>
-                        <div class="radio-group">
-                            <label>
-                                <input type="radio" class="plan" name="plan" data-price="0" checked>
-                                <div class="plan-text">
-                                    <strong>Base</strong><br>
-                                    <span>(Gratis)</span>
-                                </div>
-                            </label>
-                            <label>
-                                <input type="radio" class="plan" name="plan" data-price="18000">
-                                <div class="plan-text">
-                                    <strong>Emprendedor Mensual</strong><br>
-                                    <span>($18.000)</span>
-                                </div>
-                            </label>
-                            <label>
-                                <input type="radio" class="plan" name="plan" data-price="36000">
-                                <div class="plan-text">
-                                    <strong>Profesional Mensual</strong><br>
-                                    <span>($36.000)</span>
-                                </div>
-                            </label>
-                            <label>
-                                <input type="radio" class="plan" name="plan" data-price="72000">
-                                <div class="plan-text">
-                                    <strong>Corporativo Mensual</strong><br>
-                                    <span>($72.000)</span>
-                                </div>
-                            </label>
-                            <label>
-                                <input type="radio" class="plan" name="plan" data-price="180000">
-                                <div class="plan-text">
-                                    <strong>Emprendedor Anual</strong><br>
-                                    <span>($180.000 - 2 meses de regalo por año)</span>
-                                </div>
-                            </label>
-                            <label>
-                                <input type="radio" class="plan" name="plan" data-price="360000">
-                                <div class="plan-text">
-                                    <strong>Profesional Anual</strong><br>
-                                    <span>($360.000 - 2 meses de regalo por año)</span>
-                                </div>
-                            </label>
-                            <label>
-                                <input type="radio" class="plan" name="plan" data-price="720000">
-                                <div class="plan-text">
-                                    <strong>Corporativo Anual</strong><br>
-                                    <span>($720.000 - 2 meses de regalo por año)</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div id="totalAmount">
-                            <strong>Total: $<span class="priceValue">0</span></strong>
-                        </div>
-                        <div id="formError" class="form-error" style="display:none;"></div>
-                        <div class="form-buttons">
-                            <button type="button" class="btn next-btn">Continuar</button>
-                        </div>
-                    </div>
 
-                    <!-- Step 2: Personal Information -->
-                    <div class="form-step" data-step="2">
+                    <!-- Step 1: Personal Information -->
+                    <div class="form-step" data-step="1">
                         <h2>Información Personal</h2>
                         <div class="form-group">
                             <label for="firstName">Nombre</label>
@@ -135,14 +69,14 @@
                             <label for="phone">Teléfono de contacto</label>
                             <input type="tel" id="phone" name="phone" required .>
                         </div>
-                        <div class="form-buttons">
+                        <div class="form-buttons" style="justify-content: center;">
                             <button type="button" class="btn prev-btn">Atrás</button>
                             <button type="button" class="btn next-btn">Continuar</button>
                         </div>
                     </div>
                     
-                    <!-- Step 3: Sponsorship Details -->
-                    <div class="form-step" data-step="3">
+                    <!-- Step 2: Sponsorship Details -->
+                    <div class="form-step" data-step="2">
                         <h2>Información de tu Negocio</h2>
                         <div class="form-group">
                             <label for="companyName">Nombre de tu Negocio</label>
@@ -190,39 +124,43 @@
                         <div id="termsError" class="form-error" style="display:none; color: #d32f2f; margin-top: 8px;">
                             Debes aceptar los términos y condiciones.
                         </div>
-                        <div class="form-buttons">
+                        <div class="form-buttons" style="justify-content: center;">
                             <button type="button" class="btn prev-btn">Atrás</button>
                             <button type="button" class="btn next-btn">Continuar</button>
                         </div>
                     </div>
                     
-                    <!-- Step 4: Total -->
-                    <div class="form-step" data-step="4">
+                    <!-- Step 3: Total -->
+                    <div class="form-step" data-step="3">
                         <div id="planInfo"></div>
                         <strong>Total a pagar: $<span class="priceValue">0</span></strong>
                         <div class="success-message">
-                            <h2>Pago</h2>
-                            <p>Hacé clic en el siguiente botón para completar tu suscripción:</p>
-                            <a href="https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c938084968c9eaa01969982254c05d0"
-                            name="MP-payButton"
-                            class="blue-button"
-                            target="_blank"
-                            rel="noopener noreferrer">Suscribirme</a>
-                        </div>
-                        <div class="form-buttons">
-                            <button type="button" class="btn prev-btn">Atrás</button>
+                            <!-- Ícono MercadoPago -->
+                            <div style="display:flex;justify-content:center;margin-bottom:12px;">
+                                <img src="MPicon.svg" alt="MercadoPago" style="width:80px;height:auto;">
+                            </div>
+                            <p>Protegé tu compra con Mercado Pago</p>
+                            <p>Luego del pago se te enviará al mail toda la info necesario para comenzar a editar tu carta</p>
+                            <div style="display: flex; justify-content: center; gap: 12px; margin-top: 16px;">
+                                <button type="button" class="btn prev-btn">Atrás</button>
+                                <a href="https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c938084968c9eaa01969982254c05d0"
+                                    name="MP-payButton"
+                                    class="blue-button"
+                                    target="_blank"
+                                    rel="noopener noreferrer">Suscribirme</a>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Step 5: Success -->
-                    <div class="form-step" data-step="5">
+                    <!-- Step 4: Success -->
+                    <div class="form-step" data-step="4">
                         <div class="success-message">
                             <div class="success-icon">✓</div>
                             <h2>¡Felicitaciones!</h2>
                             <p>Tu compra fue procesada exitosamente. En breve recibirás un mail con los accesos y tu sitio editable.</p>
                             <br>¿Dudas? Escribinos con el codigo de tu compra a al whatsapp o mail de contacto.</br>
                         </div>
-                        <div class="form-buttons">
+                        <div class="form-buttons" style="justify-content: center;">
                             <button type="button" id="resetForm" class="btn">Realizar otra compra</button>
                         </div>
                     </div>
@@ -248,5 +186,170 @@
             </footer>
         </footer4-wrapper>
                         
-    </body>
+        
+        <script>
+            // filepath: c:\Users\chmed\OneDrive\Escritorio\ThePent\plansForm.html
+            document.addEventListener('DOMContentLoaded', function () {
+    const planMap = {
+        0: {
+            name: "Plan Base",
+            price: "GRATIS",
+            features: [
+                "Actualizaciones limitadas",
+                "Carga y edición de información básica",
+                "Certificado SSL incluido",
+                "Hasta 25 ítems en tu carta",
+                "Hosting limitado"
+            ]
+        },
+        1: {
+            name: "Plan Emprendedor Mensual",
+            price: "$18.000",
+            features: [
+                "Actualizaciones automáticas ilimitadas",
+                "Carga y edición completa",
+                "Certificado SSL incluido",
+                "Productos ilimitados",
+                "Dominio personalizado",
+                "Soporte estándar",
+                "5% OFF en productos",
+                "Sin publicidad",
+                "Hosting 24/7"
+            ]
+        },
+        2: {
+            name: "Plan Profesional Mensual",
+            price: "$36.000",
+            features: [
+                "Todo lo anterior",
+                "Diseño personalizado",
+                "Galería de fotos",
+                "Soporte prioritario",
+                "10% OFF en productos",
+                "Botón WhatsApp",
+                "Dominio personalizado"
+            ]
+        },
+        3: {
+            name: "Plan Corporativo Mensual",
+            price: "$72.000",
+            features: [
+                "Todo lo anterior",
+                "Gestión multisucursal",
+                "Atención personalizada 1 a 1",
+                "20% OFF en productos",
+                "Edición avanzada",
+                "Informe mensual de visitas"
+            ]
+        },
+        4: {
+            name: "Plan Emprendedor Anual",
+            price: "$180.000",
+            features: [
+                "Actualizaciones automáticas ilimitadas",
+                "Carga y edición completa",
+                "Certificado SSL incluido",
+                "Productos ilimitados",
+                "Dominio personalizado",
+                "Soporte estándar",
+                "20% OFF en productos",
+                "Sin publicidad",
+                "Hosting 24/7"
+            ]
+        },
+        5: {
+            name: "Plan Profesional Anual",
+            price: "$360.000",
+            features: [
+                "Todo lo anterior",
+                "Diseño personalizado",
+                "Galería de fotos",
+                "Soporte prioritario",
+                "25% OFF en productos",
+                "Botón WhatsApp",
+                "Dominio personalizado"
+            ]
+        },
+        6: {
+            name: "Plan Corporativo Anual",
+            price: "$720.000",
+            features: [
+                "Todo lo anterior",
+                "Gestión multisucursal",
+                "Atención personalizada 1 a 1",
+                "30% OFF en productos",
+                "Edición avanzada",
+                "Informe mensual de visitas"
+            ]
+        }
+    };
+
+    // Lee los parámetros de la URL
+    const params = new URLSearchParams(window.location.search);
+    const planParam = params.get('plan');
+    const stepParam = params.get('step');
+    const planInfoDiv = document.getElementById('planInfo');
+    const priceSpan = document.querySelector('.priceValue');
+
+    if (planParam && planMap[planParam]) {
+        const plan = planMap[planParam];
+        if (planInfoDiv) {
+            planInfoDiv.innerHTML = `
+            <h3>${plan.name}</h3>
+            <ul style="margin-bottom:10px;">
+                ${plan.features.map(f => `<li>✓ ${f}</li>`).join('')}
+            </ul>
+            `;
+        }
+        if (priceSpan) {
+            priceSpan.textContent = plan.price.replace('$', '').replace('.', '');
+        }
+    } else {
+        if (planInfoDiv) {
+            planInfoDiv.innerHTML = `<h3>Plan no especificado</h3>`;
+        }
+    }
+
+    // --- Manejo de pasos del formulario ---
+    let currentStep = 1;
+    const steps = document.querySelectorAll('.form-step');
+    const progressSteps = document.querySelectorAll('.progress-steps .step');
+    if (stepParam && !isNaN(stepParam) && Number(stepParam) >= 1 && Number(stepParam) <= steps.length) {
+        currentStep = Number(stepParam);
+    }
+
+    function showStep(step) {
+        steps.forEach((el, idx) => {
+            el.classList.toggle('active', idx === step - 1);
+        });
+        progressSteps.forEach((el, idx) => {
+            el.classList.toggle('active', idx === step - 1);
+        });
+    }
+
+    document.querySelectorAll('.next-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            if (currentStep < steps.length) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        });
+    });
+
+    document.querySelectorAll('.prev-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        });
+    });
+
+    // Inicializa mostrando el paso correcto
+    showStep(currentStep);
+});
+        </script>
+</body>
+
 </html>
+
