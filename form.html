@@ -20,9 +20,20 @@
     <body>
         <div class="container">
             <div class="form-container">
-                <div class="form-header">
-                    <h1>Aplicación de Plan</h1>
-                    <p>Completá los pasos para activar tu sitio y acceder a los beneficios de tu compra</p>
+                <div class="form-header" style="background: linear-gradient(90deg, #4f8cff 0%, #6dd5ed 100%); border-radius: 18px; padding: 32px 24px 24px 24px; box-shadow: 0 4px 24px rgba(79,140,255,0.10); margin-bottom: 32px; color: #fff; text-align: center; position: relative;">
+                    <div style="position: absolute; top: 18px; left: 24px; font-size: 2.2rem; opacity: 0.15; pointer-events: none;">🚀</div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 10px; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                        Productos Seccionados
+                    </h3>
+                    <h2 style="font-size: 1.15rem; font-weight: 400; margin-bottom: 18px; color: #e3f2fd;">
+                        Completá los pasos para activar tu sitio y acceder a los beneficios de tu compra
+                    </h2>
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 10px; background: rgba(255,255,255,0.13); border-radius: 12px; padding: 10px 18px; margin: 0 auto; max-width: 420px;">
+                        <span style="font-size: 1.6rem;">🎁</span>
+                        <span style="font-size: 1.05rem; font-weight: 500; color: #fff;">
+                            <b>¡Pedí tu muestrario gratis!</b>
+                        </span>
+                    </div>
                 </div>
                 
                 <form id="sponsorshipForm">
@@ -41,150 +52,137 @@
                                 <div class="step-label">Datos Negocio</div>
                             </div>
                             <div class="step" data-step="4">
-                                <div class="step-label">Adicionales</div>
-                            </div>
-                            <div class="step" data-step="5">
                                 <div class="step-label">Pago</div>
-                            </div>
-                            <div class="step" data-step="6">
-                                <div class="step-label">Felicitaciones</div>
                             </div>
                         </div>
                     </div>
                     
                     <!-- Step 1: Selección de Productos -->
                     <div class="form-step active" data-step="1" id="step1">
-                    <h2>Seleccioná tus Productos</h2>
                     <div class="checkbox-group">
-                        <label><input type="checkbox" class="product-checkbox" data-price="150000"> MicroSite ($150.000)</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="300000"> ProSite ($300.000)</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="100000"> Carta Simple Faz ($100.000)</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="180000"> Carta Doble Faz ($180.000)</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="200000"> Carta Tríptico A3 ($200.000)</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="300000"> Carta Anillada ($300.000)</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="150000"> Individual de Mesa ($150.000)</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="50000"> Diseño de Portavasos ($50.000)</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="50000"> Diseño de Tarjeta de Descuento ($50.000)</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="336000"> <b>Combo Base:</b> MicroSite, carta doble faz e individual ($336.000)</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="600000"> <b>Combo Pro:</b> ProSite, carta Anillada, portavasos y tarjeta de descuento ($600.000)</label>
+                        <label><input type="checkbox" class="product-checkbox" data-price="120000"> MicroSite</label>
+                        <label><input type="checkbox" class="product-checkbox" data-price="300000"> ProSite</label>
+                        <label><input type="checkbox" class="product-checkbox" data-price="100000"> Carta Simple Faz</label>
+                        <label><input type="checkbox" class="product-checkbox" data-price="180000"> Carta Doble Faz</label>
+                        <label><input type="checkbox" class="product-checkbox" data-price="200000"> Carta Tríptico A3</label>
+                        <label><input type="checkbox" class="product-checkbox" data-price="300000"> Carta Anillada</label>
+                        <label><input type="checkbox" class="product-checkbox" data-price="150000"> Individual de Mesa</label>
+                        <label><input type="checkbox" class="product-checkbox" data-price="50000"> Diseño de Portavasos</label>
+                        <label><input type="checkbox" class="product-checkbox" data-price="75000"> Traducción de Carta al Inglés</label>
+                        <label><input type="checkbox" class="product-checkbox" data-price="50000"> Carta de Exhibición</label>
+                        <label><input type="checkbox" class="product-checkbox" data-price="50000"> Diseño de Tarjeta de Descuento</label>
+                        <label><input type="checkbox" class="product-checkbox" data-price="50000"> Flyers Promocionales</label>
+                        <label><input type="checkbox" class="product-checkbox" data-price="50000"> Menú Vertical para Mesas</label>
+                        <label><input type="checkbox" class="product-checkbox" data-price="336000"> <b>Combo Base:</b> MicroSite, carta doble faz e individual</label>
+                        <label><input type="checkbox" class="product-checkbox" data-price="600000"> <b>Combo Pro:</b> ProSite, carta Anillada, portavasos y tarjeta de descuento</label>
                     </div>
                     <div id="totalAmount" class="form-group"><strong>Total: $0</strong></div>
                     <div id="formError" class="form-error" style="display:none;"></div>
                     <div class="form-buttons">
                         <button type="button" class="btn next-btn">Continuar</button>
                     </div>
+                </div>
+                
+                <!-- Step 2: Personal Information -->
+                <div class="form-step" data-step="2">
+                    <h2>Información Personal</h2>
+                    <div class="form-group">
+                        <label for="firstName">Nombre</label>
+                        <input type="text" id="firstName" name="firstName" required>
                     </div>
-
-                    <!-- Step 2: Personal Information -->
-                    <div class="form-step" data-step="2">
-                        <h2>Información Personal</h2>
-                        <div class="form-group">
-                            <label for="firstName">Nombre</label>
-                            <input type="text" id="firstName" name="firstName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName">Apellido</label>
-                            <input type="text" id="lastName" name="lastName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Teléfono de contacto</label>
-                            <input type="tel" id="phone" name="phone" required .>
-                        </div>
-                        <div class="form-buttons">
-                            <button type="button" class="btn prev-btn">Atrás</button>
-                            <button type="button" class="btn next-btn">Continuar</button>
-                        </div>
+                    <div class="form-group">
+                        <label for="lastName">Apellido</label>
+                        <input type="text" id="lastName" name="lastName" required>
                     </div>
-                    
-                    <!-- Step 3: Sponsorship Details -->
-                    <div class="form-step" data-step="3">
-                        <h2>Información de tu Negocio</h2>
-                        <div class="form-group">
-                            <label for="companyName">Nombre de tu Negocio</label>
-                            <input type="text" id="companyName" name="companyName">
-                        </div>
-                        <div class="form-group">
-                            <label for="websiteUrl">Dirección</label>
-                            <input type="url" id="websiteUrl" name="websiteUrl">
-                        </div>
-                        <div class="form-group">
-                            <label for="sponsorshipLevel">País</label>
-                            <select id="sponsorshipLevel" name="sponsorshipLevel" required>
-                                <option value="bronze">Argentina</option>
-                                <option value="bronze">Uruguay</option>
-                                <option value="silver">Chile</option>
-                                <option value="gold">España</option>
-                                <option value="platinum">USA</option>
-                            </select>
-                        </div>
-                        <div class="form-group" id="customAmountContainer" style="display: none;">
-                            <label for="customAmount">Custom Amount ($)</label>
-                            <input type="number" id="customAmount" name="customAmount" min="10000">
-                        </div>
-                        <div class="form-buttons">
-                            <button type="button" class="btn prev-btn">Atrás</button>
-                            <button type="button" class="btn next-btn">Continuar</button>
-                        </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
                     </div>
-                    
-                    <!-- Step 4: Contratación -->
-                    <div class="form-step" data-step="4">
-                        <h2>Información Adicional</h2>
-                        <div class="form-group">
-                            <label for="hearAbout">¿Cómo nos conociste?</label>
-                            <select id="hearAbout" name="hearAbout">
-                                <option value="" disabled selected>Por favor seleccioná</option>
-                                <option value="instagram">Instagram</option>
-                                <option value="mercadolibre">Mercado Libre</option>
-                                <option value="colegas">Colegas</option>
-                                <option value="whatsapp">Whatsapp</option>
-                                <option value="email">Email</option>
-                                <option value="other">Otro</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="comments">Comentarios Adicionales</label>
-                            <textarea id="comments" name="comments" rows="4"></textarea>
-                        </div>
-                        <div class="form-group checkbox-group">
-                            <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
-                            <label for="agreeTerms">Acepto los términos y condiciones</label>
-                        </div>
-                        <div class="form-buttons">
-                            <button type="button" class="btn prev-btn">Atrás</button>
-                            <button type="submit" class="btn submit-btn">Realizar Pago</button>
-                        </div>
+                    <div class="form-group">
+                        <label for="phone">Teléfono de contacto</label>
+                        <input type="tel" id="phone" name="phone" required .>
                     </div>
-
-                    <!-- Step 5: Payment -->
-                    <div class="form-step" data-step="5">
-                        <div class="success-message">
-                            <div class="success-icon">✓</div>
-                            <h2>redireccionar!</h2>
-                            <p>redireccionar.</p>
-                            <div class="form-buttons">
+                    <div class="form-buttons">
+                        <button type="button" class="btn prev-btn">Atrás</button>
+                        <button type="button" class="btn next-btn">Continuar</button>
+                    </div>
+                </div>
+                
+                <!-- Step 3: Sponsorship Details -->
+                <div class="form-step" data-step="3">
+                    <h2>Información de tu Negocio</h2>
+                    <div class="form-group">
+                        <label for="companyName">Nombre de tu Negocio</label>
+                        <input type="text" id="companyName" name="companyName">
+                    </div>
+                    <div class="form-group">
+                        <label for="websiteUrl">Dirección</label>
+                        <input type="url" id="websiteUrl" name="websiteUrl">
+                    </div>
+                    <div class="form-group">
+                        <label for="sponsorshipLevel">País</label>
+                        <select id="sponsorshipLevel" name="sponsorshipLevel" required>
+                            <option value="bronze">Argentina</option>
+                            <option value="bronze">Uruguay</option>
+                            <option value="silver">Chile</option>
+                            <option value="gold">España</option>
+                            <option value="platinum">USA</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="customAmountContainer" style="display: none;">
+                        <label for="customAmount">Custom Amount ($)</label>
+                        <input type="number" id="customAmount" name="customAmount" min="10000">
+                    </div>
+                    <h2>Información Adicional</h2>
+                    <div class="form-group">
+                        <label for="hearAbout">¿Cómo nos conociste?</label>
+                        <select id="hearAbout" name="hearAbout">
+                            <option value="" disabled selected>Por favor seleccioná</option>
+                            <option value="instagram">Instagram</option>
+                            <option value="mercadolibre">Mercado Libre</option>
+                            <option value="colegas">Colegas</option>
+                            <option value="whatsapp">Whatsapp</option>
+                            <option value="email">Email</option>
+                            <option value="other">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="comments">Comentarios Adicionales</label>
+                        <textarea id="comments" name="comments" rows="4"></textarea>
+                    </div>
+                    <div class="form-group checkbox-group horizontal">
+                        <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                        <label for="agreeTerms">Acepto los términos y condiciones</label>
+                    </div>
+                    <div id="termsError" class="form-error" style="display:none; color: #d32f2f; margin-top: 8px;">
+                        Debes aceptar los términos y condiciones.
+                    </div>
+                    <div class="form-buttons" style="justify-content: center;">
+                        <button type="button" class="btn prev-btn">Atrás</button>
+                        <button type="button" class="btn next-btn">Continuar</button>
+                    </div>
+                </div>
+                
+                
+                <!-- Step 4: Payment -->
+                <div class="form-step" data-step="4">
+                    <div id="planInfo"></div>
+                    <div id="selectedProductsDetail" style="margin-bottom:16px;"></div>
+                    <div class="success-message">
+                        <!-- Ícono MercadoPago -->
+                        <div style="display:flex;justify-content:center;margin-bottom:12px;">
+                            <img src="MPicon.svg" alt="MercadoPago" style="width:80px;height:auto;">
+                        </div>
+                            <p>Protegé tu compra con Mercado Pago</p>
+                            <p>Luego del pago se te enviará al mail toda la info necesario para comenzar a editar tu carta</p>
+                            <div style="display: flex; justify-content: center; gap: 12px; margin-top: 16px;">
+                                <button type="button" class="btn prev-btn">Atrás</button>
+                                <a href="https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c938084968c9eaa01969982254c05d0"
+                                    name="MP-payButton"
+                                    class="blue-button"
+                                    target="_blank"
+                                    rel="noopener noreferrer">Suscribirme</a>
                             </div>
-                        </div>
-                        <div class="form-buttons">
-                            <button type="button" class="btn prev-btn">Atrás</button>
-                            <button type="submit" class="btn submit-btn">Continuar</button>
-                        </div>
-                    </div>
-
-                    <!-- Step 6: Success -->
-                    <div class="form-step" data-step="6">
-                        <div class="success-message">
-                            <div class="success-icon">✓</div>
-                            <h2>¡Felicitaciones!</h2>
-                            <p>Tu compra fue procesada exitosamente. En breve recibirás un mail con los accesos y tu sitio editable.</p>
-                            <br>¿Dudas? Escribinos con el codigo de tu compra a al whatsapp o mail de contacto.</br>
-                        </div>
-                        <div class="form-buttons">
-                            <button type="button" id="resetForm" class="btn">Realizar otra compra</button>
                         </div>
                     </div>
                 </form>
@@ -210,5 +208,70 @@
                 </div>
             </footer>
         </footer4-wrapper>
+        <script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Guardar productos seleccionados al pasar de paso 1 a 2
+    let selectedProducts = [];
+    let total = 0;
+
+    function updateSelectedProducts() {
+        selectedProducts = [];
+        total = 0;
+        document.querySelectorAll('.product-checkbox:checked').forEach(cb => {
+            const label = cb.parentElement.textContent.trim();
+            const price = Number(cb.dataset.price);
+            selectedProducts.push({ name: label, price: price });
+            total += price;
+        });
+        // Guarda en sessionStorage para usar en el paso 4
+        sessionStorage.setItem('selectedProducts', JSON.stringify(selectedProducts));
+        sessionStorage.setItem('selectedTotal', total);
+    }
+
+    // Actualiza el total en el paso 1 en tiempo real
+    document.querySelectorAll('.product-checkbox').forEach(cb => {
+        cb.addEventListener('change', function () {
+            updateSelectedProducts();
+            document.getElementById('totalAmount').innerHTML = `<strong>Total: $${total.toLocaleString()}</strong>`;
+        });
+    });
+
+    // Al avanzar de paso, guarda la selección
+    document.querySelectorAll('.next-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            updateSelectedProducts();
+        });
+    });
+
+    // Mostrar detalle en el paso 4
+    function showSelectedProductsDetail() {
+        const detailDiv = document.getElementById('selectedProductsDetail');
+        const products = JSON.parse(sessionStorage.getItem('selectedProducts') || '[]');
+        const total = Number(sessionStorage.getItem('selectedTotal') || 0);
+        if (products.length === 0) {
+            detailDiv.innerHTML = "<em>No seleccionaste productos.</em>";
+            return;
+        }
+        let html = "<strong>Productos seleccionados:</strong><ul style='margin:8px 0 8px 16px;'>";
+        products.forEach(p => {
+            html += `<li>${p.name} <span style="color:#888;">$${p.price.toLocaleString()}</span></li>`;
+        });
+        html += `</ul><strong>Total a pagar: $${total.toLocaleString()}</strong>`;
+        detailDiv.innerHTML = html;
+        // También actualiza el total en el span principal
+        const priceValue = document.querySelector('.priceValue');
+        if (priceValue) priceValue.textContent = total.toLocaleString();
+    }
+
+    // Detecta cuando se muestra el paso 4 y actualiza el detalle
+    const observer = new MutationObserver(() => {
+        const step4 = document.querySelector('.form-step[data-step="4"]');
+        if (step4 && step4.classList.contains('active')) {
+            showSelectedProductsDetail();
+        }
+    });
+    observer.observe(document.body, { subtree: true, attributes: true, attributeFilter: ['class'] });
+});
+</script>
     </body>
 </html>
