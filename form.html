@@ -60,21 +60,21 @@
                     <!-- Step 1: Selección de Productos -->
                     <div class="form-step active" data-step="1" id="step1">
                     <div class="checkbox-group">
-                        <label><input type="checkbox" class="product-checkbox" data-price="120000"> MicroSite</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="300000"> ProSite</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="100000"> Carta Simple Faz</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="180000"> Carta Doble Faz</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="200000"> Carta Tríptico A3</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="300000"> Carta Anillada</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="150000"> Individual de Mesa</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="50000"> Diseño de Portavasos</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="75000"> Traducción de Carta al Inglés</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="50000"> Carta de Exhibición</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="50000"> Diseño de Tarjeta de Descuento</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="50000"> Flyers Promocionales</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="50000"> Menú Vertical para Mesas</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="336000"> <b>Combo Base:</b> MicroSite, carta doble faz e individual</label>
-                        <label><input type="checkbox" class="product-checkbox" data-price="600000"> <b>Combo Pro:</b> ProSite, carta Anillada, portavasos y tarjeta de descuento</label>
+                        <label><input type="checkbox" class="product-checkbox cart-checkbox" data-product="microsite" data-price="120000"> MicroSite</label>
+                        <label><input type="checkbox" class="product-checkbox cart-checkbox" data-product="prosite" data-price="300000"> ProSite</label>
+                        <label><input type="checkbox" class="product-checkbox cart-checkbox" data-product="cartasimplefaz" data-price="100000"> Carta Simple Faz</label>
+                        <label><input type="checkbox" class="product-checkbox cart-checkbox" data-product="cartadoblefaz" data-price="180000"> Carta Doble Faz</label>
+                        <label><input type="checkbox" class="product-checkbox cart-checkbox" data-product="cartatriptica" data-price="200000"> Carta Tríptico A3</label>
+                        <label><input type="checkbox" class="product-checkbox cart-checkbox" data-product="cartaanillada" data-price="300000"> Carta Anillada</label>
+                        <label><input type="checkbox" class="product-checkbox cart-checkbox" data-product="individual" data-price="150000"> Individual de Mesa</label>
+                        <label><input type="checkbox" class="product-checkbox cart-checkbox" data-product="portavasos" data-price="50000"> Diseño de Portavasos</label>
+                        <label><input type="checkbox" class="product-checkbox cart-checkbox" data-product="traduccion" data-price="75000"> Traducción de Carta al Inglés</label>
+                        <label><input type="checkbox" class="product-checkbox cart-checkbox" data-product="exhibicion" data-price="50000"> Carta de Exhibición</label>
+                        <label><input type="checkbox" class="product-checkbox cart-checkbox" data-product="tarjeta" data-price="50000"> Diseño de Tarjeta de Descuento</label>
+                        <label><input type="checkbox" class="product-checkbox cart-checkbox" data-product="flyer" data-price="50000"> Flyers Promocionales</label>
+                        <label><input type="checkbox" class="product-checkbox cart-checkbox" data-product="menumesas" data-price="50000"> Menú Vertical para Mesas</label>
+                        <label><input type="checkbox" class="product-checkbox cart-checkbox" data-product="combobase" data-price="336000"> <b>Combo Base:</b> MicroSite, carta doble faz e individual</label>
+                        <label><input type="checkbox" class="product-checkbox cart-checkbox" data-product="combopro" data-price="600000"> <b>Combo Pro:</b> ProSite, carta Anillada, portavasos y tarjeta de descuento</label>
                     </div>
                     <div id="totalAmount" class="form-group"><strong>Total: $0</strong></div>
                     <div id="formError" class="form-error" style="display:none;"></div>
@@ -152,7 +152,12 @@
                     </div>
                     <div class="form-group checkbox-group horizontal">
                         <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
-                        <label for="agreeTerms">Acepto los términos y condiciones</label>
+                        <label for="agreeTerms">
+                            Acepto los 
+                            <a href="legal.html" target="_blank" style="color:#1976d2; text-decoration:underline; font-weight:600;">
+                                términos y condiciones
+                            </a>
+                        </label>
                     </div>
                     <div id="termsError" class="form-error" style="display:none; color: #d32f2f; margin-top: 8px;">
                         Debes aceptar los términos y condiciones.
@@ -177,7 +182,7 @@
                             <p>Luego del pago se te enviará al mail toda la info necesario para comenzar a editar tu carta</p>
                             <div style="display: flex; justify-content: center; gap: 12px; margin-top: 16px;">
                                 <button type="button" class="btn prev-btn">Atrás</button>
-                                <a href="https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c938084968c9eaa01969982254c05d0"
+                                <a href="https://link.mercadopago.com.ar/barmodelo"
                                     name="MP-payButton"
                                     class="blue-button"
                                     target="_blank"
@@ -210,7 +215,18 @@
         </footer4-wrapper>
         <script>
 document.addEventListener('DOMContentLoaded', function () {
-    // Guardar productos seleccionados al pasar de paso 1 a 2
+    // --- Sincronizar checkboxes con localStorage (cart) ---
+    function getCart() {
+        return JSON.parse(localStorage.getItem('cart') || '[]');
+    }
+    const cart = getCart();
+    document.querySelectorAll('.cart-checkbox').forEach(checkbox => {
+        if (cart.includes(checkbox.dataset.product)) {
+            checkbox.checked = true;
+        }
+    });
+
+    // --- Lógica de productos seleccionados y total ---
     let selectedProducts = [];
     let total = 0;
 
@@ -271,6 +287,25 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
     observer.observe(document.body, { subtree: true, attributes: true, attributeFilter: ['class'] });
+
+    // Inicializa el total al cargar
+    updateSelectedProducts();
+    document.getElementById('totalAmount').innerHTML = `<strong>Total: $${total.toLocaleString()}</strong>`;
+
+    // Validación de términos y condiciones en el paso 3
+    document.querySelectorAll('.form-step[data-step="3"] .next-btn').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            const agreeTerms = document.getElementById('agreeTerms');
+            const termsError = document.getElementById('termsError');
+            if (!agreeTerms.checked) {
+                e.preventDefault();
+                termsError.style.display = "block";
+                agreeTerms.focus();
+            } else {
+                termsError.style.display = "none";
+            }
+        });
+    });
 });
 </script>
     </body>

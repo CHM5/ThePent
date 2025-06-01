@@ -650,3 +650,106 @@
 .navbar8-mobile-menu.active {
   display: flex;
 }
+
+/* Ejemplo de menú lateral móvil moderno */
+.mobile-menu {
+  position: fixed;
+  top: 0; left: 0;
+  width: 90vw;
+  max-width: 340px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: 2px 0 16px rgba(0,0,0,0.10);
+  transform: translateX(-100%);
+  transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+  z-index: 9999;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.mobile-menu.open {
+  transform: translateX(0);
+}
+.mobile-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 24px 0 24px;
+}
+.mobile-menu-logo {
+  height: 36px;
+}
+.menu-close {
+  background: #f4ff81;
+  border: none;
+  border-radius: 50%;
+  width: 44px; height: 44px;
+  font-size: 2rem;
+  color: #222;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.menu-close:hover {
+  background: #ffe082;
+}
+.mobile-menu a {
+  font-size: 1.15rem;
+  color: #222;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 18px 24px;
+  border-bottom: 1px solid #f0f0f0;
+  transition: color 0.2s, background 0.2s;
+  display: block;
+}
+.mobile-menu a:hover {
+  color: #1976d2;
+  background: #f7faff;
+}
+.mobile-menu-actions {
+  display: flex;
+  gap: 12px;
+  padding: 24px;
+  margin-top: auto;
+}
+.mobile-menu-login {
+  background: #fff;
+  border: 1px solid #222;
+  border-radius: 18px;
+  padding: 8px 18px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.mobile-menu-signup {
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 18px;
+  padding: 8px 18px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.menu-toggle {
+  position: fixed;
+  top: 18px; left: 18px;
+  z-index: 10000;
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 44px; height: 44px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  cursor: pointer;
+}
+@media (min-width: 900px) {
+  .mobile-menu, .menu-toggle { display: none !important; }
+}

@@ -119,7 +119,12 @@
                         </div>
                         <div class="form-group checkbox-group horizontal">
                             <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
-                            <label for="agreeTerms">Acepto los términos y condiciones</label>
+                            <label for="agreeTerms">
+                                Acepto los 
+                                <a href="legal.html" target="_blank" style="color:#1976d2; text-decoration:underline; font-weight:600;">
+                                    términos y condiciones
+                                </a>
+                            </label>
                         </div>
                         <div id="termsError" class="form-error" style="display:none; color: #d32f2f; margin-top: 8px;">
                             Debes aceptar los términos y condiciones.
@@ -143,7 +148,8 @@
                             <p>Luego del pago se te enviará al mail toda la info necesario para comenzar a editar tu carta</p>
                             <div style="display: flex; justify-content: center; gap: 12px; margin-top: 16px;">
                                 <button type="button" class="btn prev-btn">Atrás</button>
-                                <a href="https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c938084968c9eaa01969982254c05d0"
+                                <a id="mpPayButton"
+                                    href="#"
                                     name="MP-payButton"
                                     class="blue-button"
                                     target="_blank"
@@ -215,7 +221,8 @@
                 "5% OFF en productos",
                 "Sin publicidad",
                 "Hosting 24/7"
-            ]
+            ],
+            mpLink: "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c938084966c84bc01969976d53f14d2"
         },
         2: {
             name: "Plan Profesional Mensual",
@@ -228,7 +235,8 @@
                 "10% OFF en productos",
                 "Botón WhatsApp",
                 "Dominio personalizado"
-            ]
+            ],
+            mpLink: "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380849696ea8201969bd7708d01ac"
         },
         3: {
             name: "Plan Corporativo Mensual",
@@ -240,7 +248,8 @@
                 "20% OFF en productos",
                 "Edición avanzada",
                 "Informe mensual de visitas"
-            ]
+            ],
+            mpLink: "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c938084968c9eaa01969bd7f0f4062c"
         },
         4: {
             name: "Plan Emprendedor Anual",
@@ -255,7 +264,8 @@
                 "20% OFF en productos",
                 "Sin publicidad",
                 "Hosting 24/7"
-            ]
+            ],
+            mpLink: "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380849721f5e501972934c13602ad"
         },
         5: {
             name: "Plan Profesional Anual",
@@ -268,7 +278,8 @@
                 "25% OFF en productos",
                 "Botón WhatsApp",
                 "Dominio personalizado"
-            ]
+            ],
+            mpLink: "https://mpago.la/1FzYWEk"
         },
         6: {
             name: "Plan Corporativo Anual",
@@ -280,7 +291,8 @@
                 "30% OFF en productos",
                 "Edición avanzada",
                 "Informe mensual de visitas"
-            ]
+            ],
+            mpLink: "https://mpago.la/2sL5gCq"
         }
     };
 
@@ -347,6 +359,14 @@
 
     // Inicializa mostrando el paso correcto
     showStep(currentStep);
+
+    const mpPayButton = document.getElementById('mpPayButton');
+    if (mpPayButton && planParam && planMap[planParam] && planMap[planParam].mpLink) {
+        mpPayButton.href = planMap[planParam].mpLink;
+        mpPayButton.style.display = ""; // Mostrar el botón si hay link
+    } else if (mpPayButton) {
+        mpPayButton.style.display = "none"; // Ocultar si no hay link (ejemplo: Plan Base)
+    }
 });
         </script>
 </body>
