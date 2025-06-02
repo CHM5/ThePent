@@ -178,7 +178,7 @@
 
     if (plan === 0) {
       try {
-        const response = await fetch("https://script.google.com/macros/s/AKfycbyjCp5Azw5HEQfGHuaJirUtaPmSxS7AiEOYihVjb2WNpCDarq2K7VzUxWRfZteWeuXi/exec", {
+        const response = await fetch("https://script.google.com/macros/s/AKfycbx2Gl5uAJm19Jn0duS6cbFLaJfZeslv7H6lLKFPWqGQjQpvBky_1HNKQqs2Nx7zeI7N/exec", {
           method: "POST",
           body: formData
         });
@@ -216,7 +216,7 @@
 
       const formData = new FormData(document.getElementById("formulario"));
       formData.append("plan", plan);
-      fetch("https://script.google.com/macros/s/AKfycbyjCp5Azw5HEQfGHuaJirUtaPmSxS7AiEOYihVjb2WNpCDarq2K7VzUxWRfZteWeuXi/exec", {
+      fetch("https://script.google.com/macros/s/AKfycbx2Gl5uAJm19Jn0duS6cbFLaJfZeslv7H6lLKFPWqGQjQpvBky_1HNKQqs2Nx7zeI7N/exec", {
         method: "POST",
         body: formData
       }).then(() => {

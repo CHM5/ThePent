@@ -155,6 +155,11 @@
                                     target="_blank"
                                     rel="noopener noreferrer">Suscribirme</a>
                             </div>
+                            <a id="noPayButton"
+                                href="#"
+                                class="blue-button"
+                                style="display: none;">Continuar sin pagar
+                            </a>
                         </div>
                     </div>
 
@@ -196,178 +201,269 @@
         <script>
             // filepath: c:\Users\chmed\OneDrive\Escritorio\ThePent\plansForm.html
             document.addEventListener('DOMContentLoaded', function () {
-    const planMap = {
-        0: {
-            name: "Plan Base",
-            price: "GRATIS",
-            features: [
-                "Actualizaciones limitadas",
-                "Carga y edición de información básica",
-                "Certificado SSL incluido",
-                "Hasta 25 ítems en tu carta",
-                "Hosting limitado"
-            ]
-        },
-        1: {
-            name: "Plan Emprendedor Mensual",
-            price: "$18.000",
-            features: [
-                "Actualizaciones automáticas ilimitadas",
-                "Carga y edición completa",
-                "Certificado SSL incluido",
-                "Productos ilimitados",
-                "Dominio personalizado",
-                "Soporte estándar",
-                "5% OFF en productos",
-                "Sin publicidad",
-                "Hosting 24/7"
-            ],
-            mpLink: "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c938084966c84bc01969976d53f14d2"
-        },
-        2: {
-            name: "Plan Profesional Mensual",
-            price: "$36.000",
-            features: [
-                "Todo lo anterior",
-                "Diseño personalizado",
-                "Galería de fotos",
-                "Soporte prioritario",
-                "10% OFF en productos",
-                "Botón WhatsApp",
-                "Dominio personalizado"
-            ],
-            mpLink: "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380849696ea8201969bd7708d01ac"
-        },
-        3: {
-            name: "Plan Corporativo Mensual",
-            price: "$72.000",
-            features: [
-                "Todo lo anterior",
-                "Gestión multisucursal",
-                "Atención personalizada 1 a 1",
-                "20% OFF en productos",
-                "Edición avanzada",
-                "Informe mensual de visitas"
-            ],
-            mpLink: "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c938084968c9eaa01969bd7f0f4062c"
-        },
-        4: {
-            name: "Plan Emprendedor Anual",
-            price: "$180.000",
-            features: [
-                "Actualizaciones automáticas ilimitadas",
-                "Carga y edición completa",
-                "Certificado SSL incluido",
-                "Productos ilimitados",
-                "Dominio personalizado",
-                "Soporte estándar",
-                "20% OFF en productos",
-                "Sin publicidad",
-                "Hosting 24/7"
-            ],
-            mpLink: "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380849721f5e501972934c13602ad"
-        },
-        5: {
-            name: "Plan Profesional Anual",
-            price: "$360.000",
-            features: [
-                "Todo lo anterior",
-                "Diseño personalizado",
-                "Galería de fotos",
-                "Soporte prioritario",
-                "25% OFF en productos",
-                "Botón WhatsApp",
-                "Dominio personalizado"
-            ],
-            mpLink: "https://mpago.la/1FzYWEk"
-        },
-        6: {
-            name: "Plan Corporativo Anual",
-            price: "$720.000",
-            features: [
-                "Todo lo anterior",
-                "Gestión multisucursal",
-                "Atención personalizada 1 a 1",
-                "30% OFF en productos",
-                "Edición avanzada",
-                "Informe mensual de visitas"
-            ],
-            mpLink: "https://mpago.la/2sL5gCq"
-        }
-    };
+            const planMap = {
+                0: {
+                    name: "Plan Base",
+                    price: "GRATIS",
+                    features: [
+                        "Actualizaciones Ilimitadas",
+                        "Diseño Responsivo",
+                        "Datos del Negocio",
+                        "Certificado SSL incluido",
+                        "Hasta 25 ítems en tu carta"
+                    ]
+                },
+                1: {
+                    name: "Plan Emprendedor Mensual",
+                    price: "$18.000",
+                    features: [
+                        "Atención Virtual",
+                        "Código QR",
+                        "Sin Publicidad",
+                        "Hosting 24/7",
 
-    // Lee los parámetros de la URL
-    const params = new URLSearchParams(window.location.search);
-    const planParam = params.get('plan');
-    const stepParam = params.get('step');
-    const planInfoDiv = document.getElementById('planInfo');
-    const priceSpan = document.querySelector('.priceValue');
+                        "Ítems Ilimitados en tu carta",
+                        "Actualizaciones Ilimitadas",
+                        "Diseño Responsivo",
+                        "Data Negocio",
+                        "Certificado SSL incluido",
 
-    if (planParam && planMap[planParam]) {
-        const plan = planMap[planParam];
-        if (planInfoDiv) {
-            planInfoDiv.innerHTML = `
-            <h3>${plan.name}</h3>
-            <ul style="margin-bottom:10px;">
-                ${plan.features.map(f => `<li>✓ ${f}</li>`).join('')}
-            </ul>
-            `;
-        }
-        if (priceSpan) {
-            priceSpan.textContent = plan.price.replace('$', '').replace('.', '');
-        }
-    } else {
-        if (planInfoDiv) {
-            planInfoDiv.innerHTML = `<h3>Plan no especificado</h3>`;
-        }
-    }
+                        "5% OFF en productos"
+                    ],
+                    mpLink: "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c938084966c84bc01969976d53f14d2"
+                },
+                2: {
+                    name: "Plan Profesional Mensual",
+                    price: "$36.000",
+                    features: [
+                        "Atención Personalizada",
+                        "Integración Redes Sociales",
+                        "Integración WhatsApp",
+                        "Integración Rappi / Pedido Ya",
+                        "Tema personalizable",
 
-    // --- Manejo de pasos del formulario ---
-    let currentStep = 1;
-    const steps = document.querySelectorAll('.form-step');
-    const progressSteps = document.querySelectorAll('.progress-steps .step');
-    if (stepParam && !isNaN(stepParam) && Number(stepParam) >= 1 && Number(stepParam) <= steps.length) {
-        currentStep = Number(stepParam);
-    }
+                        "Código QR",
+                        "Sin Publicidad",
+                        "Hosting 24/7",
+                        "Ítems Ilimitados en tu carta",
+                        "Actualizaciones Ilimitadas",
+                        "Diseño Responsivo",
+                        "Data Negocio",
+                        "Certificado SSL incluido",
 
-    function showStep(step) {
-        steps.forEach((el, idx) => {
-            el.classList.toggle('active', idx === step - 1);
-        });
-        progressSteps.forEach((el, idx) => {
-            el.classList.toggle('active', idx === step - 1);
-        });
-    }
+                        "10% OFF en productos"
+                    ],
+                    mpLink: "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380849696ea8201969bd7708d01ac"
+                },
+                3: {
+                    name: "Plan Corporativo Mensual",
+                    price: "$72.000",
+                    features: [
+                        "Atención Prioritaria",
+                        "Fotos de tus Platos",
+                        "Promos x temporada",
+                        "Reunión plan de acción 30m",
 
-    document.querySelectorAll('.next-btn').forEach(btn => {
-        btn.addEventListener('click', function () {
-            if (currentStep < steps.length) {
-                currentStep++;
-                showStep(currentStep);
+                        "Integración Redes Sociales",
+                        "Integración WhatsApp",
+                        "Integración Rappi / Pedido Ya",
+                        "Tema personalizable",
+                        "Código QR",
+                        "Sin Publicidad",
+                        "Hosting 24/7",
+                        "Ítems Ilimitados en tu carta",
+                        "Actualizaciones Ilimitadas",
+                        "Diseño Responsivo",
+                        "Data Negocio",
+                        "Certificado SSL incluido",
+
+                        "15% OFF en productos"
+                    ],
+                    mpLink: "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c938084968c9eaa01969bd7f0f4062c"
+                },
+                4: {
+                    name: "Plan Emprendedor Anual",
+                    price: "$180.000",
+                    features: [
+                        "Atención Virtual",
+                        "Código QR",
+                        "Sin Publicidad",
+                        "Hosting 24/7",
+
+                        "Ítems Ilimitados en tu carta",
+                        "Actualizaciones Ilimitadas",
+                        "Diseño Responsivo",
+                        "Data Negocio",
+                        "Certificado SSL incluido",
+
+                        "10% OFF en productos"
+                    ],
+                    mpLink: "https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380849721f5e501972934c13602ad"
+                },
+                5: {
+                    name: "Plan Profesional Anual",
+                    price: "$360.000",
+                    features: [
+                        "Atención Personalizada",
+                        "Integración Redes Sociales",
+                        "Integración WhatsApp",
+                        "Integración Rappi / Pedido Ya",
+                        "Tema personalizable",
+
+                        "Código QR",
+                        "Sin Publicidad",
+                        "Hosting 24/7",
+                        "Ítems Ilimitados en tu carta",
+                        "Actualizaciones Ilimitadas",
+                        "Diseño Responsivo",
+                        "Data Negocio",
+                        "Certificado SSL incluido",
+
+                        "20% OFF en productos"
+
+                    ],
+                    mpLink: "https://mpago.la/1FzYWEk"
+                },
+                6: {
+                    name: "Plan Corporativo Anual",
+                    price: "$720.000",
+                    features: [
+                        "Atención Prioritaria",
+                        "Fotos de tus Platos",
+                        "Promos x temporada",
+                        "Reunión plan de acción 30m",
+
+                        "Integración Redes Sociales",
+                        "Integración WhatsApp",
+                        "Integración Rappi / Pedido Ya",
+                        "Tema personalizable",
+                        "Código QR",
+                        "Sin Publicidad",
+                        "Hosting 24/7",
+                        "Ítems Ilimitados en tu carta",
+                        "Actualizaciones Ilimitadas",
+                        "Diseño Responsivo",
+                        "Data Negocio",
+                        "Certificado SSL incluido",
+                        "30% OFF en productos"
+                    ],
+                    mpLink: "https://mpago.la/2sL5gCq"
+                }
+            };
+
+            // Lee los parámetros de la URL
+            const params = new URLSearchParams(window.location.search);
+            const planParam = params.get('plan');
+            const stepParam = params.get('step');
+            const planInfoDiv = document.getElementById('planInfo');
+            const priceSpan = document.querySelector('.priceValue');
+
+            if (planParam && planMap[planParam]) {
+                const plan = planMap[planParam];
+                if (planInfoDiv) {
+                    planInfoDiv.innerHTML = `
+                    <h3>${plan.name}</h3>
+                    <ul style="margin-bottom:10px;">
+                        ${plan.features.map(f => `<li>✓ ${f}</li>`).join('')}
+                    </ul>
+                    `;
+                }
+                if (priceSpan) {
+                    priceSpan.textContent = plan.price.replace('$', '').replace('.', '');
+                }
+            } else {
+                if (planInfoDiv) {
+                    planInfoDiv.innerHTML = `<h3>Plan no especificado</h3>`;
+                }
             }
-        });
-    });
 
-    document.querySelectorAll('.prev-btn').forEach(btn => {
-        btn.addEventListener('click', function () {
-            if (currentStep > 1) {
-                currentStep--;
-                showStep(currentStep);
+            // --- Manejo de pasos del formulario ---
+            let currentStep = 1;
+            const steps = document.querySelectorAll('.form-step');
+            const progressSteps = document.querySelectorAll('.progress-steps .step');
+            if (stepParam && !isNaN(stepParam) && Number(stepParam) >= 1 && Number(stepParam) <= steps.length) {
+                currentStep = Number(stepParam);
             }
+
+            function showStep(step) {
+                steps.forEach((el, idx) => {
+                    el.classList.toggle('active', idx === step - 1);
+                });
+                progressSteps.forEach((el, idx) => {
+                    el.classList.toggle('active', idx === step - 1);
+                });
+            }
+
+            document.querySelectorAll('.next-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    if (currentStep < steps.length) {
+                        currentStep++;
+                        showStep(currentStep);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.prev-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    if (currentStep > 1) {
+                        currentStep--;
+                        showStep(currentStep);
+                    }
+                });
+            });
+
+            // Inicializa mostrando el paso correcto
+            showStep(currentStep);
+
+            const mpPayButton = document.getElementById('mpPayButton');
+            if (mpPayButton && planParam && planMap[planParam] && planMap[planParam].mpLink) {
+                mpPayButton.href = planMap[planParam].mpLink;
+                mpPayButton.style.display = ""; // Mostrar el botón si hay link
+            } else if (mpPayButton) {
+                mpPayButton.style.display = "none"; // Ocultar si no hay link (ejemplo: Plan Base)
+            }
+            const noPayButton = document.getElementById('noPayButton');
+            if (noPayButton) {
+                if (!planMap[planParam] || !planMap[planParam].mpLink) {
+                    noPayButton.style.display = "";
+                    noPayButton.addEventListener('click', function (e) {
+                        e.preventDefault();
+
+                        // Enviar datos al Apps Script con pago = false (gratuito)
+                        const form = document.getElementById('sponsorshipForm');
+                        const formData = new FormData(form);
+                        const formDataObj = {};
+
+                        formData.forEach((value, key) => {
+                            formDataObj[key] = value;
+                        });
+
+                        formDataObj.plan = planMap[planParam]?.name || "Base";
+                        formDataObj.pago = false;
+                        formDataObj.redirect = "https://thepent.com.ar/successpayment.html";
+
+                        const postForm = document.createElement("form");
+                        postForm.method = "POST";
+                        postForm.action = "https://script.google.com/macros/s/AKfycbx2Gl5uAJm19Jn0duS6cbFLaJfZeslv7H6lLKFPWqGQjQpvBky_1HNKQqs2Nx7zeI7N/exec"; // <-- Reemplazá con tu URL real
+
+                        for (let key in formDataObj) {
+                            const input = document.createElement("input");
+                            input.type = "hidden";
+                            input.name = key;
+                            input.value = formDataObj[key];
+                            postForm.appendChild(input);
+                        }
+
+                        document.body.appendChild(postForm);
+                        postForm.submit();
+
+                    });
+                } else {
+                    noPayButton.style.display = "none";
+                }
+            }
+
         });
-    });
-
-    // Inicializa mostrando el paso correcto
-    showStep(currentStep);
-
-    const mpPayButton = document.getElementById('mpPayButton');
-    if (mpPayButton && planParam && planMap[planParam] && planMap[planParam].mpLink) {
-        mpPayButton.href = planMap[planParam].mpLink;
-        mpPayButton.style.display = ""; // Mostrar el botón si hay link
-    } else if (mpPayButton) {
-        mpPayButton.style.display = "none"; // Ocultar si no hay link (ejemplo: Plan Base)
-    }
-});
         </script>
 </body>
 
