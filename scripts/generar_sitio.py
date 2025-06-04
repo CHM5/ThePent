@@ -8,7 +8,8 @@ from googleapiclient.errors import HttpError
 
 # === CONFIG ===
 TEMPLATE_SHEET_ID = "1bHOgSjbDydp69BeUS0Ln9JFke6Y2U0SGcwahUeAPAuc"
-SHEET_RANGE = "A2:E26"  # Hasta 25 productos
+MENU_RANGE = "Carta Web Interactiva!A2:E26"  # Hasta 25 productos
+FIJOS_RANGE = "Datos Fijos!B4:B15"
 SHEET_FIELDS = ["Categoría", "Subcategoría", "Nombre", "Descripción", "Precio"]
 
 # === AUTENTICACIÓN ===
@@ -78,13 +79,36 @@ drive_service.permissions().create(
     sendNotificationEmail=False
 ).execute()
 
-# === LEER CONTENIDO DE SHEET ===
-result = sheets_service.spreadsheets().values().get(
-    spreadsheetId=sheet_id,
-    range=SHEET_RANGE
+# Permiso general: cualquiera con el enlace puede ver
+drive_service.permissions().create(
+    fileId=sheet_id,
+    body={
+        "type": "anyone",
+        "role": "reader"
+    },
+    sendNotificationEmail=False
 ).execute()
 
-rows = result.get("values", [])
+# === LEER CONTENIDO DE SHEET DE AMBAS TABS ===
+MENU_RANGE = "Carta Web Interactiva!A2:E26"
+FIJOS_RANGE = "Datos Fijos!B4:B15"
+
+# Leer menú
+menu_result = sheets_service.spreadsheets().values().get(
+    spreadsheetId=sheet_id,
+    range=MENU_RANGE
+).execute()
+menu_rows = menu_result.get("values", [])
+
+# Leer datos fijos
+fijos_result = sheets_service.spreadsheets().values().get(
+    spreadsheetId=sheet_id,
+    range=FIJOS_RANGE
+).execute()
+fijos_rows = fijos_result.get("values", [])
+
+# Opcional: convertir datos fijos a una lista simple (quita sublistas vacías)
+fijos = [row[0] for row in fijos_rows if row]
 
 # === GENERAR HTML ===
 output_dir = Path(f"planes/menu-base-{fecha_id}")
@@ -103,11 +127,19 @@ html = f"""<!DOCTYPE html>
     table {{ width: 100%; border-collapse: collapse; margin-top: 20px; }}
     th, td {{ border: 1px solid #ccc; padding: 10px; text-align: left; }}
     th {{ background: #eee; }}
+    .fijos {{ margin-bottom: 20px; color: #444; }}
   </style>
 </head>
 <body>
   <h1>Menú Base</h1>
   <p>Este menú está conectado a <a href="{sheet_url}" target="_blank">esta planilla</a> y se actualiza automáticamente.</p>
+
+  <div class="fijos">
+    <strong>Datos Fijos:</strong>
+    <ul>
+      {''.join(f'<li>{dato}</li>' for dato in fijos)}
+    </ul>
+  </div>
 
   <table id="menuTable">
     <thead>
@@ -133,7 +165,7 @@ html = f"""<!DOCTYPE html>
 
         rows.forEach(row => {{
           const cols = row.split(",").map(col => col.replace(/\"/g, ""));
-          if (cols.length >= 5) {{
+          if (cols.length >= 5 && cols.some(cell => cell.trim() !== "")) {{
             const tr = document.createElement("tr");
             cols.slice(0, 5).forEach(cell => {{
               const td = document.createElement("td");
