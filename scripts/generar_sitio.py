@@ -332,16 +332,17 @@ html = f"""<!DOCTYPE html>
       .then(response => response.text())
       .then(data => {{
         const rows = data.split("\\n").map(row => row.trim()).filter(Boolean);
-        // Si hay encabezado, saltealo
-        const datos = rows.slice(1).filter(x => x);
+        // Tomar solo la columna B de cada fila, desde la fila 3 a la 15 (índices 2 a 14)
         const ul = document.getElementById("fijos-list");
         ul.innerHTML = "";
-        if (datos.length) {{
-          datos.forEach(dato => {{
-            // Si el dato viene con coma, tomar solo la columna B
-            ul.innerHTML += `<li>${{dato.split(",")[0]}}</li>`;
-          }});
-        }} else {{
+        // Saltar encabezado si lo hay, y mostrar solo filas con valor en B
+        rows.slice(2, 15).forEach(row => {{
+          const cols = row.split(",");
+          if (cols[1] && cols[1].trim()) {{
+            ul.innerHTML += `<li>${{cols[1]}}</li>`;
+          }}
+        }});
+        if (!ul.innerHTML) {{
           ul.innerHTML = "<li>No hay datos fijos.</li>";
         }}
       }})
