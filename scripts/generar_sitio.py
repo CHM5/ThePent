@@ -8,7 +8,7 @@ from googleapiclient.errors import HttpError
 
 # === CONFIG ===
 TEMPLATE_SHEET_ID = "1bHOgSjbDydp69BeUS0Ln9JFke6Y2U0SGcwahUeAPAuc"
-SHEET_RANGE = "A2:D26"  # Hasta 25 productos
+SHEET_RANGE = "A2:E26"  # Hasta 25 productos
 SHEET_FIELDS = ["Categoría", "Nombre", "Descripción", "Precio"]
 
 # === AUTENTICACIÓN ===
@@ -87,7 +87,7 @@ result = sheets_service.spreadsheets().values().get(
 rows = result.get("values", [])
 
 # === GENERAR HTML ===
-output_dir = Path(f"planes/menu-{fecha_id}")
+output_dir = Path(f"planes/menu-base-{fecha_id}")
 output_dir.mkdir(parents=True, exist_ok=True)
 
 html_file = output_dir / "index.html"
@@ -113,6 +113,7 @@ html = f"""<!DOCTYPE html>
     <thead>
       <tr>
         <th>Categoría</th>
+        <th>Subcategoría</th>
         <th>Nombre</th>
         <th>Descripción</th>
         <th>Precio</th>
@@ -132,9 +133,9 @@ html = f"""<!DOCTYPE html>
 
         rows.forEach(row => {{
           const cols = row.split(",").map(col => col.replace(/\"/g, ""));
-          if (cols.length >= 4) {{
+          if (cols.length >= 5) {{
             const tr = document.createElement("tr");
-            cols.slice(0, 4).forEach(cell => {{
+            cols.slice(0, 5).forEach(cell => {{
               const td = document.createElement("td");
               td.textContent = cell;
               tr.appendChild(td);
@@ -160,7 +161,7 @@ print("📄 Planilla editable:", sheet_url)
 # NUEVO → exportar urls para el workflow
 with open("menu_url.txt", "w") as f:
     # ruta pública en GitHub Pages
-    f.write(f"planes/menu-{fecha_id}/index.html")
+    f.write(f"planes/menu-base-{fecha_id}/index.html")
 
 with open("sheet_url.txt", "w") as f:
     f.write(sheet_url)
