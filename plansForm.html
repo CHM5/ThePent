@@ -466,14 +466,6 @@
                     formDataObj.redirect = `successpayment.html`;
                     console.log("🔍 formDataObj que se enviará:", formDataObj);
                     console.log("📦 Payload final:", new URLSearchParams(formDataObj).toString());
-                    // Espera 2 segundos antes de redirigir
-                    setTimeout(() => {
-                    if (formDataObj.redirect) {
-                        window.location.href = formDataObj.redirect;
-                    } else {
-                        alert("Formulario enviado pero sin redirección.");
-                    }
-                    }, 90000);
 
                     // Enviar datos a Apps Script usando form-urlencoded
                     fetch("https://script.google.com/macros/s/AKfycbynKXp7fdOrO0yirndPLGlOS5gxseIKusf-WlSWpJbG9pXLCFr9WyWpwsF_Yt-1fW3b/exec", {
