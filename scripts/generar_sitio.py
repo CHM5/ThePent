@@ -9,7 +9,7 @@ from googleapiclient.errors import HttpError
 # === CONFIG ===
 TEMPLATE_SHEET_ID = "1bHOgSjbDydp69BeUS0Ln9JFke6Y2U0SGcwahUeAPAuc"
 SHEET_RANGE = "A2:E26"  # Hasta 25 productos
-SHEET_FIELDS = ["Categoría", "Nombre", "Descripción", "Precio"]
+SHEET_FIELDS = ["Categoría", "Subcategoría", "Nombre", "Descripción", "Precio"]
 
 # === AUTENTICACIÓN ===
 credentials_info = json.loads(os.environ["GOOGLE_CREDENTIALS"])
@@ -128,7 +128,7 @@ html = f"""<!DOCTYPE html>
     fetch(CSV_URL)
       .then(response => response.text())
       .then(data => {{
-        const rows = data.split("\\n").slice(0, 25);
+        const rows = data.split("\\n").slice(1, 26);
         const tbody = document.querySelector("#menuTable tbody");
 
         rows.forEach(row => {{
