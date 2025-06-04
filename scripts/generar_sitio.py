@@ -330,24 +330,24 @@ html = f"""<!DOCTYPE html>
     const FIJOS_CSV_URL = "{sheet_url.replace('/edit', '')}/gviz/tq?tqx=out:csv&sheet=Datos%20Fijos";
     fetch(FIJOS_CSV_URL)
       .then(response => response.text())
-      .then(data => {
+      .then(data => {{
         const rows = data.split("\\n").map(row => row.trim()).filter(Boolean);
         // Si hay encabezado, saltealo
         const datos = rows.slice(1).filter(x => x);
         const ul = document.getElementById("fijos-list");
         ul.innerHTML = "";
-        if (datos.length) {
-          datos.forEach(dato => {
+        if (datos.length) {{
+          datos.forEach(dato => {{
             // Si el dato viene con coma, tomar solo la columna B
-            ul.innerHTML += `<li>${dato.split(",")[0]}</li>`;
-          });
-        } else {
+            ul.innerHTML += `<li>${{dato.split(",")[0]}}</li>`;
+          }});
+        }} else {{
           ul.innerHTML = "<li>No hay datos fijos.</li>";
-        }
-      })
-      .catch(() => {
+        }}
+      }})
+      .catch(() => {{
         document.getElementById("fijos-list").innerHTML = "<li>Error al cargar datos fijos.</li>";
-      });
+      }});
   </script>
 </body>
 </html>
