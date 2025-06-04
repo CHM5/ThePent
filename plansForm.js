@@ -36,10 +36,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    sponsorshipLevel.addEventListener('change', function () {
-        customAmountContainer.style.display = this.value === 'platinum' ? 'block' : 'none';
-    });
-
     sponsorshipForm.addEventListener('submit', function (e) {
         e.preventDefault();
         if (validateStep(currentStep)) {
@@ -76,91 +72,53 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function validateStep(step) {
-        document.getElementById('formError').style.display = 'none';
-        const currentStepEl = document.querySelector(`.form-step[data-step="${step}"]`);
-        const requiredFields = currentStepEl.querySelectorAll('[required]');
-        let isValid = true;
+    const currentStepEl = document.querySelector(`.form-step[data-step="${step}"]`);
+    const requiredFields = currentStepEl.querySelectorAll('[required]');
+    let isValid = true;
 
-        if (step === 1) {
-            const selectedPlan = document.querySelector('input.plan[type="radio"]:checked');
-            const errorBox = document.getElementById('formError');
-
-            if (!selectedPlan) {
-                errorBox.textContent = 'Seleccioná un plan para continuar.';
-                errorBox.style.display = 'block';
-                return false;
-            } else {
-                errorBox.style.display = 'none';
-            }
+    requiredFields.forEach(field => {
+        field.style.borderColor = '';
+        const errorField = document.getElementById('fieldError');
+        if (!field.checkValidity() || field.value.trim() === '') {
+            field.style.borderColor = 'var(--danger-color)';
+            field.classList.add('shake');
+            isValid = false;
+            setTimeout(() => field.classList.remove('shake'), 500);
+            errorField.textContent = 'Debés completar todos los campos.';
+            errorField.style.display = 'block';
+        } else {
+            errorField.style.display = 'none';
         }
+    });
 
-        requiredFields.forEach(field => {
-            field.style.borderColor = '';
-            if (!field.checkValidity() || field.value.trim() === '') {
-                field.style.borderColor = 'var(--danger-color)';
-                isValid = false;
-                field.classList.add('shake');
-                setTimeout(() => field.classList.remove('shake'), 500);
-            }
-        });
-
-        if (step === 2 && sponsorshipLevel.value === 'platinum') {
-            const customAmount = document.getElementById('customAmount');
-            if (!customAmount.value || parseInt(customAmount.value) < 10000) {
-                customAmount.style.borderColor = 'var(--danger-color)';
-                customAmount.classList.add('shake');
-                setTimeout(() => customAmount.classList.remove('shake'), 500);
-                return false;
-             }
-            }        
-
-        if (step === 3) {
-            const agreeTerms = document.getElementById('agreeTerms');
-            if (!agreeTerms.checked) {
-                const errorBox = document.getElementById('termsError');
-                errorBox.textContent = 'Debes aceptar los términos y condiciones para continuar.';
-                errorBox.style.display = 'block';
-                customAmount.classList.add('shake');
-                setTimeout(() => customAmount.classList.remove('shake'), 500);
-                return false;
-            }
-            }
-        return isValid; // <-- AGREGA ESTA LÍNEA
+    if (step === 2) {
+        const agreeTerms = document.getElementById('agreeTerms');
+        const errorBox = document.getElementById('termsError');
+        if (!agreeTerms.checked) {
+            errorBox.textContent = 'Debes aceptar los términos y condiciones para continuar.';
+            errorBox.style.display = 'block';
+            isValid = false;
+        } else {
+            errorBox.style.display = 'none';
+        }
     }
+
+    return isValid;
+}
 
     // Actualización del total dinámico según plan seleccionado
     const radios = document.querySelectorAll('.plan');
-    const totalDisplay = document.getElementById('totalAmount');
 
-    function updateTotal() {
-        const selected = document.querySelector('.plan:checked');
-        const price = parseInt(selected?.dataset.price || 0, 10);
-
-        if (!selected) {
-            totalDisplay.innerHTML = `<strong>Total: $0</strong>`;
-            return;
-        }
-        // Actualiza todos los spans con class="priceValue"
-        document.querySelectorAll('.priceValue').forEach(el => {
-            el.textContent = price.toLocaleString();
-        });
-        if (priceValue) {
-            priceValue.textContent = price.toLocaleString();
-        }
-    }
 
 
     
     radios.forEach(radio => {
         radio.addEventListener('change', function() {
-            updateTotal();
             updatePlanInfo();
         });
     });
 
-    updateTotal(); // Mostrar al cargar
-
-    // Si querés que al volver del pago de MercadoPago se pase al paso 6:
+    // Si querés que al volver del pago de MercadoPago se pase al paso 4:
     window.addEventListener('message', function (event) {
         // Verificamos que venga de MercadoPago y que tenga la estructura esperada (puede variar según tu integración real)
         if (event.origin.includes("mercadopago")) {
@@ -168,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (event.data && event.data.preapproval_id) {
                 console.log("🔁 Suscripción confirmada:", event.data.preapproval_id);
-                currentStep = 6;
+                currentStep = 4;
                 updateFormProgress(currentStep);
             }
         }

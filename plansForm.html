@@ -54,20 +54,23 @@
                     <div class="form-step" data-step="1">
                         <h2>Información Personal</h2>
                         <div class="form-group">
-                            <label for="firstName">Nombre</label>
-                            <input type="text" id="firstName" name="firstName" required>
+                            <label for="nombre">* Nombre</label>
+                            <input type="text" id="nombre" name="nombre" required>
                         </div>
                         <div class="form-group">
-                            <label for="lastName">Apellido</label>
-                            <input type="text" id="lastName" name="lastName" required>
+                            <label for="apellido">* Apellido</label>
+                            <input type="text" id="apellido" name="apellido" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
+                            <label for="email">* Email</label>
                             <input type="email" id="email" name="email" required>
                         </div>
                         <div class="form-group">
-                            <label for="phone">Teléfono de contacto</label>
-                            <input type="tel" id="phone" name="phone" required .>
+                            <label for="telefono">* Teléfono de contacto</label>
+                            <input type="tel" id="telefono" name="telefono" required>
+                        </div>
+                        <div id="fieldError" class="form-error" style="display:none; color: #d32f2f; margin-top: 8px;">
+                            Debés completar todos los campos..
                         </div>
                         <div class="form-buttons" style="justify-content: center;">
                             <button type="button" class="btn prev-btn">Atrás</button>
@@ -77,33 +80,13 @@
                     
                     <!-- Step 2: Sponsorship Details -->
                     <div class="form-step" data-step="2">
-                        <h2>Información de tu Negocio</h2>
                         <div class="form-group">
-                            <label for="companyName">Nombre de tu Negocio</label>
-                            <input type="text" id="companyName" name="companyName">
+                            <label for="negocio">Nombre de tu Negocio</label>
+                            <input type="text" id="negocio" name="negocio">
                         </div>
                         <div class="form-group">
-                            <label for="websiteUrl">Dirección</label>
-                            <input type="url" id="websiteUrl" name="websiteUrl">
-                        </div>
-                        <div class="form-group">
-                            <label for="sponsorshipLevel">País</label>
-                            <select id="sponsorshipLevel" name="sponsorshipLevel" required>
-                                <option value="bronze">Argentina</option>
-                                <option value="bronze">Uruguay</option>
-                                <option value="silver">Chile</option>
-                                <option value="gold">España</option>
-                                <option value="platinum">USA</option>
-                            </select>
-                        </div>
-                        <div class="form-group" id="customAmountContainer" style="display: none;">
-                            <label for="customAmount">Custom Amount ($)</label>
-                            <input type="number" id="customAmount" name="customAmount" min="10000">
-                        </div>
-                        <h2>Información Adicional</h2>
-                        <div class="form-group">
-                            <label for="hearAbout">¿Cómo nos conociste?</label>
-                            <select id="hearAbout" name="hearAbout">
+                            <label for="medio">¿Cómo nos conociste?</label>
+                            <select id="medio" name="medio">
                                 <option value="" disabled selected>Por favor seleccioná</option>
                                 <option value="instagram">Instagram</option>
                                 <option value="mercadolibre">Mercado Libre</option>
@@ -114,15 +97,15 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="comments">Comentarios Adicionales</label>
-                            <textarea id="comments" name="comments" rows="4"></textarea>
+                            <label for="comentario">Comentarios Adicionales</label>
+                            <textarea id="comentario" name="comentario" rows="4"></textarea>
                         </div>
                         <div class="form-group checkbox-group horizontal">
                             <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
                             <label for="agreeTerms">
-                                Acepto los 
+                                * Acepto los
                                 <a href="legal.html" target="_blank" style="color:#1976d2; text-decoration:underline; font-weight:600;">
-                                    términos y condiciones
+                                     términos y condiciones
                                 </a>
                             </label>
                         </div>
@@ -396,9 +379,45 @@
 
             document.querySelectorAll('.next-btn').forEach(btn => {
                 btn.addEventListener('click', function () {
+                    const currentStepElement = document.querySelector(`.form-step[data-step="${currentStep}"]`);
+                    const requiredFields = currentStepElement.querySelectorAll('[required]');
+                    let isValid = true;
+
+                    requiredFields.forEach(field => {
+                    field.style.borderColor = '';
+                    if (!field.value.trim()) {
+                        field.style.borderColor = 'red';
+                        field.classList.add('shake');
+                        isValid = false;
+                        setTimeout(() => field.classList.remove('shake'), 500);
+                        console.warn('⛔ Debés completar todos los campos');
+                    }
+                    });
+
+                    if (currentStep === 2) {
+                        const checkbox = document.getElementById('agreeTerms');
+                        const errorBox = document.getElementById('termsError');
+                        
+                        if (!checkbox.checked) {
+                            errorBox.style.display = 'block';
+                            console.warn('⛔ Debés aceptar los términos y condiciones');
+                            isValid = false;
+                        } else {
+                            errorBox.style.display = 'none';
+                        }
+                    }
+
+                    if (!isValid) {
+                    console.warn(`⛔ Campos incompletos en paso ${currentStep}`);
+                    return; // No avanza si algún campo está vacío
+                    }
+
+                    console.log(`✅ Todos los campos del paso ${currentStep} están completos.`);
+
+                    
                     if (currentStep < steps.length) {
-                        currentStep++;
-                        showStep(currentStep);
+                    currentStep++;
+                    showStep(currentStep);
                     }
                 });
             });
@@ -424,47 +443,69 @@
             }
             const noPayButton = document.getElementById('noPayButton');
             if (noPayButton) {
+                // Mostramos el botón si el plan no tiene link de MercadoPago (por ejemplo, plan base)
                 if (!planMap[planParam] || !planMap[planParam].mpLink) {
-                    noPayButton.style.display = "";
-                    noPayButton.addEventListener('click', function (e) {
-                        e.preventDefault();
+                  noPayButton.style.display = "";
+                  
+                  noPayButton.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const form = document.getElementById('sponsorshipForm');
+                    const formData = new FormData(form);
+                    const formDataObj = {};
 
-                        // Enviar datos al Apps Script con pago = false (gratuito)
-                        const form = document.getElementById('sponsorshipForm');
-                        const formData = new FormData(form);
-                        const formDataObj = {};
+                    // Solo agregamos nombreCompleto y NO los campos nombre ni apellido
+                    formDataObj.nombreCompleto = `${formData.get("nombre")} ${formData.get("apellido")}`.trim();
+                    formDataObj.email = formData.get("email");
+                    formDataObj.telefono = formData.get("telefono");
+                    formDataObj.negocio = formData.get("negocio");
+                    formDataObj.medio = formData.get("medio");
+                    formDataObj.comentario = formData.get("comentario");
+                    formDataObj.plan = planMap[planParam]?.name || "base";
+                    formDataObj.pago = false;
+                    formDataObj.redirect = `successpayment.html`;
+                    console.log("🔍 formDataObj que se enviará:", formDataObj);
+                    console.log("📦 Payload final:", new URLSearchParams(formDataObj).toString());
+                    // Espera 2 segundos antes de redirigir
+                    setTimeout(() => {
+                    if (formDataObj.redirect) {
+                        window.location.href = formDataObj.redirect;
+                    } else {
+                        alert("Formulario enviado pero sin redirección.");
+                    }
+                    }, 90000);
 
-                        formData.forEach((value, key) => {
-                            formDataObj[key] = value;
-                        });
-
-                        formDataObj.plan = planMap[planParam]?.name || "base";
-                        formDataObj.pago = false;
-                        formDataObj.redirect = "https://thepent.com.ar/successpayment.html";
-
-                        const postForm = document.createElement("form");
-                        postForm.method = "POST";
-                        postForm.action = "https://script.google.com/macros/s/AKfycbx2Gl5uAJm19Jn0duS6cbFLaJfZeslv7H6lLKFPWqGQjQpvBky_1HNKQqs2Nx7zeI7N/exec"; // <-- Reemplazá con tu URL real
-
-                        for (let key in formDataObj) {
-                            const input = document.createElement("input");
-                            input.type = "hidden";
-                            input.name = key;
-                            input.value = formDataObj[key];
-                            postForm.appendChild(input);
-                        }
-
-                        document.body.appendChild(postForm);
-                        postForm.submit();
-
+                    // Enviar datos a Apps Script usando form-urlencoded
+                    fetch("https://script.google.com/macros/s/AKfycbynKXp7fdOrO0yirndPLGlOS5gxseIKusf-WlSWpJbG9pXLCFr9WyWpwsF_Yt-1fW3b/exec", {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                      },
+                      body: new URLSearchParams(formDataObj).toString()
+                    })
+                    .then(response => response.text())
+                    .then(text => {
+                      console.log("✅ Enviado a Apps Script:", text);
+                      // Avanzar al paso 4 (éxito)
+                      currentStep = 4;
+                      showStep(currentStep);
+                      // Redirigir a la URL de éxito (si se definió)
+                      if (formDataObj.redirect) {
+                        window.location.href = formDataObj.redirect;
+                      } else {
+                        alert("Formulario enviado pero sin redirección.");
+                      }
+                    })
+                    .catch(err => {
+                      console.error("❌ Error al enviar a Apps Script:", err);
+                      alert("Ocurrió un error al enviar tus datos. Intentá nuevamente.");
                     });
-                } else {
-                    noPayButton.style.display = "none";
+                  });
                 }
             }
 
-        });
-        </script>
+    });
+    </script>
 </body>
 
 </html>
