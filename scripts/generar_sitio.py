@@ -270,6 +270,7 @@ html = f"""<!DOCTYPE html>
         </thead>
         <tbody></tbody>
       </table>
+      <div id="noResults" style="display:none;color:#b00;text-align:center;margin:1rem 0;">No hay resultados.</div>
     </div>
   </div>
   <footer style="display:flex;justify-content:space-between;align-items:flex-end;max-width:900px;margin:2rem auto 0 auto;padding:1rem 1rem 2rem 1rem;">
@@ -296,7 +297,7 @@ html = f"""<!DOCTYPE html>
           count++;
         }}
       }});
-      document.getElementById("noResults")?.style.display = count === 0 ? "block" : "none";
+      document.getElementById("noResults").style.display = count === 0 ? "block" : "none";
     }}
 
     function filterTable() {{
@@ -316,13 +317,13 @@ html = f"""<!DOCTYPE html>
       .then(data => {{
         allRows = data.split("\\n").slice(1, 26).map(row => {{
           // Mejor parseo para precios con coma
-          const cols = row.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g) || [];
+          const cols = row.match(/(".*?"|[^",\\s]+)(?=\\s*,|\\s*$)/g) || [];
           return cols.map(col => col.replace(/"/g, ""));
         }});
         renderTable(allRows);
       }})
       .catch(err => {{
-        document.getElementById("noResults")?.style.display = "block";
+        document.getElementById("noResults").style.display = "block";
         document.getElementById("noResults").textContent = "Error al cargar el menú.";
         console.error("Error al cargar el CSV:", err);
       }});
@@ -346,8 +347,8 @@ html = f"""<!DOCTYPE html>
         const direccion = (rows[6]?.split(",")[1] || "").replace(/"/g, "").trim();
         const horarios = (rows[7]?.split(",")[1] || "").replace(/"/g, "").trim();
         let direccionHtml = "";
-        if (direccion) direccionHtml += `<div><strong>Dirección:</strong> ${{direccion}}</div>`;
-        if (horarios) direccionHtml += `<div><strong>Horarios:</strong> ${{horarios}}</div>`;
+        if (direccion) direccionHtml += `<div><strong>Dirección:</strong> ${direccion}</div>`;
+        if (horarios) direccionHtml += `<div><strong>Horarios:</strong> ${horarios}</div>`;
         document.getElementById("footer-direccion").innerHTML = direccionHtml;
 
         // Redes sociales
@@ -365,7 +366,7 @@ html = f"""<!DOCTYPE html>
             const cols = rows[i].split(",");
             let link = (cols[1] || "").replace(/"/g, "").trim();
             if (link) {{
-              redesHtml += `<a href="${{link}}" target="_blank" rel="noopener" title="${{redes[i-10]}}" style="margin-right:0.7rem;text-decoration:none;font-size:1.3rem;">${{iconos[i-10]}}</a>`;
+              redesHtml += `<a href="${link}" target="_blank" rel="noopener" title="${redes[i-10]}" style="margin-right:0.7rem;text-decoration:none;font-size:1.3rem;">${iconos[i-10]}</a>`;
             }}
           }}
         }}
