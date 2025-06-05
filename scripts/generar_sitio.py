@@ -332,16 +332,32 @@ html = f"""<!DOCTYPE html>
       .then(response => response.text())
       .then(data => {{
         const rows = data.split("\\n").map(row => row.trim()).filter(Boolean);
-        // Tomar solo la columna B de cada fila, desde la fila 3 a la 15 (índices 2 a 14)
         const ul = document.getElementById("fijos-list");
         ul.innerHTML = "";
-        // Saltar encabezado si lo hay, y mostrar solo filas con valor en B
-        rows.slice(2, 15).forEach(row => {{
-          const cols = row.split(",");
-          if (cols[1] && cols[1].trim()) {{
-            ul.innerHTML += `<li>${{cols[1]}}</li>`;
+
+        // Mostrar B4:B8 (índices 3 a 7) como texto simple
+        for (let i = 3; i <= 7; i++) {{
+          if (rows[i]) {{
+            const cols = rows[i].split(",");
+            let valor = (cols[1] || "").replace(/"/g, "").trim();
+            if (valor) {{
+              ul.innerHTML += `<li>${{valor}}</li>`;
+            }}
           }}
-        }});
+        }}
+
+        // Mostrar B11:B15 (índices 11 a 15) como hipervínculo si hay valor
+        const redes = ["Whatsapp", "Instagram", "Facebook", "Rappi", "PedidosYa"];
+        for (let i = 11; i <= 15; i++) {{
+          if (rows[i]) {{
+            const cols = rows[i].split(",");
+            let link = (cols[1] || "").replace(/"/g, "").trim();
+            if (link) {{
+              ul.innerHTML += `<li><a href="${{link}}" target="_blank" rel="noopener">${{redes[i-10]}}</a></li>`;
+            }}
+          }}
+        }}
+
         if (!ul.innerHTML) {{
           ul.innerHTML = "<li>No hay datos fijos.</li>";
         }}
