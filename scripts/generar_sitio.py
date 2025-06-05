@@ -205,6 +205,14 @@ html = f"""<!DOCTYPE html>
     tr:last-child td {{
       border-bottom: none;
     }}
+    footer {{
+      border-top: 1px solid #eee;
+      background: #f8f9fa;
+      border-radius: 0 0 10px 10px;
+    }}
+    #footer-redes a:hover {{
+      opacity: 0.7;
+    }}
     @media (max-width: 700px) {{
       .container {{
         padding: 0.5rem;
@@ -238,24 +246,16 @@ html = f"""<!DOCTYPE html>
 </head>
 <body>
   <header>
-    <h1 style="margin:0;font-size:2rem;">Menú Online</h1>
-    <div style="font-size:1rem;font-weight:400;margin-top:0.2rem;">
-      <a href="{sheet_url}" target="_blank" style="color:#ffc107;text-decoration:underline;">Ver planilla</a>
-    </div>
+    <div id="resto-nombre" style="font-size:2.2rem;font-weight:700;margin-bottom:0.2rem;"></div>
+    <div id="resto-subtitulo" style="font-size:1.2rem;color:#ffc107;margin-bottom:1.2rem;"></div>
   </header>
   <div class="container">
-    <div class="fijos">
-      <strong>Datos Fijos:</strong>
-      <ul id="fijos-list" style="margin:0.5rem 0 0 1.2rem;">
-        <li>Cargando...</li>
-      </ul>
-    </div>
     <div class="search-box">
       <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <circle cx="11" cy="11" r="8"></circle>
         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
       </svg>
-      <input id="search" type="text" placeholder="Buscar plato, categoría, descripción..." autocomplete="off">
+      <input id="search" type="text" placeholder="Buscador..." autocomplete="off">
     </div>
     <div style="overflow-x:auto;">
       <table id="menuTable">
@@ -271,10 +271,11 @@ html = f"""<!DOCTYPE html>
         <tbody></tbody>
       </table>
     </div>
-    <div id="noResults" style="display:none;text-align:center;color:#dc3545;margin-top:1.5rem;font-size:1.1rem;">
-      No se encontraron platos con ese criterio.
-    </div>
   </div>
+  <footer style="display:flex;justify-content:space-between;align-items:flex-end;max-width:900px;margin:2rem auto 0 auto;padding:1rem 1rem 2rem 1rem;">
+    <div id="footer-direccion" style="font-size:1rem;color:#444;"></div>
+    <div id="footer-redes" style="display:flex;gap:1.2rem;"></div>
+  </footer>
   <script>
     const CSV_URL = "{csv_url}";
     let allRows = [];
@@ -295,7 +296,7 @@ html = f"""<!DOCTYPE html>
           count++;
         }}
       }});
-      document.getElementById("noResults").style.display = count === 0 ? "block" : "none";
+      document.getElementById("noResults")?.style.display = count === 0 ? "block" : "none";
     }}
 
     function filterTable() {{
@@ -313,13 +314,15 @@ html = f"""<!DOCTYPE html>
     fetch(CSV_URL)
       .then(response => response.text())
       .then(data => {{
-        allRows = data.split("\\n").slice(1, 26).map(row =>
-          row.split(",").map(col => col.replace(/\"/g, ""))
-        );
+        allRows = data.split("\\n").slice(1, 26).map(row => {{
+          // Mejor parseo para precios con coma
+          const cols = row.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g) || [];
+          return cols.map(col => col.replace(/"/g, ""));
+        }});
         renderTable(allRows);
       }})
       .catch(err => {{
-        document.getElementById("noResults").style.display = "block";
+        document.getElementById("noResults")?.style.display = "block";
         document.getElementById("noResults").textContent = "Error al cargar el menú.";
         console.error("Error al cargar el CSV:", err);
       }});
@@ -332,38 +335,45 @@ html = f"""<!DOCTYPE html>
       .then(response => response.text())
       .then(data => {{
         const rows = data.split("\\n").map(row => row.trim()).filter(Boolean);
-        const ul = document.getElementById("fijos-list");
-        ul.innerHTML = "";
 
-        // Mostrar B4:B8 (índices 3 a 7) como texto simple
-        for (let i = 3; i <= 7; i++) {{
-          if (rows[i]) {{
-            const cols = rows[i].split(",");
-            let valor = (cols[1] || "").replace(/"/g, "").trim();
-            if (valor) {{
-              ul.innerHTML += `<li>${{valor}}</li>`;
-            }}
-          }}
-        }}
+        // Nombre y subtítulo
+        const nombre = (rows[4]?.split(",")[1] || "").replace(/"/g, "").trim();
+        const subtitulo = (rows[5]?.split(",")[1] || "").replace(/"/g, "").trim();
+        document.getElementById("resto-nombre").textContent = nombre;
+        document.getElementById("resto-subtitulo").textContent = subtitulo;
 
-        // Mostrar B11:B15 (índices 11 a 15) como hipervínculo si hay valor
+        // Dirección y horarios
+        const direccion = (rows[6]?.split(",")[1] || "").replace(/"/g, "").trim();
+        const horarios = (rows[7]?.split(",")[1] || "").replace(/"/g, "").trim();
+        let direccionHtml = "";
+        if (direccion) direccionHtml += `<div><strong>Dirección:</strong> ${{direccion}}</div>`;
+        if (horarios) direccionHtml += `<div><strong>Horarios:</strong> ${{horarios}}</div>`;
+        document.getElementById("footer-direccion").innerHTML = direccionHtml;
+
+        // Redes sociales
         const redes = ["Whatsapp", "Instagram", "Facebook", "Rappi", "PedidosYa"];
-        for (let i = 11; i <= 15; i++) {{
+        const iconos = [
+          "📱", // Whatsapp
+          '<svg width="20" height="20" fill="#E4405F" viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.3.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.3 1.1.4 2.3.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.3-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1.1.3-2.3.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.3-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.3-1.1-.4-2.3C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.3.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1.1-.3 2.3-.4C8.4 2.2 8.8 2.2 12 2.2zm0-2.2C8.7 0 8.3 0 7 .1 5.7.2 4.7.4 3.9.7c-.9.3-1.6.7-2.3 1.4C.7 3.1.3 3.8 0 4.7c-.3.8-.5 1.8-.6 3.1C-.1 8.3-.1 8.7 0 12c.1 3.3.1 3.7.6 5 .1 1.3.3 2.3.6 3.1.3.9.7 1.6 1.4 2.3.7.7 1.4 1.1 2.3 1.4.8.3 1.8.5 3.1.6 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3-.1 2.3-.3 3.1-.6.9-.3 1.6-.7 2.3-1.4.7-.7 1.1-1.4 1.4-2.3.3-.8.5-1.8.6-3.1.1-1.3.1-1.7.1-5s0-3.7-.1-5c-.1-1.3-.3-2.3-.6-3.1-.3-.9-.7-1.6-1.4-2.3C20.9.7 20.2.3 19.3 0c-.8-.3-1.8-.5-3.1-.6C15.7-.1 15.3-.1 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-10.6a1.4 1.4 0 1 1-2.8 0 1.4 1.4 0 0 1 2.8 0z"/></svg>',
+          '<svg width="20" height="20" fill="#1877F3" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.6 0 0 .6 0 1.326v21.348C0 23.4.6 24 1.326 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.4 24 24 23.4 24 22.674V1.326C24 .6 23.4 0 22.675 0"/></svg>',
+          '<svg width="20" height="20" fill="#00C300" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12"/></svg>',
+          '<svg width="20" height="20" fill="#FF004F" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12"/></svg>'
+        ];
+        let redesHtml = "";
+        for (let i = 10; i <= 14; i++) {{
           if (rows[i]) {{
             const cols = rows[i].split(",");
             let link = (cols[1] || "").replace(/"/g, "").trim();
             if (link) {{
-              ul.innerHTML += `<li><a href="${{link}}" target="_blank" rel="noopener">${{redes[i-10]}}</a></li>`;
+              redesHtml += `<a href="${{link}}" target="_blank" rel="noopener" title="${{redes[i-10]}}" style="margin-right:0.7rem;text-decoration:none;font-size:1.3rem;">${{iconos[i-10]}}</a>`;
             }}
           }}
         }}
-
-        if (!ul.innerHTML) {{
-          ul.innerHTML = "<li>No hay datos fijos.</li>";
-        }}
+        document.getElementById("footer-redes").innerHTML = redesHtml;
       }})
       .catch(() => {{
-        document.getElementById("fijos-list").innerHTML = "<li>Error al cargar datos fijos.</li>";
+        document.getElementById("resto-nombre").textContent = "Nombre";
+        document.getElementById("footer-direccion").textContent = "Error al cargar datos fijos.";
       }});
   </script>
 </body>
