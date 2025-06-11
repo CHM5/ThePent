@@ -4481,6 +4481,11 @@ body {
   padding: 4rem 1rem;
   font-family: 'Inter', sans-serif;
   background-color: var(--dl-color-theme-neutral-light);
+  max-width: 1400px; /* o más */
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem; /* opcional para respiración lateral */
+
 }
 
 .pricing-toggle {
@@ -4508,6 +4513,12 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   gap: 1.5rem;
+}
+
+.pricing-card {
+  width: 100%;       /* o 100%, o el tamaño que quieras */
+  max-width: 25%;
+  flex: 1 1 300px;     /* crece si hay espacio */
 }
 
 .pricing-card {
@@ -4597,6 +4608,11 @@ body {
   .pricing-cards {
     flex-direction: column;
     align-items: center;
+  }
+
+  .pricing-card {
+    width: 85vw;       /* o 95vw si querés casi todo el ancho */
+    max-width: none;   /* elimina límites preexistentes */
   }
 
   .navbar8-burger-menu {
@@ -4899,108 +4915,6 @@ button::before, button::after,
   max-width: 1200px;
   margin: 0 auto;
 }
-
-              .pricing-section {
-                padding: 4rem 1rem;
-                font-family: 'Inter', sans-serif;
-                background-color: var(--dl-color-theme-neutral-light);
-              }
-              .pricing-toggle {
-                display: flex;
-                justify-content: center;
-                gap: 1rem;
-                margin-bottom: 2rem;
-              }
-              .pricing-toggle button {
-                padding: 0.5rem 1rem;
-                border: 1px solid var(--dl-color-theme-primary1);
-                background: transparent;
-                cursor: pointer;
-                border-radius: 0.5rem;
-              }
-              .pricing-toggle button.active {
-                background-color: var(--dl-color-theme-primary1);
-                color: white;
-              }
-              .pricing-cards {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 1.5rem;
-              }
-              .pricing-card {
-                background: white;
-                border-radius: 1rem;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-                padding: 1.5rem;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                width: 260px;
-              }
-              .pricing-card h3 {
-                font-size: 1.25rem;
-                margin-bottom: 0.25rem;
-              }
-              .price {
-                font-size: 2rem;
-                font-weight: bold;
-                margin: 0.5rem 0;
-              }
-              .feature-list {
-                list-style: none;
-                padding: 0;
-                margin: 1rem 0;
-                text-align: left;
-              }
-              .feature-list li {
-                margin-bottom: 0.5rem;
-                position: relative;
-              }
-              .info-icon {
-                display: inline-block;
-                margin-left: 6px;
-                background: #ddd;
-                color: #333;
-                border-radius: 50%;
-                width: 16px;
-                height: 16px;
-                font-size: 12px;
-                text-align: center;
-                line-height: 16px;
-                cursor: help;
-                position: relative;
-              }
-
-              .info-icon:hover::after {
-                content: attr(data-tooltip);
-                position: absolute;
-                bottom: 125%;
-                left: 50%;
-                transform: translateX(-50%);
-                background: #333;
-                color: white;
-                padding: 6px 8px;
-                border-radius: 4px;
-                white-space: nowrap;
-                z-index: 10;
-                font-size: 12px;
-              }
-
-              .select-btn {
-                padding: 0.5rem 1rem;
-                border: none;
-                background-color: var(--dl-color-theme-primary1);
-                color: white;
-                border-radius: 0.5rem;
-                cursor: pointer;
-              }
-              @media (max-width: 768px) {
-                .pricing-cards {
-                  flex-direction: column;
-                  align-items: center;
-                }
-              }
 
 .toggle-container {
   display: grid;
