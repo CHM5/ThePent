@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Menú Online</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <style>
+    :root {
+      --primary: #ffc107;
+      --bg: #fff;
+      --text: #212529;
+      --header: #343a40;
+      --border: #dee2e6;
+      --radius: 10px;
+    }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: var(--header);
+      color: #fff;
+      padding: 1.2rem 1rem 0.7rem 1rem;
+      text-align: center;
+      border-radius: 0 0 var(--radius) var(--radius);
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    .fijos {
+      margin: 1.5rem 0 1rem 0;
+      padding: 0.7rem 1rem;
+      background: #f8f9fa;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      color: #444;
+    }
+    .search-box {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.2rem;
+      background: #f8f9fa;
+      border-radius: var(--radius);
+      padding: 0.5rem 1rem;
+      box-shadow: 0 2px 8px #0001;
+    }
+    .search-box input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-size: 1.1rem;
+      padding: 0.7rem 0.5rem;
+      outline: none;
+    }
+    .search-box svg {
+      margin-right: 0.7rem;
+      opacity: 0.6;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      background: #fff;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 2px 8px #0001;
+    }
+    th, td {
+      padding: 0.8rem 0.5rem;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      font-size: 1rem;
+    }
+    th {
+      background: #f1f1f1;
+      font-weight: 700;
+      color: #343a40;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    @media (max-width: 700px) {
+      .container {
+        padding: 0.5rem;
+      }
+      th, td {
+        font-size: 0.97rem;
+        padding: 0.6rem 0.3rem;
+      }
+      .fijos {
+        font-size: 0.97rem;
+        padding: 0.5rem 0.7rem;
+      }
+      .search-box {
+        padding: 0.4rem 0.7rem;
+      }
+    }
+    @media (max-width: 480px) {
+      header {
+        font-size: 1.2rem;
+        padding: 0.8rem 0.3rem;
+      }
+      .container {
+        padding: 0.2rem;
+      }
+      th, td {
+        font-size: 0.93rem;
+        padding: 0.4rem 0.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 style="margin:0;font-size:2rem;">Menú Online</h1>
+    <div style="font-size:1rem;font-weight:400;margin-top:0.2rem;">
+      <a href="https://docs.google.com/spreadsheets/d/19xavcKqZP8fPZ6BdrssSk412mDyw9OPVu5n7dlepjcg/edit" target="_blank" style="color:#ffc107;text-decoration:underline;">Ver planilla</a>
+    </div>
+  </header>
+  <div class="container">
+    <div class="fijos">
+      <strong>Datos Fijos:</strong>
+      <ul id="fijos-list" style="margin:0.5rem 0 0 1.2rem;">
+        <li>Cargando...</li>
+      </ul>
+    </div>
+    <div class="search-box">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input id="search" type="text" placeholder="Buscar plato, categoría, descripción..." autocomplete="off">
+    </div>
+    <div style="overflow-x:auto;">
+      <table id="menuTable">
+        <thead>
+          <tr>
+            <th>Categoría</th>
+            <th>Subcategoría</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div id="noResults" style="display:none;text-align:center;color:#dc3545;margin-top:1.5rem;font-size:1.1rem;">
+      No se encontraron platos con ese criterio.
+    </div>
+  </div>
+  <script>
+    const CSV_URL = "https://docs.google.com/spreadsheets/d/19xavcKqZP8fPZ6BdrssSk412mDyw9OPVu5n7dlepjcg/gviz/tq?tqx=out:csv";
+    let allRows = [];
+
+    function renderTable(rows) {
+      const tbody = document.querySelector("#menuTable tbody");
+      tbody.innerHTML = "";
+      let count = 0;
+      rows.forEach(cols => {
+        if (cols.length >= 3 && cols.some(cell => cell.trim() !== "")) {
+          const tr = document.createElement("tr");
+          cols.slice(0, 5).forEach(cell => {
+            const td = document.createElement("td");
+            td.textContent = cell;
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+          count++;
+        }
+      });
+      document.getElementById("noResults").style.display = count === 0 ? "block" : "none";
+    }
+
+    function filterTable() {
+      const q = document.getElementById("search").value.toLowerCase();
+      if (!q) {
+        renderTable(allRows);
+        return;
+      }
+      const filtered = allRows.filter(cols =>
+        cols.join(" ").toLowerCase().includes(q)
+      );
+      renderTable(filtered);
+    }
+
+    fetch(CSV_URL)
+      .then(response => response.text())
+      .then(data => {
+        allRows = data.split("\n").slice(1, 26).map(row =>
+          row.split(",").map(col => col.replace(/"/g, ""))
+        );
+        renderTable(allRows);
+      })
+      .catch(err => {
+        document.getElementById("noResults").style.display = "block";
+        document.getElementById("noResults").textContent = "Error al cargar el menú.";
+        console.error("Error al cargar el CSV:", err);
+      });
+
+    document.getElementById("search").addEventListener("input", filterTable);
+
+    // Cargar datos fijos en vivo
+    const FIJOS_CSV_URL = "https://docs.google.com/spreadsheets/d/19xavcKqZP8fPZ6BdrssSk412mDyw9OPVu5n7dlepjcg/gviz/tq?tqx=out:csv&sheet=Datos%20Fijos";
+    fetch(FIJOS_CSV_URL)
+      .then(response => response.text())
+      .then(data => {
+        const rows = data.split("\n").map(row => row.trim()).filter(Boolean);
+        const ul = document.getElementById("fijos-list");
+        ul.innerHTML = "";
+
+        // Mostrar B4:B8 (índices 3 a 7) como texto simple
+        for (let i = 3; i <= 7; i++) {
+          if (rows[i]) {
+            const cols = rows[i].split(",");
+            let valor = (cols[1] || "").replace(/"/g, "").trim();
+            if (valor) {
+              ul.innerHTML += `<li>${valor}</li>`;
+            }
+          }
+        }
+
+        // Mostrar B11:B15 (índices 11 a 15) como hipervínculo si hay valor
+        const redes = ["Whatsapp", "Instagram", "Facebook", "Rappi", "PedidosYa"];
+        for (let i = 11; i <= 15; i++) {
+          if (rows[i]) {
+            const cols = rows[i].split(",");
+            let link = (cols[1] || "").replace(/"/g, "").trim();
+            if (link) {
+              ul.innerHTML += `<li><a href="${link}" target="_blank" rel="noopener">${redes[i-10]}</a></li>`;
+            }
+          }
+        }
+
+        if (!ul.innerHTML) {
+          ul.innerHTML = "<li>No hay datos fijos.</li>";
+        }
+      })
+      .catch(() => {
+        document.getElementById("fijos-list").innerHTML = "<li>Error al cargar datos fijos.</li>";
+      });
+  </script>
+</body>
+</html>
