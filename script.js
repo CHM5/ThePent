@@ -65,5 +65,5 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Elemento clickeado:', this);
     });
   });
-});
 
+});
